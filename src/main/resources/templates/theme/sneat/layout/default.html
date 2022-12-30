@@ -6,31 +6,38 @@ sneat 테마(기본테마)의 default 레이아웃 구성
       class="light-style layout-menu-fixed"
       dir="ltr"
       data-theme="theme-default"
-      data-assets-path="static/assets/"
+      data-assets-path="static/theme/sneat/"
       data-template="vertical-menu-template-free"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <!-- 공통 헤더-->
   <th:block th:replace="theme/sneat/fragments/header :: fragment-header"></th:block>
-
   <body>
-    <div id="wrapper">
-      <!-- 왼쪽 메뉴-->
-      <th:block th:replace="theme/sneat/fragments/menu :: fragment-menu"></th:block>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <!-- Layout container -->
+      <div class="layout-container">
+        <!-- 왼쪽 메뉴-->
+        <th:block th:replace="theme/sneat/fragments/menu :: fragment-menu"></th:block>
 
-      <div id="wrapper-content">
-        <div id="content">
+        <div class="layout-page">
           <!-- 상단-->
           <th:block th:replace="theme/sneat/fragments/top :: fragment-top"></th:block>
-          <!-- 본문-->
-          <th:block layout:fragment="content"></th:block>
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- 본문-->
+            <th:block layout:fragment="content"></th:block>
+            <!-- 공통 하단-->
+            <th:block th:replace="theme/sneat/fragments/footer :: fragment-footer"></th:block>
+          </div>
+          <!-- Content wrapper END -->
         </div>
-
-        <!-- 공통 하단-->
-        <th:block th:replace="theme/sneat/fragments/footer :: fragment-footer"></th:block>
+        <!-- Layout page END -->
       </div>
+      <!-- Layout container END -->
     </div>
-
+    <!-- Layout END -->
     <!-- 공통 스크립트-->
     <th:block th:replace="theme/sneat/fragments/script :: fragment-script"></th:block>
   </body>

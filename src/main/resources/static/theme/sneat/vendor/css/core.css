@@ -15501,6 +15501,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
     height: 100vh !important;
   }
 }
+
 .layout-navbar-fixed body:not(.modal-open) .layout-navbar-full .layout-navbar,
 .layout-menu-fixed body:not(.modal-open) .layout-navbar-full .layout-navbar,
 .layout-menu-fixed-offcanvas body:not(.modal-open) .layout-navbar-full .layout-navbar {
@@ -15511,7 +15512,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
 .layout-menu-fixed-offcanvas body:not(.modal-open) .layout-content-navbar .layout-navbar {
   z-index: 1075;
 }
-
+/*******************/
 .layout-footer-fixed .content-footer {
   z-index: 1030;
 }
