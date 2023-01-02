@@ -11,25 +11,25 @@ sneat 테마(기본테마)의 default 레이아웃 구성
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <!-- 공통 헤더-->
-  <th:block th:replace="theme/sneat/fragments/header :: fragment-header"></th:block>
+  <th:block th:replace="theme/sneat/fragments/header :: fragment-sneat-header"></th:block>
   <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <!-- Layout container -->
       <div class="layout-container">
         <!-- 왼쪽 메뉴-->
-        <th:block th:replace="theme/sneat/fragments/menu :: fragment-menu"></th:block>
+        <th:block th:replace="theme/sneat/fragments/menu :: fragment-sneat-menu"></th:block>
 
         <div class="layout-page">
           <!-- 상단-->
-          <th:block th:replace="theme/sneat/fragments/top :: fragment-top"></th:block>
+          <th:block th:replace="theme/sneat/fragments/top :: fragment-sneat-top"></th:block>
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- 본문-->
-            <th:block layout:fragment="content"></th:block>
+            <th:block layout:fragment="content-sneat"></th:block>
             <!-- 공통 하단-->
-            <th:block th:replace="theme/sneat/fragments/footer :: fragment-footer"></th:block>
+            <th:block th:replace="theme/sneat/fragments/footer :: fragment-sneat-footer"></th:block>
           </div>
           <!-- Content wrapper END -->
         </div>
@@ -39,6 +39,6 @@ sneat 테마(기본테마)의 default 레이아웃 구성
     </div>
     <!-- Layout END -->
     <!-- 공통 스크립트-->
-    <th:block th:replace="theme/sneat/fragments/script :: fragment-script"></th:block>
+    <th:block th:replace="theme/sneat/fragments/script :: fragment-sneat-script"></th:block>
   </body>
 </html>

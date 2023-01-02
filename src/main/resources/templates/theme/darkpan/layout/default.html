@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- =========================================================
+darkpan 테마(기본테마)의 default 레이아웃 구성
+========================================================= -->
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- 공통 헤더-->
+<th:block th:replace="theme/darkpan/fragments/header :: fragment-darkpan-header"></th:block>
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- 왼쪽 메뉴-->
+        <th:block th:replace="theme/darkpan/fragments/menu :: fragment-darkpan-menu"></th:block>
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- 상단-->
+            <th:block th:replace="theme/darkpan/fragments/top :: fragment-darkpan-top"></th:block>
+
+            <!-- 본문-->
+            <th:block layout:fragment="content-darkpan"></th:block>
+
+            <!-- 공통 하단-->
+            <th:block th:replace="theme/darkpan/fragments/footer :: fragment-darkpan-footer"></th:block>
+        </div>
+        <!-- Content END -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    <!-- container-fluid END -->
+
+<!-- 공통 스크립트-->
+<th:block th:replace="theme/darkpan/fragments/script :: fragment-darkpan-script"></th:block>
+</body>
+</html>
