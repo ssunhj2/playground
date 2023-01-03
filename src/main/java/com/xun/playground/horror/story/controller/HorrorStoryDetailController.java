@@ -4,13 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * hrror 컨텐츠 홈
- * 권한체크 대상이 되는 페이지
+ * 무서운이야기 상세페이지
  */
 @Controller
-public class HorrorHomeController {
-    @GetMapping("/horror")
+public class HorrorStoryDetailController {
+    @GetMapping("/horrorStoryDetail")
     public String welcome() {
-        return "horror/horrorHome";
+        return "horror/story/horrorStoryDetail";
     }
 }

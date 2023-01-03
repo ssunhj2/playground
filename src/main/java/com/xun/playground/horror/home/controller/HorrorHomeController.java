@@ -1,4 +1,4 @@
-package com.xun.playground.horror.story.controller;
+package com.xun.playground.horror.home.controller;
 
 import com.xun.playground.horror.story.domain.HorrorStoryDomain;
 import com.xun.playground.horror.story.service.HorrorStoryListService;
@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 /**
- * 무서운이야기 목록페이지
+ * hrror 컨텐츠 홈
  * 권한체크 대상이 되는 페이지
  */
 @Controller
-public class HorrorStoryListController {
+public class HorrorHomeController {
     private final HorrorStoryListService horrorStoryListService;
-
     @Autowired
-    public HorrorStoryListController(HorrorStoryListService horrorStoryListService){
+    public HorrorHomeController(HorrorStoryListService horrorStoryListService){
         this.horrorStoryListService = horrorStoryListService;
     }
 
-    @GetMapping("/horrorStoryList")
-    public String findHorrorStoryList(Model model) {
+    @GetMapping("/horror")
+    public String goHorrorHome(Model model) {
+        // 무서운이야기 게시판 목록 조회
         List<HorrorStoryDomain> storyList = horrorStoryListService.findHorrorStoryList();
         model.addAttribute("storyList", storyList);
 
-        return "horror/story/horrorStoryList";
+        return "horror/horrorHome";
     }
 }

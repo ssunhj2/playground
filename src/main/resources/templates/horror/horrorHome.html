@@ -7,6 +7,20 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
+
+  <!-- 안내 -->
+  <div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <h6 class="mb-0">게시판 안내</h6>
+      </div>
+      <div>
+        ※주의
+        심약자를 위해 사이트의 게시물들은 하나도 무섭지 않습니다.
+      </div>
+    </div>
+  </div>
+  <!-- 안내 End -->
   <!-- top 조회수 게시물 Start -->
   <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
@@ -53,57 +67,27 @@
 
   <!-- Horror List Start -->
   <div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary text-center rounded p-4">
+    <div class="bg-secondary rounded p-4">
       <div class="d-flex align-items-center justify-content-between mb-4">
         <h6 class="mb-0">무서운이야기</h6>
-        <a href="">Show All</a>
+        <a href="horrorStoryList">Show All</a>
       </div>
       <div class="table-responsive">
-        <table class="table text-start">
+        <table class="table">
           <thead>
-          <tr class="text-white">
+          <tr>
             <th scope="col">조회수</th>
             <th scope="col">제목</th>
             <th scope="col">글쓴이</th>
             <th scope="col">날짜</th>
-            <th scope="col">상세</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>2</td>
-            <td>무서운이야기1</td>
-            <td>회원1</td>
-            <td>2023-01-02</td>
-            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>2023-01-02</td>
-            <td>회원1</td>
-            <td>2023-01-02</td>
-            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-          </tr>
-          <tr>
-            <td>55</td>
-            <td>2023-01-02</td>
-            <td>회원1</td>
-            <td>2023-01-02</td>
-            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-          </tr>
-          <tr>
-            <td>100</td>
-            <td>2023-01-02</td>
-            <td>회원1</td>
-            <td>2023-01-02</td>
-            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-          </tr>
-          <tr>
-            <td>153</td>
-            <td>2023-01-02</td>
-            <td>회원1</td>
-            <td>2023-01-02</td>
-            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+          <tr th:each="story : ${storyList}">
+            <td th:text="${story.viewCount}"></td>
+            <td th:text="${story.title}"></td>
+            <td th:text="${story.name}"></td>
+            <td th:text="${story.enterDate}"></td>
           </tr>
           </tbody>
         </table>
