@@ -24,6 +24,7 @@ public class HorrorHomeController {
     @GetMapping("/horror")
     public String goHorrorHome(Model model) {
         // 무서운이야기 게시판 목록 조회
+        // todo 최신글 5개만 가져오기
         List<HorrorStoryDomain> storyList = horrorStoryListService.findHorrorStoryList();
         model.addAttribute("storyList", storyList);
 

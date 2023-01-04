@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 /**
- * 무서운이야기 목록페이지
+ * 무서운이야기 목록페이지 controller
  * 권한체크 대상이 되는 페이지
  */
 @Controller
@@ -22,7 +22,7 @@ public class HorrorStoryListController {
         this.horrorStoryListService = horrorStoryListService;
     }
 
-    @GetMapping("/horrorStoryList")
+    @GetMapping("/horror/story")
     public String findHorrorStoryList(Model model) {
         List<HorrorStoryDomain> storyList = horrorStoryListService.findHorrorStoryList();
         model.addAttribute("storyList", storyList);

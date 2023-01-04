@@ -12,7 +12,12 @@
         <div class="row g-4">
             <div class="col-12">
                 <div class="bg-secondary rounded h-100 p-4">
-                    <h6 class="mb-4">무서운이야기</h6>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">무서운이야기</h6>
+                        <a href="javascript:goStoryNew();">
+                            <button class="btn btn-outline-primary m-2" type="button">글쓰기</button>
+                        </a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -26,12 +31,21 @@
                             <tbody>
                             <tr th:each="story : ${storyList}">
                                 <td th:text="${story.viewCount}"></td>
-                                <td><a href="horrorStoryDetail"  th:text="${story.title}"></a></td>
-                                <td th:text="${story.name}"></td>
+                                <td><a href="#" th:onclick="goStoryDetail([[${story.horrStNo}]])" th:text="${story.title}"></a></td>
+                                <td th:text="${story.userName}"></td>
                                 <td th:text="${story.enterDate}"></td>
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group me-2 justify-content-center" role="group" aria-label="Second group">
+                            <button type="button" class="btn btn-primary">1</button>
+                            <button type="button" class="btn btn-secondary">2</button>
+                            <button type="button" class="btn btn-secondary">3</button>
+                            <button type="button" class="btn btn-secondary">4</button>
+                            <button type="button" class="btn btn-secondary">5</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,5 +53,18 @@
     </div>
     <!-- Horror List End -->
 
+    <script type="application/javascript">
+        <!-- 상세페이지로 이동-->
+        function goStoryDetail(horrStNo){
+            console.log(horrStNo);
+            location.href="/horror/story/detail?horrStNo=" + horrStNo;
+        }
+
+        <!-- 글쓰기 페이지로 이동-->
+        function goStoryNew(){
+            location.href="/horror/story/new";
+        }
+
+    </script>
 </th:block>
 </html>

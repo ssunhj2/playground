@@ -8,11 +8,14 @@
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
     <div class="container-fluid pt-4 px-4">
-        <h6 class="mb-4">무서운이야기</h6>
         <div class="bg-secondary rounded-top p-4">
+            <h6 class="mb-4">무서운이야기</h6>
             <div class="row">
-                <h5>제목</h5>
-                <p>내용</p>
+                <h5 th:text="${story.title}">제목</h5>
+                <p th:text="${story.content}">내용</p>
+                <p th:text="${story.viewCount}">조회수</p>
+                <p th:text="${story.userName}">작성자</p>
+                <p th:text="${story.enterDate}">작성일</p>
             </div>
         </div>
     </div>
