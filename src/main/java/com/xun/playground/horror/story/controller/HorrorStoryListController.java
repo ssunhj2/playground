@@ -23,7 +23,7 @@ public class HorrorStoryListController {
     }
 
     @GetMapping("/horror/story")
-    public String findHorrorStoryList(Model model) {
+    public String findList(Model model) {
         List<HorrorStoryDomain> storyList = horrorStoryListService.findHorrorStoryList();
         model.addAttribute("storyList", storyList);
 

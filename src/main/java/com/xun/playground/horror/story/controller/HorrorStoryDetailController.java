@@ -22,7 +22,7 @@ public class HorrorStoryDetailController {
     }
 
     @GetMapping("/horror/story/detail")
-    public String welcome(Model model, @RequestParam("horrStNo") String horrStNo) {
+    public String findDetail(Model model, @RequestParam("horrStNo") String horrStNo) {
         // 상세페이지 데이터 조회
         HorrorStoryDomain story = horrorStoryDetailService.findHorrorStoryDetail(horrStNo);
         model.addAttribute("story", story);
