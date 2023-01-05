@@ -12,3 +12,9 @@ function goPlaygroundHome(){
 function goHorrorHome(){
     location.href="/horror";
 }
+
+
+// horror 홈으로 이동
+function goHorrorStory(){
+    location.href="/horror/story";
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<!-- =========================================================
+무서운이야기 목록 페이지
+========================================================= -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{theme/darkpan/layout/default}">
+<th:block layout:fragment="content-darkpan">
+
+  <!-- 안내 -->
+  <div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <h6 class="mb-0">게시판 안내</h6>
+      </div>
+      <div>
+        ※주의
+        심약자를 위해 사이트의 게시물들은 하나도 무섭지 않습니다.
+      </div>
+    </div>
+  </div>
+  <!-- 안내 End -->
+  <!-- top 조회수 게시물 Start -->
+  <div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+      <div class="col-sm-6 col-xl-3">
+        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+          <i class="fa fa-chart-line fa-3x text-primary"></i>
+          <div class="ms-3">
+            <p class="mb-2">Today Top1</p>
+            <h6 class="mb-0">$1234</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+          <i class="fa fa-chart-bar fa-3x text-primary"></i>
+          <div class="ms-3">
+            <p class="mb-2">Week Top2</p>
+            <h6 class="mb-0">$1234</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+          <i class="fa fa-chart-area fa-3x text-primary"></i>
+          <div class="ms-3">
+            <p class="mb-2">Month Top1e</p>
+            <h6 class="mb-0">$1234</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+          <i class="fa fa-chart-pie fa-3x text-primary"></i>
+          <div class="ms-3">
+            <p class="mb-2">Year Top</p>
+            <h6 class="mb-0">$1234</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- top 조회수 게시물 End -->
+
+
+  <!-- Horror List Start -->
+  <div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary rounded p-4">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <h6 class="mb-0">무서운이야기</h6>
+        <a href="javascript:goHorrorStory()">Show All</a>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">조회수</th>
+            <th scope="col">제목</th>
+            <th scope="col">글쓴이</th>
+            <th scope="col">날짜</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="story : ${storyList}">
+            <td th:text="${story.viewCount}"></td>
+            <td th:text="${story.title}"></td>
+            <td th:text="${story.userName}"></td>
+            <td th:text="${story.enterDate}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Horror List End -->
+
+</th:block>
+</html>
