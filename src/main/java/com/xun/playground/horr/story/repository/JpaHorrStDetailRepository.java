@@ -20,7 +20,7 @@ public class JpaHorrStDetailRepository implements HorrStDetailRepository {
 
     @Override
     public Optional<HorrStDomain> findHorrorStoryDetail(String horrStNo) {
-        List<HorrStDomain> story = em.createQuery("SELECT s FROM HORROR_STORY s WHERE s.horrStNo = :horrStNo", HorrStDomain.class)
+        List<HorrStDomain> story = em.createQuery("SELECT s FROM HorrStDomain s WHERE s.horrStNo = :horrStNo", HorrStDomain.class)
                 .setParameter("horrStNo", horrStNo)
                 .getResultList();
         return story.stream().findAny();

@@ -29,6 +29,6 @@ public class HorrStDetailController {
         Optional<HorrStDomain> story = horrorStoryDetailService.findHorrorStoryDetail(horrStNo);
         model.addAttribute("story", story);
 
-        return "horror/story/horrorStoryDetail";
+        return "horr/story/horrStDetail";
     }
 }

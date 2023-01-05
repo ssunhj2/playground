@@ -10,7 +10,6 @@ import java.util.Optional;
 /**
  * Horror Story 상세페이지
  */
-@Service
 public class HorrStDetailService {
     private final HorrStDetailRepository horrorStoryDetailRepository;
 

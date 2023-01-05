@@ -1,27 +1,32 @@
 package com.xun.playground.horr.story.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * 무서운이야기 컨텐츠
  */
 @Entity
+@Table(name="HORROR_STORY")
 public class HorrStDomain {
     // horror Story No
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="HORR_ST_NO")
     private String horrStNo;
     // 조회수
+    @Column(name="VIEW_COUNT")
     private String viewCount;
     // 제목
+    @Column(name="TITLE")
     private String title;
     // 내용
+    @Column(name="CONTENT")
     private String content;
     // 작성자 id
+    @Column(name="ENTER_BY")
     private String enterBy;
     // 작성날짜
+    @Column(name="ENTER_DATE")
     private String enterDate;
 
     public String getHorrStNo() {

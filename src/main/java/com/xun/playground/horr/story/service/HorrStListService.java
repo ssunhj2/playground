@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * 무서운이야기 콘텐츠 서비스
  */
-@Service
 public class HorrStListService {
     private final HorrStListRepository horrorStoryListRepository;
 

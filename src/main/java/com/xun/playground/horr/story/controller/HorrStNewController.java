@@ -2,7 +2,7 @@ package com.xun.playground.horr.story.controller;
 
 import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.form.HorrStForm;
-import com.xun.playground.horr.story.service.HorrStWriteService;
+import com.xun.playground.horr.story.service.HorrStNewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
  * 무서운이야기 글쓰기
  */
 @Controller
-public class HorrStWriteController {
+public class HorrStNewController {
 
-    private final HorrStWriteService horrorStoryWriteService;
+    private final HorrStNewService horrorStoryWriteService;
 
 
-    public HorrStWriteController(HorrStWriteService horrorStoryWriteService){
+    public HorrStNewController(HorrStNewService horrorStoryWriteService){
         this.horrorStoryWriteService = horrorStoryWriteService;
     }
 
@@ -27,7 +27,7 @@ public class HorrStWriteController {
      */
     @GetMapping("/horror/story/new")
     public String goHorrorStory(){
-        return "horror/story/horrorStoryWrite";
+        return "horr/story/horrStNew";
     }
 
     

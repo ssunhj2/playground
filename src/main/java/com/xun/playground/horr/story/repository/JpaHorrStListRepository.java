@@ -19,6 +19,6 @@ public class JpaHorrStListRepository implements HorrStListRepository {
 
     @Override
     public List<HorrStDomain> findHorrorStoryList() {
-        return em.createQuery("SELECT s FROM HORROR_STORY s", HorrStDomain.class).getResultList();
+        return em.createQuery("SELECT s FROM HorrStDomain s", HorrStDomain.class).getResultList();
     }
 }

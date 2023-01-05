@@ -27,6 +27,6 @@ public class HorrStListController {
         List<HorrStDomain> storyList = horrorStoryListService.findHorrorStoryList();
         model.addAttribute("storyList", storyList);
 
-        return "horror/story/horrorStoryList";
+        return "horr/story/horrStList";
     }
 }

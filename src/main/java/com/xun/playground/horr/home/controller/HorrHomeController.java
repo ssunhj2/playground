@@ -28,6 +28,6 @@ public class HorrHomeController {
         List<HorrStDomain> storyList = horrorStoryListService.findHorrorStoryList();
         model.addAttribute("storyList", storyList);
 
-        return "horror/horrorHome";
+        return "horr/horrorHome";
     }
 }
