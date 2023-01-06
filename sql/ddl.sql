@@ -6,8 +6,8 @@ create table HORROR_STORY
     TITLE varchar(255),
     CONTENT varchar(4000),
     ENTER_BY varchar(40),
-    ENTER_DATE date,
+    ENTER_DATE datetime,
     UPDATE_BY varchar(40),
-    UPDATE_DATE date,
+    UPDATE_DATE datetime,
     PRIMARY KEY (HORR_ST_NO)
 )

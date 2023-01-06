@@ -1,6 +1,11 @@
 package com.xun.playground.horr.story.domain;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * 무서운이야기 컨텐츠
@@ -26,8 +31,17 @@ public class HorrStDomain {
     @Column(name="ENTER_BY")
     private String enterBy;
     // 작성날짜
+    @CreationTimestamp
     @Column(name="ENTER_DATE")
-    private String enterDate;
+    private LocalDateTime enterDate = LocalDateTime.now();
+    // 수정자 id
+    @Column(name="UPDATE_BY")
+    private String updateBy;
+    // 수정날짜
+    @UpdateTimestamp
+    @Column(name="UPDATE_DATE")
+    private LocalDateTime updateDate;
+
 
     public String getHorrStNo() {
         return horrStNo;
@@ -69,11 +83,27 @@ public class HorrStDomain {
         this.enterBy = enterBy;
     }
 
-    public String getEnterDate() {
+    public LocalDateTime getEnterDate() {
         return enterDate;
     }
 
-    public void setEnterDate(String enterDate) {
+    public void setEnterDate(LocalDateTime enterDate) {
         this.enterDate = enterDate;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
 }

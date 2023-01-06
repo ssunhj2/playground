@@ -30,12 +30,20 @@ public class HorrStNewController {
         return "horr/story/horrStNew";
     }
 
-    
+    /**
+     * 글쓰기 수행
+     * @param form
+     * @return
+     */
     @PostMapping("/horror/story/new")
     public String createStory(HorrStForm form){
         HorrStDomain story = new HorrStDomain();
-        horrorStoryWriteService.createStory(form);
+        // todo 로그인 사용자 ID 가져오기
+        story.setEnterBy("xunxou");
+        story.setTitle(form.getTitle());
+        story.setContent(form.getContent());
+        horrorStoryWriteService.createStory(story);
 
-        return "redirect:/";
+        return "horr/story/horrStList";
     }
 }

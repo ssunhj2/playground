@@ -30,7 +30,6 @@ public class DumHorrStListRepository implements HorrStListRepository {
         story.setViewCount("3");
         story.setTitle("우리 지역에 전해내려오는 무시무시한 이야기");
         story.setEnterBy("xunxou");
-        story.setEnterDate("2023-01-03");
         storyList.add(story);
 
         HorrStDomain story2 = new HorrStDomain();
@@ -38,7 +37,7 @@ public class DumHorrStListRepository implements HorrStListRepository {
         story2.setViewCount("30");
         story2.setTitle("공포 실화");
         story2.setEnterBy("hello");
-        story2.setEnterDate("2023-01-02");
+        story2.setEnterBy("hello");
         storyList.add(story2);
 
         return storyList;

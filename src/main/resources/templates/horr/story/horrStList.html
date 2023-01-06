@@ -19,7 +19,7 @@
                         </a>
                     </div>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="HORR_ST">
                             <thead>
                             <tr>
                                 <th scope="col">조회수</th>
@@ -32,7 +32,7 @@
                             <tr th:each="story : ${storyList}">
                                 <td th:text="${story.viewCount}"></td>
                                 <td><a href="#" th:onclick="goStoryDetail([[${story.horrStNo}]])" th:text="${story.title}"></a></td>
-                                <td th:text="${story.userName}"></td>
+                                <td th:text="${story.enterBy}"></td>
                                 <td th:text="${story.enterDate}"></td>
                             </tr>
                             </tbody>

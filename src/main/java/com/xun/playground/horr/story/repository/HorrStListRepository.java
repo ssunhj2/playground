@@ -5,7 +5,7 @@ import com.xun.playground.horr.story.domain.HorrStDomain;
 import java.util.List;
 
 /**
- * 무서운이야기 콘텐츠 ropository 인터페이스
+ * 무서운이야기 목록 ropository 인터페이스
  */
 public interface HorrStListRepository {
     // 목록 전체조회

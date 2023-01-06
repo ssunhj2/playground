@@ -5,7 +5,7 @@ import com.xun.playground.horr.story.domain.HorrStDomain;
 import java.util.Optional;
 
 /**
- * 무서운이야기 콘텐츠 ropository 인터페이스
+ * 무서운이야기 상세 ropository 인터페이스
  */
 public interface HorrStDetailRepository {
     // 상세페이지 조회

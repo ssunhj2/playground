@@ -4,18 +4,20 @@ import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.repository.HorrStDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 /**
  * Horror Story 상세페이지
  */
+@Transactional
 public class HorrStDetailService {
-    private final HorrStDetailRepository horrorStoryDetailRepository;
+    private final HorrStDetailRepository horrStDetailRepository;
 
     @Autowired
-    public HorrStDetailService(HorrStDetailRepository horrorStoryDetailRepository){
-        this.horrorStoryDetailRepository = horrorStoryDetailRepository;
+    public HorrStDetailService(HorrStDetailRepository horrStDetailRepository){
+        this.horrStDetailRepository = horrStDetailRepository;
     }
 
     /**
@@ -24,7 +26,7 @@ public class HorrStDetailService {
      * @return
      */
     public Optional<HorrStDomain> findHorrorStoryDetail(String horrStNo){
-        return horrorStoryDetailRepository.findHorrorStoryDetail(horrStNo);
+        return horrStDetailRepository.findHorrorStoryDetail(horrStNo);
     }
 
 }

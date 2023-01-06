@@ -28,7 +28,6 @@ public class DumHorrStDetailRepository implements HorrStDetailRepository {
         story.setViewCount("3");
         story.setTitle("우리 지역에 전해내려오는 무시무시한 이야기");
         story.setEnterBy("hello");
-        story.setEnterDate("2023-01-03");
 
         return Optional.ofNullable(story);
     }
