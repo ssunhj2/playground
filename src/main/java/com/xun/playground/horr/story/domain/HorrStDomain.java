@@ -1,10 +1,13 @@
 package com.xun.playground.horr.story.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -19,6 +22,7 @@ public class HorrStDomain {
     @Column(name="HORR_ST_NO")
     private String horrStNo;
     // 조회수
+    @ColumnDefault("0")
     @Column(name="VIEW_COUNT")
     private String viewCount;
     // 제목
@@ -32,15 +36,17 @@ public class HorrStDomain {
     private String enterBy;
     // 작성날짜
     @CreationTimestamp
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
     @Column(name="ENTER_DATE")
-    private LocalDateTime enterDate = LocalDateTime.now();
+    private LocalDate enterDate;
     // 수정자 id
     @Column(name="UPDATE_BY")
     private String updateBy;
     // 수정날짜
     @UpdateTimestamp
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
     @Column(name="UPDATE_DATE")
-    private LocalDateTime updateDate;
+    private LocalDate updateDate;
 
 
     public String getHorrStNo() {
@@ -83,11 +89,11 @@ public class HorrStDomain {
         this.enterBy = enterBy;
     }
 
-    public LocalDateTime getEnterDate() {
+    public LocalDate getEnterDate() {
         return enterDate;
     }
 
-    public void setEnterDate(LocalDateTime enterDate) {
+    public void setEnterDate(LocalDate enterDate) {
         this.enterDate = enterDate;
     }
 
@@ -99,11 +105,11 @@ public class HorrStDomain {
         this.updateBy = updateBy;
     }
 
-    public LocalDateTime getUpdateDate() {
+    public LocalDate getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(LocalDateTime updateDate) {
+    public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
 }
