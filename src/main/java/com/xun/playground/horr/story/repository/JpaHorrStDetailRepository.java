@@ -34,4 +34,14 @@ public class JpaHorrStDetailRepository implements HorrStDetailRepository {
 
         em.clear();
     }
+
+    @Override
+    public void modifyStory(String horrStNo) {
+        em.createQuery("UPDATE HorrStDomain s set s.title = :title WHERE s.horrStNo = :horrStNo")
+                .setParameter("horrStNo", horrStNo)
+                .executeUpdate();
+        em.clear();
+    }
+
+
 }

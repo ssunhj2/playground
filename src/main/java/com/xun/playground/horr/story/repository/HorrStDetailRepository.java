@@ -12,4 +12,6 @@ public interface HorrStDetailRepository {
     Optional<HorrStDomain> findHorrorStoryDetail(String horrStNo);
     // story를 삭제
     void deleteStory(String horrStNo);
+    // story 수정
+    void modifyStory(String horrStNo);
 }
