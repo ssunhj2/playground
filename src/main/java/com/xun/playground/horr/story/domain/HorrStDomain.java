@@ -48,7 +48,6 @@ public class HorrStDomain {
     @Column(name="UPDATE_DATE")
     private LocalDate updateDate;
 
-
     public String getHorrStNo() {
         return horrStNo;
     }

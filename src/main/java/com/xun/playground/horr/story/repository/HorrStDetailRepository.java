@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface HorrStDetailRepository {
     // 상세페이지 조회
     Optional<HorrStDomain> findHorrorStoryDetail(String horrStNo);
+    // story를 삭제
+    void deleteStory(String horrStNo);
 }

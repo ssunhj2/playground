@@ -9,17 +9,41 @@
 <th:block layout:fragment="content-darkpan">
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary rounded-top p-4">
-            <h6 class="mb-4">무서운이야기</h6>
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">무서운이야기</h6>
+                <div>
+                    <button type="button" onclick="" class="btn btn-outline-warning m-2">수정</button>
+                    <button type="button" th:onclick="deleteStory([[${story.horrStNo}]])" class="btn btn-outline-light m-2">삭제</button>
+                </div>
+            </div>
+
             <div class="row">
                 <h5 th:text="${story.title}">제목</h5>
                 <p th:text="${story.content}">내용</p>
                 <p th:text="${story.viewCount}">조회수</p>
-                <p th:text="${story.userName}">작성자</p>
+                <p th:text="${story.enterBy}">작성자</p>
                 <p th:text="${story.enterDate}">작성일</p>
             </div>
         </div>
     </div>
+    <script type="application/javascript">
+        <!-- 수정 -->
+        function goMmodify(horrStNo){
 
+        }
+
+        <!-- 삭제 -->
+        function deleteStory(horrStNo){
+            if(!confirm("삭제하시겠습니까?")) return;
+
+            var url = "/horror/story/delete";
+            var param = {'horrStNo':horrStNo};
+            var after = goHorrorStory();
+
+            ajax(url, param, after);
+        }
+
+    </script>
 
 </th:block>
 </html>

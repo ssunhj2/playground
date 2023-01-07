@@ -10,7 +10,7 @@ import java.util.Optional;
  * DB 연결 전에 사용한다.
  */
 
-public class DumHorrStDetailRepository implements HorrStDetailRepository {
+public class DumHorrStDetailRepository {
 
 
     public Optional<HorrStDomain> findHorrorStoryDetail(String horrStNo) {

@@ -25,4 +25,13 @@ public class JpaHorrStDetailRepository implements HorrStDetailRepository {
                 .getResultList();
         return story.stream().findAny();
     }
+
+    @Override
+    public void deleteStory(String horrStNo) {
+        em.createQuery("DELETE FROM HorrStDomain s WHERE s.horrStNo = :horrStNo")
+                .setParameter("horrStNo", horrStNo)
+                .executeUpdate();
+
+        em.clear();
+    }
 }

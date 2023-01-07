@@ -15,7 +15,6 @@ public class HorrStNewController {
 
     private final HorrStNewService horrorStoryWriteService;
 
-
     public HorrStNewController(HorrStNewService horrorStoryWriteService){
         this.horrorStoryWriteService = horrorStoryWriteService;
     }

@@ -3,7 +3,6 @@ package com.xun.playground.horr.story.service;
 import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.repository.HorrStDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -29,4 +28,7 @@ public class HorrStDetailService {
         return horrStDetailRepository.findHorrorStoryDetail(horrStNo);
     }
 
+   public void deleteStory(String horrStNo){
+       horrStDetailRepository.deleteStory(horrStNo);
+   }
 }
