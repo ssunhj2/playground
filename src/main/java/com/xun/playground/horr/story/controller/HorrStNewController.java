@@ -2,21 +2,29 @@ package com.xun.playground.horr.story.controller;
 
 import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.form.HorrStForm;
+import com.xun.playground.horr.story.service.HorrStDetailService;
 import com.xun.playground.horr.story.service.HorrStNewService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 /**
  * 무서운이야기 글쓰기
  */
 @Controller
 public class HorrStNewController {
-
+    // 신규관련 서비스
     private final HorrStNewService horrorStoryWriteService;
+    // 상세관련 서비스
+    private final HorrStDetailService horrorStoryDetailService;
 
-    public HorrStNewController(HorrStNewService horrorStoryWriteService){
+    public HorrStNewController(HorrStNewService horrorStoryWriteService, HorrStDetailService horrorStoryDetailService){
         this.horrorStoryWriteService = horrorStoryWriteService;
+        this.horrorStoryDetailService = horrorStoryDetailService;
     }
 
 
@@ -25,23 +33,26 @@ public class HorrStNewController {
      * @return
      */
     @GetMapping("/horror/story/new")
-    public String goHorrorStory(){
+    public String goHorrorStory(Model model, @RequestParam(required = false, value = "horrStNo") String horrStNo){
+        // 수정인 경우, 값 조회
+        if(!"".equals(horrStNo) && horrStNo != null){
+            Optional<HorrStDomain> story = horrorStoryDetailService.findHorrorStoryDetail(horrStNo);
+            if(story != null) model.addAttribute("story", story.get());
+        }
+
         return "horr/story/horrStNew";
     }
 
     /**
-     * 글쓰기 수행
+     * 글 저장 & 수정
      * @param form
      * @return
      */
     @PostMapping("/horror/story/new")
-    public String createStory(HorrStForm form){
-        HorrStDomain story = new HorrStDomain();
+    public String saveStory(HorrStForm form){
         // todo 로그인 사용자 ID 가져오기
-        story.setEnterBy("xunxou");
-        story.setTitle(form.getTitle());
-        story.setContent(form.getContent());
-        horrorStoryWriteService.createStory(story);
+        form.setEnterBy("xunxou");
+        horrorStoryWriteService.saveStory(form);
 
         return "horr/story/horrStList";
     }

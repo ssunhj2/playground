@@ -8,4 +8,6 @@ import com.xun.playground.horr.story.domain.HorrStDomain;
 public interface HorrStNewRepository {
     // 글 저장
     HorrStDomain createStory(HorrStDomain story);
+    // 글 수정
+    HorrStDomain modifyStory(HorrStDomain story);
 }

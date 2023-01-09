@@ -32,7 +32,7 @@ public class HorrStDetailController {
         if(!"".equals(horrStNo) && horrStNo != null){
             // 상세페이지 데이터 조회
             Optional<HorrStDomain> story = horrorStoryDetailService.findHorrorStoryDetail(horrStNo);
-            // null인 경우, exception이 나지 않도록 생성자를
+            // null인 경우, exception이 나지 않도록 생성자를 반환
             HorrStDomain result = story.orElseGet(HorrStDomain::new);
 
             model.addAttribute("story", result);

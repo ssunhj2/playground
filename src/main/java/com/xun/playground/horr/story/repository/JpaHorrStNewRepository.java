@@ -25,4 +25,24 @@ public class JpaHorrStNewRepository implements HorrStNewRepository {
         em.persist(story);
         return story;
     }
+
+    /**
+     * 글을 수정한다.
+     * @param story
+     * @return
+     */
+    @Override
+    public HorrStDomain modifyStory(HorrStDomain story) {
+        String title = story.getTitle();
+        String content = story.getContent();
+
+        StringBuffer query = new StringBuffer();
+        query.append("UPDATE HORROR_STORY SET ");
+        if(title != null) query.append("   TITLE = :title ");
+        if(content != null) query.append(" CONTENT = :content ");
+        query.append(" WHERE HORR_ST_NO = :horrStNo");
+
+
+        return null;
+    }
 }
