@@ -4,6 +4,7 @@ import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.form.HorrStForm;
 import com.xun.playground.horr.story.service.HorrStDetailService;
 import com.xun.playground.horr.story.service.HorrStNewService;
+import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,7 @@ public class HorrStNewController {
     @GetMapping("/horror/story/new")
     public String goHorrorStory(Model model, @RequestParam(required = false, value = "horrStNo") String horrStNo){
         // 수정인 경우, 값 조회
-        if(!"".equals(horrStNo) && horrStNo != null){
+        if(!StringUtils.isEmpty(horrStNo)){
             Optional<HorrStDomain> story = horrorStoryDetailService.findHorrorStoryDetail(horrStNo);
             if(story != null) model.addAttribute("story", story.get());
         }

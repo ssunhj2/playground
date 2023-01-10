@@ -1,8 +1,10 @@
 package com.xun.playground.horr.story.repository;
 
+import com.xun.playground.common.CommonUtils;
 import com.xun.playground.horr.story.domain.HorrStDomain;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 
 /**
  * 무서운이야기 글쓰기 JPA Repository
@@ -33,16 +35,14 @@ public class JpaHorrStNewRepository implements HorrStNewRepository {
      */
     @Override
     public HorrStDomain modifyStory(HorrStDomain story) {
-        String title = story.getTitle();
-        String content = story.getContent();
+        String horrStNo = story.getHorrStNo();
 
-        StringBuffer query = new StringBuffer();
-        query.append("UPDATE HORROR_STORY SET ");
-        if(title != null) query.append("   TITLE = :title ");
-        if(content != null) query.append(" CONTENT = :content ");
-        query.append(" WHERE HORR_ST_NO = :horrStNo");
+        HorrStDomain modiStory = em.find(HorrStDomain.class, horrStNo);
+        modiStory.setTitle(story.getTitle());
+        modiStory.setContent(story.getContent());
+        modiStory.setUpdateBy(story.getEnterBy());
 
 
-        return null;
+        return modiStory;
     }
 }

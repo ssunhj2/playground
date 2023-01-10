@@ -1,18 +1,22 @@
 package com.xun.playground.horr.story.service;
 
+
 import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.form.HorrStForm;
 import com.xun.playground.horr.story.repository.HorrStNewRepository;
-import com.xun.playground.horr.story.repository.JpaHorrStNewRepository;
+import org.apache.groovy.parser.antlr4.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 /**
  * 무서운이야기 게시판 글쓰기 service
  */
 @Transactional
 public class HorrStNewService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final HorrStNewRepository horrStNewRepository;
 
     @Autowired
@@ -30,37 +34,16 @@ public class HorrStNewService {
 
         HorrStDomain story = new HorrStDomain();
         story.setEnterBy(form.getEnterBy());
-
-        String title = nullToEmpty(form.getTitle());
-        String content = nullToEmpty(form.getContent());
+        story.setTitle(form.getTitle());
+        story.setContent(form.getContent());
 
         // 수정
-        if(horrStNo != null && !"".equals(horrStNo)){
-            String oldTitle = nullToEmpty(form.getOldTitle());
-            String oldContent = nullToEmpty(form.getOldContent());
-            /**
-             * 수정된 값만 저장한다.
-             */
-            if(!oldTitle.equals(title)) story.setTitle(title);
-            if(!oldContent.equals(content)) story.setContent(content);
-
+        if(!StringUtils.isEmpty(horrStNo)){
             return horrStNewRepository.modifyStory(story);
         }
-
-        story.setTitle(title);
-        story.setContent(content);
 
         // 입력
         return horrStNewRepository.createStory(story);
     }
-
-
-    // null 값을 "" 로 변경하여 반환한다.
-    private String nullToEmpty(String checkString){
-        if(checkString == null) return "";
-
-        return checkString;
-    }
-
 
 }

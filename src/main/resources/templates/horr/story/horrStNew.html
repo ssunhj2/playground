@@ -11,11 +11,10 @@
     <div class="bg-secondary rounded-top p-4">
       <h6 class="mb-4">무서운이야기</h6>
       <form action="/horror/story/new" id="STORY_FORM" method="post">
-        <input type="hidden" name="horrStNo" />
+        <input type="hidden" name="horrStNo" th:value="${story.horrStNo}"/>
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">제목</label>
           <div class="form-floating col-sm-10">
-            <input type="hidden" name="oldTitle" />
             <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요">
             <label for="title">title</label>
           </div>
@@ -23,7 +22,6 @@
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">내용</label>
           <div class="form-floating col-sm-10">
-            <input type="hidden" name="oldContent" />
             <textarea class="form-control" id="content" name="content" placeholder="내용을 입력해주세요" style="height: 150px;"></textarea>
             <label for="content">content</label>
           </div>
@@ -32,36 +30,31 @@
       </form>
     </div>
   </div>
+
   <script type="application/javascript">
     var mode; // 입력모드/수정모드
 
     <!-- dom 트리 준비이후 실행-->
-    $(document).ready(function(){
+    $(function() {
       mode = checkMode(); // 입력모드/수정모드 check
+      console.log("mode: " + mode);
       // 수정인 경우 값 설정
       if("MODIFY" == mode){
-        var story= "[[${story}]]";
 
-        $("input[name='horrStNo']").horrStNo = story.horrStNo;
-        $("input[name='title']").value = story.title;
-        $("input[name='content']").value = story.content;
-        $("input[name='oldTitle']").value = story.oldTitle;
-        $("input[name='oldContent']").value = story.oldContent;
+        $("input[name='title']").val('[[${story.title}]]');
+        $("textarea[name='content']").val('[[${story.content}]]');
       }
 
     });
 
-    <!-- 글쓰기인지 수정인지 검사
-         직관적으로 알기쉽게 true/false 보다 MODIFY/NEW로 반환값을 정했음.
-     -->
+    <!-- 글쓰기인지 수정인지 검사. 직관적으로 알기쉽게 true/false 보다 MODIFY/NEW로 반환값을 정했음.-->
     function checkMode(){
-      var story= "[[${story}]]";
+      var horrStNo=  $("input[name='horrStNo']").val();
       // 조회된 값이 있으면 수정
-      if(typeof story != "undefined" && story != "" && story.horrStNo != "") return "MODIFY";
+      if(typeof horrStNo != "undefined" && horrStNo != "") return "MODIFY";
       return "NEW"; // 없으면 입력
     }
 
     </script>
-
 </th:block>
 </html>

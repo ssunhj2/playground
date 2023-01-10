@@ -12,7 +12,7 @@
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h6 class="mb-0">무서운이야기</h6>
                 <div>
-                    <button type="button" onclick="" class="btn btn-outline-warning m-2">수정</button>
+                    <button type="button" th:onclick="goMmodify([[${story.horrStNo}]])" class="btn btn-outline-warning m-2">수정</button>
                     <button type="button" th:onclick="deleteStory([[${story.horrStNo}]])" class="btn btn-outline-light m-2">삭제</button>
                 </div>
             </div>
@@ -29,7 +29,7 @@
     <script type="application/javascript">
         <!-- 수정 -->
         function goMmodify(horrStNo){
-
+            location.href="/horror/story/new?horrStNo=" + horrStNo;
         }
 
         <!-- 삭제 -->

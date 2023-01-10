@@ -3,6 +3,7 @@ package com.xun.playground.horr.story.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -11,7 +12,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * 무서운이야기 컨텐츠
+ * 무서운이야기 entity(DB관련 사용)
+ * 테이블 내에 존재하는 속성만 정의한다.
  */
 @Entity
 @Table(name="HORROR_STORY")

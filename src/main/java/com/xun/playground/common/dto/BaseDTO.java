@@ -1,11 +1,11 @@
-package com.xun.playground.common.form;
+package com.xun.playground.common.dto;
 
 import java.time.LocalDate;
 
 /**
- * 공통적으로 사용되는 form
+ * 공통적으로 사용되는 속성
  */
-public class BaseForm {
+public class BaseDTO {
     // 작성자
     private String enterBy;
     // 작성날짜
