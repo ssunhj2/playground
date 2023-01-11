@@ -1,6 +1,7 @@
 package com.xun.playground.horr.story.controller;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
+
+import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.service.HorrStListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class HorrStListController {
 
     @GetMapping("/horror/story")
     public String findList(Model model) {
-        List<HorrStDomain> storyList = horrorStoryListService.findHorrorStoryList();
+        List<HorrStDTO> storyList = horrorStoryListService.findAllList();
         model.addAttribute("storyList", storyList);
 
         return "horr/story/horrStList";

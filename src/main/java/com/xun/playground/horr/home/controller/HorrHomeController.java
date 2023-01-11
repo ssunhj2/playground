@@ -1,6 +1,6 @@
 package com.xun.playground.horr.home.controller;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.service.HorrStListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class HorrHomeController {
     public String goHorrorHome(Model model) {
         // 무서운이야기 게시판 목록 조회
         // todo 최신글 5개만 가져오기
-        List<HorrStDomain> storyList = horrorStoryListService.findHorrorStoryList();
+        List<HorrStDTO> storyList = horrorStoryListService.findAllList();
         model.addAttribute("storyList", storyList);
 
         return "horr/horrorHome";

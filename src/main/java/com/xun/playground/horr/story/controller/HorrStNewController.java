@@ -1,6 +1,6 @@
 package com.xun.playground.horr.story.controller;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.form.HorrStForm;
 import com.xun.playground.horr.story.service.HorrStDetailService;
 import com.xun.playground.horr.story.service.HorrStNewService;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Optional;
 
 /**
  * 무서운이야기 글쓰기
@@ -37,8 +36,8 @@ public class HorrStNewController {
     public String goHorrorStory(Model model, @RequestParam(required = false, value = "horrStNo") String horrStNo){
         // 수정인 경우, 값 조회
         if(!StringUtils.isEmpty(horrStNo)){
-            Optional<HorrStDomain> story = horrorStoryDetailService.findHorrorStoryDetail(horrStNo);
-            if(story != null) model.addAttribute("story", story.get());
+            HorrStDTO story = horrorStoryDetailService.findDetail(horrStNo);
+            model.addAttribute("story", story);
         }
 
         return "horr/story/horrStNew";
@@ -53,7 +52,9 @@ public class HorrStNewController {
     public String saveStory(HorrStForm form){
         // todo 로그인 사용자 ID 가져오기
         form.setEnterBy("xunxou");
-        horrorStoryWriteService.saveStory(form);
+
+        HorrStDTO story = new HorrStDTO(form);
+        horrorStoryWriteService.saveStory(story);
 
         return "horr/story/horrStList";
     }

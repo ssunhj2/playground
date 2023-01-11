@@ -1,11 +1,6 @@
 package com.xun.playground.common.config;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
-import com.xun.playground.horr.story.repository.*;
-import com.xun.playground.horr.story.service.HorrStDetailService;
-import com.xun.playground.horr.story.service.HorrStListService;
-import com.xun.playground.horr.story.service.HorrStNewService;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
@@ -27,7 +22,7 @@ public class SpringConfig {
     }
 
     // 무서운이야기 목록 서비스
-    @Bean
+    /*@Bean
     public HorrStListService horrStListService(){
         return new HorrStListService(horrStListRepository());
     }
@@ -35,7 +30,7 @@ public class SpringConfig {
     // 무서운이야기 목록 JPA Repository
     @Bean
     public HorrStListRepository horrStListRepository(){
-        return new JpaHorrStListRepository(em);
+        return (HorrStListRepository) new JpaHorrStListRepository();
     }
 
     // 무서운이야기 상세 서비스
@@ -52,12 +47,12 @@ public class SpringConfig {
 
     @Bean
     public HorrStNewService horrStNewService(){
-        return new HorrStNewService(horrStNewRepository());
+        return new HorrStNewService(new HorrStNewRepository());
     }
 
     @Bean
-    public HorrStNewRepository horrStNewRepository(){
-        return new JpaHorrStNewRepository(em);
-    }
+    public HorrStDetailRepository horrStDetailRepository(){
+        return new JpaHorrStDetailRepository(em);
+    }*/
 
 }

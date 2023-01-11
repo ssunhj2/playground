@@ -1,20 +1,22 @@
 package com.xun.playground.horr.story.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import groovy.transform.builder.Builder;
+import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * 무서운이야기 entity(DB관련 사용)
- * 테이블 내에 존재하는 속성만 정의한다.
+ * ENTITY
+ * 1. 테이블 내에 존재하는 속성만 정의한다.
+ * 2. 데이터 전달에 사용하지 않는다.
  */
+@Getter
 @Entity
 @Table(name="HORROR_STORY")
 public class HorrStDomain {
@@ -50,67 +52,19 @@ public class HorrStDomain {
     @Column(name="UPDATE_DATE")
     private LocalDate updateDate;
 
-    public String getHorrStNo() {
-        return horrStNo;
-    }
-
-    public void setHorrStNo(String horrStNo) {
-        this.horrStNo = horrStNo;
-    }
-
-    public String getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(String viewCount) {
+    public HorrStDomain(){}
+    @Builder
+    public HorrStDomain(String viewCount, String title, String content, String enterBy){
         this.viewCount = viewCount;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getEnterBy() {
-        return enterBy;
-    }
-
-    public void setEnterBy(String enterBy) {
         this.enterBy = enterBy;
     }
 
-    public LocalDate getEnterDate() {
-        return enterDate;
-    }
-
-    public void setEnterDate(LocalDate enterDate) {
-        this.enterDate = enterDate;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
+    // 수정
+    public void update(String title, String content, String updateBy){
+        this.title = title;
+        this.content = content;
         this.updateBy = updateBy;
-    }
-
-    public LocalDate getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDate updateDate) {
-        this.updateDate = updateDate;
     }
 }

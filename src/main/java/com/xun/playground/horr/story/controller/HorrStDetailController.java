@@ -1,7 +1,7 @@
 package com.xun.playground.horr.story.controller;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
-import com.xun.playground.horr.story.form.HorrStForm;
+
+import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.service.HorrStDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Optional;
 
 
 /**
@@ -31,11 +29,11 @@ public class HorrStDetailController {
 
         if(!"".equals(horrStNo) && horrStNo != null){
             // 상세페이지 데이터 조회
-            Optional<HorrStDomain> story = horrorStoryDetailService.findHorrorStoryDetail(horrStNo);
+            HorrStDTO story = horrorStoryDetailService.findDetail(horrStNo);
             // null인 경우, exception이 나지 않도록 생성자를 반환
-            HorrStDomain result = story.orElseGet(HorrStDomain::new);
+            //HorrStDTO result = story.orElseGet(HorrStDTO::new);
 
-            model.addAttribute("story", result);
+            model.addAttribute("story", story);
         }
 
         return "horr/story/horrStDetail";

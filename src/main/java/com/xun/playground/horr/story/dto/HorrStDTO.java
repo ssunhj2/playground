@@ -1,10 +1,17 @@
 package com.xun.playground.horr.story.dto;
 
 import com.xun.playground.common.dto.BaseDTO;
+import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.form.HorrStForm;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 무서운이야기 DTO (데이터 전달 목적으로만 사용)
+ * 무서운이야기 DTO
+ * 데이터 전달 목적으로만 사용
  */
+@Getter
+@Setter
 public class HorrStDTO extends BaseDTO {
     // horror Story No
     private String horrStNo;
@@ -15,35 +22,36 @@ public class HorrStDTO extends BaseDTO {
     // 내용
     private String content;
 
-    public String getHorrStNo() {
-        return horrStNo;
-    }
+    public HorrStDTO(){}
 
-    public void setHorrStNo(String horrStNo) {
-        this.horrStNo = horrStNo;
-    }
-
-    public String getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(String viewCount) {
+    public HorrStDTO(String viewCount, String title, String content, String enterBy){
         this.viewCount = viewCount;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
         this.content = content;
+        this.setEnterBy(enterBy);
     }
+
+    public HorrStDTO(HorrStForm form){
+        this.horrStNo = form.getHorrStNo();
+        this.title = form.getTitle();
+        this.content = form.getContent();
+        this.setEnterBy(form.getEnterBy());
+    }
+
+    public HorrStDTO(HorrStDomain entity){
+        this.horrStNo = entity.getHorrStNo();
+        this.viewCount = entity.getViewCount();
+        this.title = entity.getTitle();
+        this.content = entity.getContent();
+        this.setEnterBy(entity.getEnterBy());
+        this.setEnterDate(entity.getEnterDate());
+        this.setUpdateBy(entity.getUpdateBy());
+        this.setUpdateDate(entity.getUpdateDate());
+    }
+
+    // HorrStDTO 객체를 entity 객체로 return 한다.
+    public HorrStDomain toEntity(){
+        return new HorrStDomain(viewCount, title, content, getEnterBy());
+    }
+
 }
