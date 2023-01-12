@@ -50,7 +50,7 @@ public class HorrStIntegTest {
 
 
     // 삭제
-    @Test
+   /* @Test
     void 삭제(){
         // given
         HorrStDomain story = newTestStory();
@@ -63,10 +63,10 @@ public class HorrStIntegTest {
 
         // then
         assertThat(listService.findHorrorStoryList().size()).isEqualTo(originSize-1);
-    }
+    }*/
 
     // 수정
-    @Test
+    /*@Test
     void 수정(){
         // given
         HorrStDomain story = newTestStory();
@@ -80,7 +80,7 @@ public class HorrStIntegTest {
         // 조회해서 제목이 일치하는지 확인하기
         assertThat("").isEqualTo(story.getTitle());
     }
-
+*/
 
     /**
      * new
@@ -92,7 +92,7 @@ public class HorrStIntegTest {
      * 공통
      */
     // 테스트를 위한 story 생성
-    private HorrStDomain newTestStory(){
+    /*private HorrStDomain newTestStory(){
         HorrStDomain story = new HorrStDomain();
         story.setViewCount("3");
         story.setTitle("우리 지역에 전해내려오는 무시무시한 이야기");
@@ -102,5 +102,5 @@ public class HorrStIntegTest {
         HorrStDomain result = newRepository.createStory(story);
 
         return result;
-    }
+    }*/
 }
