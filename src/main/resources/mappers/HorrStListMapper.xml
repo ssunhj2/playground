@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xun.playground.horr.story.model.HorrStListMapper">
+
+    <!-- SELECT 결과 Map -->
+    <resultMap id="HorrStResultMap" type="com.xun.playground.horr.story.dto.HorrStDTO">
+        <result property="horrStNo"    column="HORR_ST_NO" />
+        <result property="viewCount"   column="VIEW_COUNT" />
+        <result property="title"       column="TITLE" />
+        <result property="content"     column="CONTENT" />
+        <result property="enterBy"     column="ENTER_BY" />
+        <result property="enterDate"   column="ENTER_DATE" />
+        <result property="updateBy"    column="UPDATE_BY" />
+        <result property="updateDate"  column="UPDATE_DATE" />
+    </resultMap>
+
+    <!-- WHERE 조건 -->
+    <sql id="conditions">
+        <where>
+            delete_yn = 'N'
+            <if test="keyword != null and keyword.equals('') == false">
+                <choose>
+                    <when test="searchType == null or searchType.equals('')">
+                        AND (
+                        title LIKE CONCAT('%', #{keyword}, '%')
+                        OR content LIKE CONCAT('%', #{keyword}, '%')
+                        OR writer LIKE CONCAT('%', #{keyword}, '%')
+                        )
+                    </when>
+                    <otherwise>
+                        <choose>
+                            <when test="searchType.equals('title')">
+                                AND title LIKE CONCAT('%', #{keyword}, '%')
+                            </when>
+
+                            <when test="searchType.equals('content')">
+                                AND content LIKE CONCAT('%', #{keyword}, '%')
+                            </when>
+
+                            <when test="searchType.equals('writer')">
+                                AND writer LIKE CONCAT('%', #{keyword}, '%')
+                            </when>
+                        </choose>
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </sql>
+
+    <!-- 게시글 수 조회 -->
+    <select id="totalCnt" parameterType="com.xun.playground.common.paging.PagingDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM   HORROR_STORY
+    </select>
+
+    <!-- 게시글 리스트 조회 -->
+    <select id="findAll" parameterType="com.xun.playground.common.paging.PagingDTO" resultMap="HorrStResultMap">
+        SELECT
+             HORR_ST_NO,
+             VIEW_COUNT,
+             TITLE,
+             CONTENT,
+             ENTER_BY,
+             ENTER_DATE,
+             UPDATE_BY,
+             UPDATE_DATE
+        FROM HORROR_STORY
+        ORDER BY ENTER_DATE DESC
+        LIMIT #{pagination.limitStart}, #{pageCount}
+    </select>
+
+</mapper>

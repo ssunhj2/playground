@@ -29,14 +29,14 @@
     <script type="application/javascript">
         <!-- 수정 -->
         function goMmodify(horrStNo){
-            location.href="/horror/story/new?horrStNo=" + horrStNo;
+            location.href='/horror/story/new?horrStNo=' + horrStNo;
         }
 
         <!-- 삭제 -->
         function deleteStory(horrStNo){
-            if(!confirm("삭제하시겠습니까?")) return;
+            if(!confirm('삭제하시겠습니까?')) return;
 
-            var url = "/horror/story/delete";
+            var url = '/horror/story/delete';
             var param = {'horrStNo':horrStNo};
             var after = goHorrorStory();
 

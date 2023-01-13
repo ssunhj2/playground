@@ -3,8 +3,7 @@ package com.xun.playground.common.config;
 
 import org.springframework.context.annotation.Configuration;
 
-import javax.persistence.EntityManager;
-import javax.sql.DataSource;
+
 
 /**
  * Spring 설정
@@ -13,13 +12,13 @@ import javax.sql.DataSource;
  */
 @Configuration
 public class SpringConfig {
-    private final DataSource dataSource;
-    private  final EntityManager em;
+    //private final DataSource dataSource;
+    /*private  final EntityManager em;
 
     public SpringConfig(DataSource dataSource, EntityManager em){
         this.dataSource = dataSource;
         this.em = em;
-    }
+    }*/
 
     // 무서운이야기 목록 서비스
     /*@Bean

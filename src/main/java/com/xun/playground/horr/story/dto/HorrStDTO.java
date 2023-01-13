@@ -3,7 +3,9 @@ package com.xun.playground.horr.story.dto;
 import com.xun.playground.common.dto.BaseDTO;
 import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.form.HorrStForm;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -12,6 +14,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class HorrStDTO extends BaseDTO {
     // horror Story No
     private String horrStNo;
@@ -22,7 +25,6 @@ public class HorrStDTO extends BaseDTO {
     // 내용
     private String content;
 
-    public HorrStDTO(){}
 
     public HorrStDTO(String viewCount, String title, String content, String enterBy){
         this.viewCount = viewCount;

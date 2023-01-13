@@ -8,7 +8,7 @@
 
 // 테이블 목록에 게시물이 없는 경우 NO_DATA 표시
 function noData(){
-    $(".table tbody").not(":has(tr)").append("<tr><td>NO_DATA</td></tr>");
+    $('.table tbody').not(':has(tr)').append('<tr><td>NO_DATA</td></tr>');
 }
 
 
@@ -21,18 +21,18 @@ function noData(){
 
 // playground 홈으로 이동
 function goPlaygroundHome(){
-    location.href="/home";
+    location.href='/home';
 }
 
 // horror 홈으로 이동
 function goHorrorHome(){
-    location.href="/horror";
+    location.href='/horror';
 }
 
 
 // horror 홈으로 이동
 function goHorrorStory(){
-    location.href="/horror/story";
+    location.href='/horror/story';
 }
 
 
@@ -47,11 +47,11 @@ function goHorrorStory(){
  {
      $.ajax({
          url: _url,
-         type: "POST",
+         type: 'POST',
          data: _param,
-         dataType: "JSON",
+         dataType: 'JSON',
          error: function(request, status, error){
-             console.log("Code:"+request.status+" / Message:"+request.responseText+" / Error: "+error);
+             console.log('Code:'+request.status+' / Message:'+request.responseText+' / Error: '+error);
          },
          success: function(data){
              if(typeof _after != undefined && "" != _after) {
