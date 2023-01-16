@@ -31,8 +31,8 @@
                             <tbody id="list"></tbody>
                         </table>
                     </div>
-                    <div class="btn-toolbar" role="toolbar"> <!--페이징-->
-                        <div class="pagination btn-group me-2 justify-content-center" role="group" aria-label="Second group"></div>
+                    <div> <!--페이징-->
+                        <ul class="pagination btn-group me-2 justify-content-center" role="group" aria-label="Second group"></ul>
                     </div>
                 </div>
             </div>
@@ -112,22 +112,22 @@
             // 첫 페이지, 이전 페이지
             if (pagination.existPrevPage) {
                 html += `
-                    <button type="button" onclick="findAll(1);" class="btn btn-secondary"><i class="fa-solid fa-angles-left"></i></button>
-                    <button type="button" onclick="findAll(${pagination.startPage - 1});" class="btn btn-secondary"><i class="fa-solid fa-angle-left"></i></button>
-                `;
+                    <li class="page-item"><button type="button" onclick="findAll(1);" class="btn btn-secondary"><i class="fa fa-angles-left"></i></button> </li>
+                    <li class="page-item"><button type="button" onclick="findAll(${pagination.startPage - 1});" class="btn btn-secondary"><i class="fa fa-angle-left"></i></button> </li>
+               `;
             }
 
             // 페이지 번호
             for (let i = pagination.startPage; i <= pagination.endPage; i++) {
                 const active = (i === params.page) ? 'btn btn-primary' : 'btn btn-secondary';
-                html += `<button type="button" onclick="findAll(${i})" class="'+active+'">${i}</button>`
+                html += `<li class="page-item"><button type="button" onclick="findAll(${i})" class="${active}">${i}</button><li>`
             }
 
             // 다음 페이지, 마지막 페이지
             if (pagination.existNextPage) {
                 html += `
-                    <button type="button" onclick="findAll(${pagination.endPage + 1});" class="btn btn-secondary"><i class="fa-solid fa-angle-right"></i></button>
-                    <button type="button" onclick="findAll(${pagination.totalPageCnt});" class="btn btn-secondary"><i class="fa-solid fa-angles-right"></i></button>
+                    <li class="page-item"><button type="button" onclick="findAll(${pagination.endPage + 1});" class="btn btn-secondary"><i class="fa fa-angle-right"></i></button> </li>
+                    <li class="page-item"><button type="button" onclick="findAll(${pagination.totalPageCnt});" class="btn btn-secondary"><i class="fa fa-angles-right"></i></button> </li>
                 `;
             }
 
