@@ -51,8 +51,8 @@ public class HorrStNewService {
             return horrStDto;
         }
 
-        HorrStDomain story = new HorrStDomain("0", title, content, enterBy);
-        horrStNewRepository.save(story);
+        HorrStDomain entity = new HorrStDomain("0", title, content, enterBy);
+        HorrStDomain story = horrStNewRepository.save(entity);
 
         return new HorrStDTO(story);
     }

@@ -1,5 +1,7 @@
 package com.xun.playground.horr.story.controller;
 
+import com.xun.playground.common.file.dto.FileDTO;
+import com.xun.playground.common.file.service.FileService;
 import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.form.HorrStForm;
 import com.xun.playground.horr.story.service.HorrStDetailService;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -17,14 +20,18 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class HorrStNewController {
-    // 신규관련 서비스
+    // 신규 서비스
     private final HorrStNewService horrorStoryWriteService;
-    // 상세관련 서비스
+    // 상세 서비스
     private final HorrStDetailService horrorStoryDetailService;
 
-    public HorrStNewController(HorrStNewService horrorStoryWriteService, HorrStDetailService horrorStoryDetailService){
+    // 파일 서비스
+    private final FileService fileService;
+
+    public HorrStNewController(HorrStNewService horrorStoryWriteService, HorrStDetailService horrorStoryDetailService, FileService fileService){
         this.horrorStoryWriteService = horrorStoryWriteService;
         this.horrorStoryDetailService = horrorStoryDetailService;
+        this.fileService = fileService;
     }
 
 
@@ -49,12 +56,21 @@ public class HorrStNewController {
      * @return
      */
     @PostMapping("/horror/story/new")
-    public String saveStory(HorrStForm form){
+    public String saveStory(HorrStForm form, @RequestParam(required = false, value = "file") MultipartFile files){
         // todo 로그인 사용자 ID 가져오기
-        form.setEnterBy("xunxou");
-
+        String enterBy = "xunxou";
+        form.setEnterBy(enterBy);
+        // story 저장
         HorrStDTO story = new HorrStDTO(form);
-        horrorStoryWriteService.saveStory(story);
+        HorrStDTO result = horrorStoryWriteService.saveStory(story);
+
+        // file저장
+        if(!files.isEmpty()){
+            FileDTO fileDto = new FileDTO();
+            fileDto.setAttachType("HORR_ST");
+            fileDto.setAttachNo(result.getHorrStNo());
+            fileService.saveFile(fileDto, files);
+        }
 
         return "horr/story/horrStList";
     }

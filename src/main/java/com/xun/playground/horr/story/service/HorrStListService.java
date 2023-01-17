@@ -42,6 +42,11 @@ public class HorrStListService {
         return resultList.stream().map(HorrStDTO::new).collect(Collectors.toList());
     }
 
+    /**
+     * 무서운이야기 전체 컨텐츠 조회: 페이징 적용
+     * @param pagingDTO
+     * @return
+     */
     public Map<String, Object> findAll(PagingDTO pagingDTO){
         // 글 전체 count 조회
         int count = horrStListMapper.totalCnt(pagingDTO);

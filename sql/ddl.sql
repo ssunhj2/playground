@@ -12,3 +12,18 @@ create table HORROR_STORY
     UPDATE_DATE datetime,
     PRIMARY KEY (HORR_ST_NO)
 )
+
+
+-- 첨부파일 테이블
+create table FILE
+(
+    FILE_NO bigint NOT NULL auto_increment,
+    FILE_NAME varchar(4000),
+    ATTACH_TYPE varchar(100),
+    ATTACH_NO bigint,
+    ENTER_BY varchar(40),
+    ENTER_DATE datetime,
+    UPDATE_BY varchar(40),
+    UPDATE_DATE datetime,
+    PRIMARY KEY (FILE_NO)
+)

@@ -41,9 +41,13 @@ public class HorrStDetailService {
         return storyDto;
     }
 
+    /**
+     * story 삭제
+     * @param horrStNo
+     */
    public void deleteStory(String horrStNo){
        Optional<HorrStDomain> story = horrStDetailRepository.findById(horrStNo);
-
+       // todo: Y/N flag둬서 삭제여부만 update 하도록 변경
        if(story.isPresent()){
            horrStDetailRepository.delete(story.get());
        }
