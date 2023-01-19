@@ -21,10 +21,15 @@ public class FileDomain {
     private String fileNo;
     @Column(name="FILE_NAME")
     private String fileName;
+    @Column(name = "FILE_PATH")
+    private String filePath;
     @Column(name="ATTACH_TYPE")
     private String attachType;
     @Column(name="ATTACH_NO")
     private String attachNo;
+    // 확장자
+    @Column(name="CONTENT_TYPE")
+    private String contentType;
     @Column(name="ENTER_BY")
     private String enterBy;
     // 작성날짜
@@ -43,11 +48,14 @@ public class FileDomain {
 
     public FileDomain(){}
 
-    public FileDomain(String fileNo, String fileName, String attachType, String attachNo, String enterBy){
+    public FileDomain(String fileNo, String fileName, String filePath,
+                      String attachType, String attachNo, String contentType, String enterBy){
         this.fileNo = fileNo;
         this.fileName = fileName;
+        this.filePath = filePath;
         this.attachType = attachType;
         this.attachNo = attachNo;
+        this.contentType = contentType;
         this.enterBy = enterBy;
     }
 

@@ -67,8 +67,8 @@
         function findAll(page){
             const params = {
                     page: page,
-                    pageCount: 2,
-                    pageSize: 2
+                    pageCount: 5,
+                    pageSize: 5
             }
 
             getJson('/horror/story/list', params).then(response => {

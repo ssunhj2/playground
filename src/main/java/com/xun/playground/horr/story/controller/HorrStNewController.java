@@ -1,7 +1,7 @@
 package com.xun.playground.horr.story.controller;
 
 import com.xun.playground.common.file.dto.FileDTO;
-import com.xun.playground.common.file.service.FileService;
+import com.xun.playground.common.file.service.FileLocalService;
 import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.form.HorrStForm;
 import com.xun.playground.horr.story.service.HorrStDetailService;
@@ -9,10 +9,13 @@ import com.xun.playground.horr.story.service.HorrStNewService;
 import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 /**
@@ -26,9 +29,9 @@ public class HorrStNewController {
     private final HorrStDetailService horrorStoryDetailService;
 
     // 파일 서비스
-    private final FileService fileService;
+    private final FileLocalService fileService;
 
-    public HorrStNewController(HorrStNewService horrorStoryWriteService, HorrStDetailService horrorStoryDetailService, FileService fileService){
+    public HorrStNewController(HorrStNewService horrorStoryWriteService, HorrStDetailService horrorStoryDetailService, FileLocalService fileService){
         this.horrorStoryWriteService = horrorStoryWriteService;
         this.horrorStoryDetailService = horrorStoryDetailService;
         this.fileService = fileService;
@@ -56,7 +59,7 @@ public class HorrStNewController {
      * @return
      */
     @PostMapping("/horror/story/new")
-    public String saveStory(HorrStForm form, @RequestParam(required = false, value = "file") MultipartFile files){
+    public String saveStory(HorrStForm form, @RequestParam(required = false, value = "file") List<MultipartFile> files){
         // todo 로그인 사용자 ID 가져오기
         String enterBy = "xunxou";
         form.setEnterBy(enterBy);
@@ -65,11 +68,12 @@ public class HorrStNewController {
         HorrStDTO result = horrorStoryWriteService.saveStory(story);
 
         // file저장
-        if(!files.isEmpty()){
+        if(!CollectionUtils.isEmpty(files)){
             FileDTO fileDto = new FileDTO();
             fileDto.setAttachType("HORR_ST");
             fileDto.setAttachNo(result.getHorrStNo());
-            fileService.saveFile(fileDto, files);
+            fileDto.setEnterBy(enterBy);
+            fileService.upload(fileDto, files);
         }
 
         return "horr/story/horrStList";

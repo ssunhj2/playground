@@ -28,21 +28,20 @@
                     </div>
                 </div>
                 <div class="mt-5 mb-5">
-                    <div class="mb-3">
-                        <input name="file" id="formFileSm" type="file" class="form-control form-control-sm bg-dark">
-                    </div>
+                    <button type="button" onclick="addFile()" class="btn btn-outline-light m-2">파일추가</button>
+                    <div id="add-file" class="mb-3"></div>
                 </div>
-                <button type="button" onclick="saveStory()" class="btn btn-primary">저장</button>
+                <div class="mt-5 mb-5">
+                    <button type="button" onclick="saveStory()" class="btn btn-primary">저장</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
-    <!-- JQuery: content 아래에 두면 로딩전에 동작 안하는 경우 있어서 여기에 위치시킴-->
-    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
-
 <script type="application/javascript">
     let mode; // 입력모드/수정모드
+    let fileNum = 0; // 첨부파일 번호
 
     <!-- dom 트리 준비이후 실행-->
     $(function() {
@@ -83,6 +82,11 @@
     // 필수입력을 체크한다.
     function checkEmpty(_objname, _msg){
 
+    }
+
+    <!-- 첨부를 추가합니다. -->
+    function addFile(){
+        $('#add-file').append('<input name="file" type="file" class="mt-1 form-control form-control-sm bg-dark">');
     }
 
 

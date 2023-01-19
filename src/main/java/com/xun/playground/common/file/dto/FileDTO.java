@@ -5,6 +5,7 @@ import com.xun.playground.common.file.domain.FileDomain;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.time.LocalDate;
 
 /**
@@ -17,25 +18,37 @@ public class FileDTO extends BaseDTO {
     private String fileNo;
     // 파일명
     private String fileName;
-    // 파일타입
-    private String fileType;
-
+    // 파일경로
+    private String filePath;
+    // 첨부위치
     private String attachType;
-
+    // 첨부위치 번호
     private String attachNo;
+    // 확장자
+    private String contentType;
 
     public FileDTO(){}
 
-    public FileDTO(String fileNo, String fileName, String attachType, String attachNo,  String enterBy, LocalDate enterDate){
+    public FileDTO(String fileNo, String fileName, String filePath, String attachType, String attachNo,
+                   String contentType, String enterBy, LocalDate enterDate){
         this.fileNo = fileNo;
         this.fileName = fileName;
+        this.filePath = filePath;
         this.attachType = attachType;
         this.attachNo = attachNo;
+        this.contentType = contentType;
         this.setEnterBy(enterBy);
         this.setEnterDate(enterDate);
     }
 
+    public FileDTO fromEntity(FileDomain entity){
+        return new FileDTO(entity.getFileNo(), entity.getFileName(), entity.getFilePath(),
+                entity.getAttachType(), entity.getAttachNo(), entity.getContentType(),
+                entity.getEnterBy(), entity.getEnterDate());
+    }
+
+
     public FileDomain toEntity(){
-        return new FileDomain(fileNo, fileName, attachType, attachNo, getEnterBy());
+        return new FileDomain(fileNo, fileName, filePath, attachType, attachNo, contentType, getEnterBy());
     }
 }

@@ -19,8 +19,10 @@ create table FILE
 (
     FILE_NO bigint NOT NULL auto_increment,
     FILE_NAME varchar(4000),
+    FILE_PATH varchar(4000),
     ATTACH_TYPE varchar(100),
     ATTACH_NO bigint,
+    CONTENT_TYPE varchar(100),
     ENTER_BY varchar(40),
     ENTER_DATE datetime,
     UPDATE_BY varchar(40),
