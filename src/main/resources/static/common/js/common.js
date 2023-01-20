@@ -50,12 +50,15 @@ function goHorrorStory(){
          type: 'POST',
          data: _param,
          dataType: 'JSON',
+         contentType: "application/json",
          error: function(request, status, error){
+             console.log('errrrrrror!!!');
              console.log('Code:'+request.status+' / Message:'+request.responseText+' / Error: '+error);
          },
          success: function(data){
+             console.log('suuuuuuccess!!!');
              if(typeof _after != undefined && "" != _after) {
-                 _after
+                 new Function(_after)();
              }
          }
 

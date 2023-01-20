@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <!-- =========================================================
 무서운이야기 상세페이지
 ========================================================= -->
@@ -53,10 +52,12 @@
         <!-- 파일 다운로드-->
         function download(fileNo){
             console.log(fileNo)
-            var url = '/download';
-            var param = {'fileNo':fileNo};
 
-            ajax(url, param);
+            location.href='/download?fileNo=' + fileNo;
+        }
+
+        function aa(){
+            alert('a');
         }
 
     </script>

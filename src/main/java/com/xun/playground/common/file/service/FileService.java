@@ -1,7 +1,7 @@
 package com.xun.playground.common.file.service;
 
 import com.xun.playground.common.file.dto.FileDTO;
-import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,5 +16,5 @@ public interface FileService {
     void upload(FileDTO fileDto, List<MultipartFile> files);
 
     // 파일 다운로드
-    ResponseEntity download(String fileNo) throws MalformedURLException;
+    ResponseEntity<Resource> download(String fileNo) throws MalformedURLException;
 }

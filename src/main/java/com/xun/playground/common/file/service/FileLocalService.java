@@ -4,6 +4,8 @@ import com.xun.playground.common.file.domain.FileDomain;
 import com.xun.playground.common.file.dto.FileDTO;
 import com.xun.playground.common.file.repository.FileRepository;
 import org.apache.tomcat.util.buf.UriUtil;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.aspectj.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +13,19 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -93,25 +99,33 @@ public class FileLocalService implements FileService {
     }
 
     @Override
-    public ResponseEntity download(String fileNo) throws MalformedURLException {
-        Optional<FileDomain> findFile = fileRepository.findById(fileNo);
-        FileDomain file = findFile.orElse(null);
-        if(file == null) return null;
+    public ResponseEntity<Resource> download(String fileNo) throws MalformedURLException {
 
+        try{
+            Optional<FileDomain> findFile = fileRepository.findById(fileNo);
+            FileDomain file = findFile.orElse(null);
+            if(file == null) return null;
 
-        String fileName = file.getFileName();
-        String filePath = localPath + File.separator + file.getFilePath();
+            String uploadFileName = file.getFileName();
+            String filePath = file.getFilePath();
 
-        // 인코딩
-        String encodedFileName = UriUtils.encode(fileName, StandardCharsets.UTF_8);
-        String desc = "attachment; filename=\"" + encodedFileName + "\"";
+            UrlResource resource = new UrlResource("file:" +localPath + "\\" + filePath);
 
-        Resource resource = resourceLoader.getResource("classpath:" + filePath);
-       // UrlResource resource = new UrlResource("file:" + filePath);
+            // 인코딩
+            String encodedFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
+            String contentDisposition = "attachment; filename=\"" + encodedFileName + "\"";
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, desc)
-                .body(resource);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+                    .header(HttpHeaders.CONTENT_LENGTH, String.valueOf(resource.getFile().length()))
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM.toString())
+                    .body(resource);
+
+        } catch(IOException e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
 
     }
 
