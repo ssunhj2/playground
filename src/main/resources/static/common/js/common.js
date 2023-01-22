@@ -42,25 +42,25 @@ function goHorrorStory(){
  *****************************************/
 
 
- <!-- ajax -->
- function ajax(_url, _param, _after)
- {
-     $.ajax({
-         url: _url,
-         type: 'POST',
-         data: _param,
-         dataType: 'JSON',
-         contentType: "application/json",
-         error: function(request, status, error){
-             console.log('errrrrrror!!!');
-             console.log('Code:'+request.status+' / Message:'+request.responseText+' / Error: '+error);
-         },
-         success: function(data){
-             console.log('suuuuuuccess!!!');
-             if(typeof _after != undefined && "" != _after) {
-                 new Function(_after)();
-             }
-         }
+<!-- ajax -->
+function ajax(_url, _param, _after)
+{
+    console.log(_url);
 
+    $.ajax({
+        url: _url,
+        type: 'POST',
+        data: _param,
+        dataType: 'JSON',
+        error: function(request, status, error){
+            console.log('error!!!');
+            console.log('Code:'+request.status+' / Message:'+request.responseText+' / Error: '+error);
+        },
+        success: function(data){
+            console.log('success!!!');
+            if(typeof _after != undefined && "" != _after) {
+                new Function(_after)();
+            }
+        }
      });
- }
+}

@@ -52,4 +52,12 @@ public class HorrStDetailService {
            horrStDetailRepository.delete(story.get());
        }
    }
+
+    /**
+     * 조회수 증가시킨다
+     * @param horrStNo
+     */
+   public void addViewCount(String horrStNo){
+       horrStDetailRepository.addViewCount(horrStNo);
+   }
 }

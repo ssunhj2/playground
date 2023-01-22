@@ -6,17 +6,19 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
+    <div class="container-fluid">
+        <h6 class="mb-0">무서운이야기</h6>
+    </div>
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary rounded-top p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">무서운이야기</h6>
+                <h5 th:text="${story.title}">제목</h5>
                 <div>
                     <button type="button" th:onclick="goMmodify([[${story.horrStNo}]])" class="btn btn-outline-warning m-2">수정</button>
                     <button type="button" th:onclick="deleteStory([[${story.horrStNo}]])" class="btn btn-outline-light m-2">삭제</button>
                 </div>
             </div>
             <div class="row">
-                <h5 th:text="${story.title}">제목</h5>
                 <p th:text="${story.content}">내용</p>
                 <p th:text="${story.viewCount}">조회수</p>
                 <p th:text="${story.enterBy}">작성자</p>
@@ -33,6 +35,12 @@
         </div>
     </div>
     <script type="application/javascript">
+        let horrStNo = '[[${story.horrStNo}]]';
+
+        window.onload = () => {
+            addViewCount();
+        }
+
         <!-- 수정 -->
         function goMmodify(horrStNo){
             location.href='/horror/story/new?horrStNo=' + horrStNo;
@@ -58,6 +66,14 @@
 
         function aa(){
             alert('a');
+        }
+
+        <!-- 조회수를 업데이트 한다.-->
+        function addViewCount(){
+            var url = '/horrst/add-viewcount';
+            var param = {'horrStNo':horrStNo};
+
+            ajax(url, param);
         }
 
     </script>
