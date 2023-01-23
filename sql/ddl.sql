@@ -6,6 +6,7 @@ create table HORROR_STORY
     VIEW_COUNT int default 0,
     TITLE varchar(255),
     CONTENT varchar(4000),
+    IS_DELETE char(1) default 'N',
     ENTER_BY varchar(40),
     ENTER_DATE datetime,
     UPDATE_BY varchar(40),

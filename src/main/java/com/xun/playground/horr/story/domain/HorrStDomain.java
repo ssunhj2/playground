@@ -35,6 +35,9 @@ public class HorrStDomain {
     // 내용
     @Column(name="CONTENT")
     private String content;
+    // 삭제여부
+    @Column(name="IS_DELETE")
+    private String isDelete;
     // 작성자 id
     @Column(name="ENTER_BY")
     private String enterBy;

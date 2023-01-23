@@ -24,6 +24,8 @@ public class HorrStDTO extends BaseDTO {
     private String title;
     // 내용
     private String content;
+    // 삭제여부
+    private String isDelete;
 
 
     public HorrStDTO(String viewCount, String title, String content, String enterBy){
@@ -45,6 +47,7 @@ public class HorrStDTO extends BaseDTO {
         this.viewCount = entity.getViewCount();
         this.title = entity.getTitle();
         this.content = entity.getContent();
+        this.isDelete = entity.getIsDelete();
         this.setEnterBy(entity.getEnterBy());
         this.setEnterDate(entity.getEnterDate());
         this.setUpdateBy(entity.getUpdateBy());

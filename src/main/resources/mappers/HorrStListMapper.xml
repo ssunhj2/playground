@@ -19,7 +19,7 @@
     <!-- WHERE 조건 -->
     <sql id="conditions">
         <where>
-            IS_DELETE != 'Y'
+            ifnull(IS_DELETE, '') != 'Y'
             <if test="searchText != null and searchText.equals('') == false">
                 AND (
                     title LIKE CONCAT('%', #{searchText}, '%')

@@ -49,6 +49,7 @@
     <script type="application/javascript">
         function goSearch() {
             findAll(1);
+            console.log("goSearch");
         }
 
         <!-- 조회 API 호출 -->
@@ -92,10 +93,10 @@
                 response.list.forEach((obj, idx) => {
                     html += `
                         <tr>
-                            <td width="52%"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
+                            <td width="50%"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
                             <td width="25%">${obj.enterBy}</td>
                             <td width="15%">${obj.enterDate}</td>
-                            <td width="8%">${obj.viewCount}</td>
+                            <td width="10%">${obj.viewCount}</td>
                         </tr>
                         `;
 

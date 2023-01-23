@@ -55,6 +55,7 @@ public class HorrStDetailController {
 
     // story 삭제
     @PostMapping("/horror/story/delete")
+    @ResponseBody
     public void deleteStory(@RequestParam("horrStNo") String horrStNo){
         horrorStoryDetailService.deleteStory(horrStNo);
     }

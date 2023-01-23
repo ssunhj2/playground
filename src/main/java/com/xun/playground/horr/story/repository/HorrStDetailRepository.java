@@ -13,6 +13,10 @@ import org.springframework.data.repository.query.Param;
 public interface HorrStDetailRepository extends JpaRepository<HorrStDomain, String> {
 
     @Modifying
+    @Query("UPDATE HorrStDomain s SET s.isDelete = 'Y' WHERE s.horrStNo = :horrStNo")
+    int deleteStory(@Param("horrStNo") String horrStNo);
+
+    @Modifying
     @Query("UPDATE HorrStDomain s SET s.viewCount = s.viewCount+1 WHERE s.horrStNo = :horrStNo")
     int addViewCount(@Param("horrStNo") String horrStNo);
 
