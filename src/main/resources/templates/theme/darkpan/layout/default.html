@@ -39,5 +39,18 @@ darkpan 테마(기본테마)의 default 레이아웃 구성
 
 <!-- 공통 스크립트-->
 <th:block th:replace="theme/darkpan/fragments/script :: fragment-darkpan-script"></th:block>
+
+<script type="application/javascript">
+<!-- dom 트리 준비이후 실행-->
+$(function() {
+    console.log(typeof(goSearch));
+    if(typeof(goSearch) == 'function'){
+        goSearch();
+    }
+
+});
+
+</script>
+
 </body>
 </html>

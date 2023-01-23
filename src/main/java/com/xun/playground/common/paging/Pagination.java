@@ -1,7 +1,6 @@
 package com.xun.playground.common.paging;
 
 import lombok.Getter;
-import org.springframework.data.domain.Page;
 
 /**
  *
@@ -23,7 +22,7 @@ public class Pagination {
     // 이전페이지 존재여부
     private boolean existNextPage;
 
-    public Pagination(int totalCnt, PagingDTO pagingDTO){
+    public Pagination(int totalCnt, FilterDTO pagingDTO){
         if(totalCnt > 0){
             this.totalCnt = totalCnt;
             this.calculation(pagingDTO);
@@ -31,7 +30,7 @@ public class Pagination {
     }
 
     // 페이지 계산
-    private void calculation(PagingDTO pagingDTO){
+    private void calculation(FilterDTO pagingDTO){
         // 전체 페이지 수 계산
         totalPageCnt = ((totalCnt -1) / pagingDTO.getPageCount()) + 1;
 

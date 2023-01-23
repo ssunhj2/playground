@@ -9,6 +9,7 @@
         <result property="viewCount"   column="VIEW_COUNT" />
         <result property="title"       column="TITLE" />
         <result property="content"     column="CONTENT" />
+        <result property="isDelete"    column="IS_DELETE" />
         <result property="enterBy"     column="ENTER_BY" />
         <result property="enterDate"   column="ENTER_DATE" />
         <result property="updateBy"    column="UPDATE_BY" />
@@ -18,14 +19,21 @@
     <!-- WHERE 조건 -->
     <sql id="conditions">
         <where>
-            delete_yn = 'N'
-            <if test="keyword != null and keyword.equals('') == false">
-                <choose>
+            IS_DELETE != 'Y'
+            <if test="searchText != null and searchText.equals('') == false">
+                AND (
+                    title LIKE CONCAT('%', #{searchText}, '%')
+                    OR content LIKE CONCAT('%', #{searchText}, '%')
+                    OR enterBy LIKE CONCAT('%', #{searchText}, '%')
+                    OR enterDate LIKE CONCAT('%', #{searchText}, '%')
+                )
+                <!--<choose>
                     <when test="searchType == null or searchType.equals('')">
                         AND (
-                        title LIKE CONCAT('%', #{keyword}, '%')
-                        OR content LIKE CONCAT('%', #{keyword}, '%')
-                        OR writer LIKE CONCAT('%', #{keyword}, '%')
+                            title LIKE CONCAT('%', #{searchText}, '%')
+                            OR content LIKE CONCAT('%', #{searchText}, '%')
+                            OR enterBy LIKE CONCAT('%', #{searchText}, '%')
+                            OR enterDate LIKE CONCAT('%', #{searchText}, '%')
                         )
                     </when>
                     <otherwise>
@@ -43,19 +51,20 @@
                             </when>
                         </choose>
                     </otherwise>
-                </choose>
+                </choose>-->
             </if>
         </where>
     </sql>
 
     <!-- 게시글 수 조회 -->
-    <select id="totalCnt" parameterType="com.xun.playground.common.paging.PagingDTO" resultType="int">
+    <select id="totalCnt" parameterType="com.xun.playground.common.paging.FilterDTO" resultType="int">
         SELECT COUNT(*)
         FROM   HORROR_STORY
+        <include refid="conditions" />
     </select>
 
     <!-- 게시글 리스트 조회 -->
-    <select id="findAll" parameterType="com.xun.playground.common.paging.PagingDTO" resultMap="HorrStResultMap">
+    <select id="findAll" parameterType="com.xun.playground.common.paging.FilterDTO" resultMap="HorrStResultMap">
         SELECT
              HORR_ST_NO,
              VIEW_COUNT,
@@ -66,6 +75,7 @@
              UPDATE_BY,
              UPDATE_DATE
         FROM HORROR_STORY
+        <include refid="conditions" />
         ORDER BY ENTER_DATE DESC
         LIMIT #{pagination.limitStart}, #{pageCount}
     </select>

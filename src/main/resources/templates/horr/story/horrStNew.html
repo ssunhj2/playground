@@ -10,7 +10,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary rounded-top p-4">
-            <h6 class="mb-4">무서운이야기</h6>
+            <h6 class="text-body mb-4">무서운이야기</h6>
             <form action="/horror/story/new" id="STORY_FORM" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="horrStNo">
                 <div class="row mb-3">
@@ -44,10 +44,10 @@
     let fileNum = 0; // 첨부파일 번호
 
     <!-- dom 트리 준비이후 실행-->
-    $(function() {
+    function goSearch(){
         mode = checkMode(); // 입력모드/수정모드 check
         console.log('mode: ' + mode);
-    });
+    };
 
     <!-- 글쓰기인지 수정인지 검사. 직관적으로 알기쉽게 true/false 보다 MODIFY/NEW로 반환값을 정했음.-->
     function checkMode(){

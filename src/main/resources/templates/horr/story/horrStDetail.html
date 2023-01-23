@@ -6,8 +6,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
-    <div class="container-fluid">
-        <h6 class="mb-0">무서운이야기</h6>
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary p-4">
+            <h6 class="text-body">무서운이야기</h6>
+        </div>
     </div>
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary rounded-top p-4">
@@ -24,7 +26,7 @@
                 <p th:text="${story.enterBy}">작성자</p>
                 <p th:text="${story.enterDate}">작성일</p>
             </div>
-            <div class="row mt-5">
+            <div class="row mt-5 pb-4 pt-4" style="border-top:1px solid #000;">
                 <div th:each="file : ${files}">
                     <span>
                         <i class="fa fa-paperclip"></i>
@@ -37,7 +39,7 @@
     <script type="application/javascript">
         let horrStNo = '[[${story.horrStNo}]]';
 
-        window.onload = () => {
+        function goSearch(){
             addViewCount();
         }
 

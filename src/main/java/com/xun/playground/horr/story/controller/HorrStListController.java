@@ -1,17 +1,13 @@
 package com.xun.playground.horr.story.controller;
 
 
-import com.xun.playground.common.paging.PagingDTO;
-import com.xun.playground.horr.story.dto.HorrStDTO;
+import com.xun.playground.common.paging.FilterDTO;
 import com.xun.playground.horr.story.service.HorrStListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,8 +30,10 @@ public class HorrStListController {
 
     @GetMapping("/horror/story/list")
     @ResponseBody
-    public Map<String, Object> findAll(final PagingDTO pagingDTO) {
+    public Map<String, Object> findAll(final FilterDTO pagingDTO) {
         Map<String, Object> listMap = horrorStoryListService.findAll(pagingDTO);
         return listMap;
     }
+
+
 }

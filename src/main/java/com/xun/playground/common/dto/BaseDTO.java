@@ -19,4 +19,5 @@ public class BaseDTO {
     private String updateBy;
     // 수정날짜
     private LocalDate updateDate;
+
 }

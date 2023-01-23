@@ -1,7 +1,7 @@
 package com.xun.playground.horr.story.service;
 
 import com.xun.playground.common.paging.Pagination;
-import com.xun.playground.common.paging.PagingDTO;
+import com.xun.playground.common.paging.FilterDTO;
 import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.model.HorrStListMapper;
@@ -47,7 +47,7 @@ public class HorrStListService {
      * @param pagingDTO
      * @return
      */
-    public Map<String, Object> findAll(PagingDTO pagingDTO){
+    public Map<String, Object> findAll(FilterDTO pagingDTO){
         // 글 전체 count 조회
         int count = horrStListMapper.totalCnt(pagingDTO);
 

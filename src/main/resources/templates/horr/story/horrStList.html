@@ -7,29 +7,35 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary p-4">
+            <h6 class="text-body">무서운이야기</h6>
+        </div>
+    </div>
     <!-- Horror List Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
             <div class="col-12">
                 <div class="bg-secondary rounded h-100 p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">무서운이야기</h6>
-                        <a href="javascript:goStoryNew();">
-                            <button class="btn btn-outline-primary m-2" type="button">글쓰기</button>
-                        </a>
-                    </div>
+                    <th:block th:replace="theme/darkpan/fragments/searchFilter :: search-filter"></th:block>
                     <div class="table-responsive">
                         <table class="table" id="HORR_ST">
                             <thead>
                             <tr>
-                                <th scope="col">조회수</th>
                                 <th scope="col">제목</th>
                                 <th scope="col">글쓴이</th>
                                 <th scope="col">날짜</th>
+                                <th scope="col">조회수</th>
                             </tr>
                             </thead>
                             <tbody id="list"></tbody>
                         </table>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <i class="fa fa-list me-2"></i>
+                        <a href="javascript:goStoryNew();">
+                            <button class="btn btn-outline-primary m-2" type="button">글쓰기</button>
+                        </a>
                     </div>
                     <div> <!--페이징-->
                         <ul class="pagination btn-group me-2 justify-content-center" role="group" aria-label="Second group"></ul>
@@ -41,8 +47,7 @@
     <!-- Horror List End -->
 
     <script type="application/javascript">
-        <!-- 페이지 로딩 시점에 실행 -->
-        window.onload = () => {
+        function goSearch() {
             findAll(1);
         }
 
@@ -65,15 +70,18 @@
 
         <!-- 글 목록 조회 -->
         function findAll(page){
+            const searchText = $("#SEARCH_FORM").find("#searchText").val();
+
             const params = {
                     page: page,
                     pageCount: 5,
-                    pageSize: 5
+                    pageSize: 5,
+                    searchText: searchText
             }
 
             getJson('/horror/story/list', params).then(response => {
                 if(!Object.keys(response).length){
-                    document.getElementById("list").innerHTML ='<td> NO DATA </td>';
+                    noData();
                     drawPages();
                     return false;
                 }
@@ -84,10 +92,10 @@
                 response.list.forEach((obj, idx) => {
                     html += `
                         <tr>
-                            <td>${obj.viewCount}</td>
-                            <td><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
-                            <td>${obj.enterBy}</td>
-                            <td>${obj.enterDate}</td>
+                            <td width="52%"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
+                            <td width="25%">${obj.enterBy}</td>
+                            <td width="15%">${obj.enterDate}</td>
+                            <td width="8%">${obj.viewCount}</td>
                         </tr>
                         `;
 
@@ -144,6 +152,7 @@
         function goStoryNew(){
            location.href='/horror/story/new';
         }
+
 
     </script>
 </th:block>
