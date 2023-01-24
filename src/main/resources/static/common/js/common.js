@@ -21,6 +21,11 @@ function noData(){
  ************** 페이지 이동 ****************
  *****************************************/
 
+// welcome 페이지로 이동
+function goWelcome(){
+    location.href='/';
+}
+
 // playground 홈으로 이동
 function goPlaygroundHome(){
     location.href='/home';
@@ -45,7 +50,7 @@ function goHorrorStory(){
 
 
 <!-- ajax -->
-function ajax(_url, _param, _after)
+function ajaxJson(_url, _param, _after)
 {
     console.log(_url);
 
@@ -61,8 +66,24 @@ function ajax(_url, _param, _after)
         success: function(data){
             console.log('success!!!');
             if(typeof _after != undefined && "" != _after) {
-                new Function(_after)();
+                return _after(data);
             }
         }
      });
+}
+
+
+/*****************************************
+ *************** ajax *******************
+ *****************************************/
+
+function chkEmptyText(_element, _msg){
+    if(typeof _element == 'undefined' || _element == '') return false;
+
+    if(_element.val() == ""){
+        alert(_msg + ' 을(를) 입력해주세요.');
+        return false;
+    }
+
+    return true;
 }

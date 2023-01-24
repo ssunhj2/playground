@@ -1,16 +1,16 @@
 package com.xun.playground.horr.story.dto;
 
 import com.xun.playground.common.dto.BaseDTO;
-import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.form.HorrStForm;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * 무서운이야기 DTO
- * 데이터 전달 목적으로만 사용
+ * DTO는 데이터 전달 목적으로 사용
+ * 컨트롤러, 서비스, repository 에서 사용
  */
 @Getter
 @Setter
@@ -35,6 +35,7 @@ public class HorrStDTO extends BaseDTO {
         this.setEnterBy(enterBy);
     }
 
+    // form 값을 DTO에 set
     public HorrStDTO(HorrStForm form){
         this.horrStNo = form.getHorrStNo();
         this.title = form.getTitle();
@@ -42,7 +43,8 @@ public class HorrStDTO extends BaseDTO {
         this.setEnterBy(form.getEnterBy());
     }
 
-    public HorrStDTO(HorrStDomain entity){
+    // entity 값을 DTO에 set
+    public HorrStDTO(HorrStEntity entity){
         this.horrStNo = entity.getHorrStNo();
         this.viewCount = entity.getViewCount();
         this.title = entity.getTitle();
@@ -54,9 +56,9 @@ public class HorrStDTO extends BaseDTO {
         this.setUpdateDate(entity.getUpdateDate());
     }
 
-    // HorrStDTO 객체를 entity 객체로 return 한다.
-    public HorrStDomain toEntity(){
-        return new HorrStDomain(viewCount, title, content, getEnterBy());
+    // HorrStDTO 객체를 entity 객체로 변환하여 반환한다.
+    public HorrStEntity toEntity(){
+        return new HorrStEntity(viewCount, title, content, getEnterBy());
     }
 
 }

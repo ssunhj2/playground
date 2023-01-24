@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- =========================================================
+sneat 테마(기본테마)의 default 레이아웃 구성
+========================================================= -->
+<html lang="ko"
+      class="light-style layout-menu-fixed"
+      dir="ltr"
+      data-theme="theme-default"
+      data-assets-path="static/theme/sneat/"
+      data-template="vertical-menu-template-free"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- 공통 헤더-->
+<th:block th:replace="theme/sneat/fragments/header :: fragment-sneat-header"></th:block>
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <!-- Layout container -->
+    <div class="layout-container">
+        <div class="layout-page-no-menu">
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+                <!-- 본문-->
+                <th:block layout:fragment="content-sneat"></th:block>
+                <!-- 공통 하단-->
+                <th:block th:replace="theme/sneat/fragments/footer :: fragment-sneat-footer"></th:block>
+            </div>
+            <!-- Content wrapper END -->
+        </div>
+        <!-- Layout page END -->
+    </div>
+    <!-- Layout container END -->
+</div>
+<!-- Layout END -->
+<!-- 공통 스크립트-->
+<th:block th:replace="theme/sneat/fragments/script :: fragment-sneat-script"></th:block>
+</body>
+</html>

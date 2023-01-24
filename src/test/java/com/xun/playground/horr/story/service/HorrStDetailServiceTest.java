@@ -1,6 +1,6 @@
 package com.xun.playground.horr.story.service;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.repository.HorrStDetailRepository;
 
@@ -25,8 +25,8 @@ public class HorrStDetailServiceTest {
     @Test
     void 상세조회(){
         //given
-        HorrStDomain dummy = new HorrStDomain("0", "무서운 제목", "무서운 내용", "xunxou");
-        HorrStDomain story = horrStDetailRepository.save(dummy);
+        HorrStEntity dummy = new HorrStEntity("0", "무서운 제목", "무서운 내용", "xunxou");
+        HorrStEntity story = horrStDetailRepository.save(dummy);
 
         // when
         HorrStDTO result = horrStDetailService.findDetail(story.getHorrStNo());
@@ -41,9 +41,9 @@ public class HorrStDetailServiceTest {
     @Test
     void 삭제(){
         //given
-        HorrStDomain entity = new HorrStDomain("0", "무서운 제목", "무서운 내용", "xunxou");
+        HorrStEntity entity = new HorrStEntity("0", "무서운 제목", "무서운 내용", "xunxou");
 
-        HorrStDomain story = horrStDetailRepository.save(entity);
+        HorrStEntity story = horrStDetailRepository.save(entity);
 
         horrStDetailService.deleteStory(story.getHorrStNo());
 

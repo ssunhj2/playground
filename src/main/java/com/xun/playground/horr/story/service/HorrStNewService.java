@@ -1,9 +1,8 @@
 package com.xun.playground.horr.story.service;
 
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.dto.HorrStDTO;
-import com.xun.playground.horr.story.form.HorrStForm;
 import com.xun.playground.horr.story.repository.HorrStNewRepository;
 import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.slf4j.Logger;
@@ -43,7 +42,7 @@ public class HorrStNewService {
 
         // 수정
         if(!StringUtils.isEmpty(horrStNo)){
-            Optional<HorrStDomain> entity = horrStNewRepository.findById(horrStNo);
+            Optional<HorrStEntity> entity = horrStNewRepository.findById(horrStNo);
 
             if(entity.isPresent()){
                 entity.get().update(title, content, enterBy);
@@ -51,8 +50,8 @@ public class HorrStNewService {
             return horrStDto;
         }
 
-        HorrStDomain entity = new HorrStDomain("0", title, content, enterBy);
-        HorrStDomain story = horrStNewRepository.save(entity);
+        HorrStEntity entity = new HorrStEntity("0", title, content, enterBy);
+        HorrStEntity story = horrStNewRepository.save(entity);
 
         return new HorrStDTO(story);
     }

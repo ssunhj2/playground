@@ -30,3 +30,19 @@ create table FILE
     UPDATE_DATE datetime,
     PRIMARY KEY (FILE_NO)
 )
+
+-- 회원
+create table MEMBER
+(
+    MEMBER_NO bigint NOT NULL auto_increment,
+    LOGIN_ID varchar(100),
+    PASSWORD varchar(2000),
+    NAME varchar(100),
+    PHONE varchar(100),
+    EMAIL varchar(100),
+    ENTER_BY varchar(40),
+    ENTER_DATE datetime,
+    UPDATE_BY varchar(40),
+    UPDATE_DATE datetime,
+    PRIMARY KEY (MEMBER_NO)
+)

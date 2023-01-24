@@ -1,11 +1,8 @@
 package com.xun.playground.horr.story.repository;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
 import com.xun.playground.horr.story.service.HorrStDetailService;
 import com.xun.playground.horr.story.service.HorrStListService;
 import com.xun.playground.horr.story.service.HorrStNewService;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;

@@ -56,7 +56,7 @@
             var param = {'horrStNo':horrStNo};
             var after = goHorrorStory();
 
-            ajax(url, param, after);
+            ajaxJson(url, param, after);
         }
 
         <!-- 파일 다운로드-->
@@ -75,7 +75,7 @@
             var url = '/horrst/add-viewcount';
             var param = {'horrStNo':horrStNo};
 
-            ajax(url, param);
+            ajaxJson(url, param);
         }
 
     </script>

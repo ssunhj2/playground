@@ -1,6 +1,6 @@
 package com.xun.playground.horr.story.service;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.repository.HorrStNewRepository;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ public class HorrStNewServiceTest {
         HorrStDTO horrStDTO = horrStNewService.saveStory(dummy);
 
         //then
-        HorrStDomain result = horrStNewRepository.findById(horrStDTO.getHorrStNo()).get();
+        HorrStEntity result = horrStNewRepository.findById(horrStDTO.getHorrStNo()).get();
         assertThat(result.getViewCount()).isEqualTo("0");
         assertThat(result.getTitle()).isEqualTo("무서운 제목");
         assertThat(result.getContent()).isEqualTo("무서운 내용");
@@ -39,8 +39,8 @@ public class HorrStNewServiceTest {
     @Test
     void 수정(){
         //given
-        HorrStDomain dummy = new HorrStDomain("0", "무서운 제목2", "무서운 내용2", "xunxou");
-        HorrStDomain entity = horrStNewRepository.save(dummy); // 저장
+        HorrStEntity dummy = new HorrStEntity("0", "무서운 제목2", "무서운 내용2", "xunxou");
+        HorrStEntity entity = horrStNewRepository.save(dummy); // 저장
 
         // when
         HorrStDTO horrStDTO = new HorrStDTO(entity);
@@ -51,7 +51,7 @@ public class HorrStNewServiceTest {
         horrStNewService.saveStory(horrStDTO); // 수정
 
         //then
-        HorrStDomain result = horrStNewRepository.findById(horrStDTO.getHorrStNo()).get();
+        HorrStEntity result = horrStNewRepository.findById(horrStDTO.getHorrStNo()).get();
         assertThat(result.getTitle()).isEqualTo("무서운 제목22");
         assertThat(result.getContent()).isEqualTo("무서운 내용22");
         assertThat(result.getEnterBy()).isEqualTo("xunxou");

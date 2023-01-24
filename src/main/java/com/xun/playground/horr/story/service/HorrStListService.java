@@ -2,7 +2,7 @@ package com.xun.playground.horr.story.service;
 
 import com.xun.playground.common.paging.Pagination;
 import com.xun.playground.common.paging.FilterDTO;
-import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.model.HorrStListMapper;
 import com.xun.playground.horr.story.repository.HorrStListRepository;
@@ -38,7 +38,7 @@ public class HorrStListService {
      */
     public List<HorrStDTO> findAllList(){
         Sort sort = Sort.by(Sort.Direction.DESC, "enterDate");
-        List<HorrStDomain> resultList = horrStListRepository.findAll(sort);
+        List<HorrStEntity> resultList = horrStListRepository.findAll(sort);
         return resultList.stream().map(HorrStDTO::new).collect(Collectors.toList());
     }
 

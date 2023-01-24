@@ -1,4 +1,4 @@
-package com.xun.playground.horr.story.domain;
+package com.xun.playground.horr.story.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import groovy.transform.builder.Builder;
@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @Getter
 @Entity
 @Table(name="HORROR_STORY")
-public class HorrStDomain {
+public class HorrStEntity {
     // horror Story No
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,9 +55,9 @@ public class HorrStDomain {
     @Column(name="UPDATE_DATE")
     private LocalDate updateDate;
 
-    public HorrStDomain(){}
+    public HorrStEntity(){}
     @Builder
-    public HorrStDomain(String viewCount, String title, String content, String enterBy){
+    public HorrStEntity(String viewCount, String title, String content, String enterBy){
         this.viewCount = viewCount;
         this.title = title;
         this.content = content;

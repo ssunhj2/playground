@@ -1,6 +1,6 @@
 package com.xun.playground.horr.story.service;
 
-import com.xun.playground.horr.story.domain.HorrStDomain;
+import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.repository.HorrStDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class HorrStDetailService {
      * @return
      */
     public HorrStDTO findDetail(String horrStNo){
-        Optional<HorrStDomain> story = horrStDetailRepository.findById(horrStNo);
+        Optional<HorrStEntity> story = horrStDetailRepository.findById(horrStNo);
         HorrStDTO storyDto;
 
         if(story != null){
