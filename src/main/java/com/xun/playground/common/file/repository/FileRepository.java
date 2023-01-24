@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface FileRepository extends JpaRepository<FileDomain, String> {
     // attach type, attach no 을 조건으로 데이터를 조회
-    List<FileDomain>  findAllByAttachTypeAndAttachNo(String attachType, String attachNo);
+    List<FileDomain> findAllByAttachTypeAndAttachNo(String attachType, String attachNo);
 }

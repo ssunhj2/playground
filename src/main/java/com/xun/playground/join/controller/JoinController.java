@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.NoSuchAlgorithmException;
@@ -39,6 +40,18 @@ public class JoinController {
         String result = joinService.saveMember(joinDto);
 
         resultMap.put("result", result);
+
+        return resultMap;
+    }
+
+
+    @PostMapping("/join/chkDupId")
+    @ResponseBody
+    public HashMap<String, String> chkDupId(@RequestParam("loginId") String loginId) {
+        HashMap<String, String> resultMap = new HashMap<>();
+
+        boolean isDup = joinService.chkDupId(loginId);
+        resultMap.put("result", String.valueOf(isDup));
 
         return resultMap;
     }

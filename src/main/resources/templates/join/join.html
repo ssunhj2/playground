@@ -14,7 +14,7 @@ main home 페이지
 
         <div class="row">
             <div class="col-md-12">
-                <div class="card mb-4">
+                <div class="card mb-4" id="account-content">
                     <h5 class="card-header">회원정보를 입력해주세요.</h5>
                     <!-- Account -->
                     <div class="card-body">
@@ -35,7 +35,8 @@ main home 페이지
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label for="loginId" class="form-label">로그인 아이디</label>
-                                    <input class="form-control" type="text" name="loginId" id="loginId" maxlength="20" placeholder="로그인 아이디" />
+                                    <input class="form-control chk-id" type="text" name="loginId" id="loginId" maxlength="20" placeholder="로그인 아이디" />
+                                    <p id="chk-msg"></p>
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="name" class="form-label">이름</label>
@@ -51,11 +52,11 @@ main home 페이지
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="password" class="form-label">비밀번호</label>
-                                    <input class="form-control" type="password" name="password" id="password" placeholder="비밀번호" />
+                                    <input class="form-control" type="password" name="password" id="password" maxlength="20" placeholder="비밀번호" />
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="password_confirm" class="form-label">비밀번호 확인</label>
-                                    <input class="form-control" type="password" name="password_confirm" id="password_confirm" placeholder="비밀번호 확인"/>
+                                    <input class="form-control" type="password" name="password_confirm" maxlength="20" id="password_confirm" placeholder="비밀번호 확인"/>
                                 </div>
 
                             </div>
@@ -74,11 +75,49 @@ main home 페이지
 </div>
 <script type="application/javascript">
 
+$(function() {
+    // 중복체크 이벤트
+    $('#account-content').click(function(e){
+    	if(!$(e.target).hasClass('chk-id')){
+        	chkDupId();
+        }
+    });
+
+});
+
+
 <!-- ID 중복검사 -->
 function chkDupId(){
+    let url = '/join/chkDupId';
+    let param = {
+        'loginId' : $('input[name="loginId"]').val()
+    }
 
-
+    ajaxJson(url, param, afterChkDupId);
 }
+function afterChkDupId(_data){
+    if(typeof _data == 'undefined' || _data == '' || $('input[name="loginId"]').val() == ''){
+        $('#chk-msg').html('');
+        $('#chk-msg').removeClass();
+        return false;
+    }
+
+    if(_data.result == 'false'){
+        $('#chk-msg').html('※이미 존재하는 ID 입니다.');
+        $('#chk-msg').removeClass();
+        $('#chk-msg').addClass('text-red');
+        return false;
+    }
+
+    if(_data.result == 'true'){
+        $('#chk-msg').html('※사용 가능한 ID 입니다.');
+        $('#chk-msg').removeClass();
+        $('#chk-msg').addClass('text-green');
+        return true;
+    }
+}
+
+
 
 <!-- 회원가입 -->
 function saveMember(){
@@ -105,6 +144,9 @@ function saveMember(){
         return;
     }
 
+    // id 중복검사
+    if(!chkDupId()) return;
+
     let url = '/join';
     let param = {
         'loginId' : loginId.val(),
@@ -118,9 +160,6 @@ function saveMember(){
 
 
 }
-
-
-
 // 회원가입 후 수행
 function afterSaveMember(_data){
     if(_data != '' && _data.result == 'success'){

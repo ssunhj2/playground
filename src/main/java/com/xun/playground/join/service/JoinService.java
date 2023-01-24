@@ -4,6 +4,7 @@ import com.xun.playground.common.CommonUtils;
 import com.xun.playground.join.dto.JoinDTO;
 import com.xun.playground.join.entity.JoinEntity;
 import com.xun.playground.join.repository.JoinRepository;
+import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,19 @@ public class JoinService {
             return "fail";
         }
 
+    }
+
+    /**
+     * loginId 중복체크
+     * @param loginId
+     * @return
+     */
+    public boolean chkDupId(String loginId){
+        JoinEntity joinEntity = joinRepository.findByLoginId(loginId);
+        // 검색된 결과가 없는 경우
+        if(joinEntity == null) return true;
+
+        return false;
     }
 
 

@@ -40,6 +40,11 @@
             <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
             <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
             <script src="static/theme/sneat/js/config.js"></script>
+
+            <!-- JQuery: content 아래에 두면 로딩전에 동작 안하는 경우 있어서 여기에 위치시킴-->
+            <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+            <!-- 공통 css 생성-->
+            <link rel="stylesheet" href="static/common/css/common.css" />
         </head>
     </th:block>
 </html>
