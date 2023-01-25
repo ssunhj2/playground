@@ -144,8 +144,6 @@ function saveMember(){
         return;
     }
 
-    // id 중복검사
-    if(!chkDupId()) return;
 
     let url = '/join';
     let param = {
@@ -165,6 +163,7 @@ function afterSaveMember(_data){
     if(_data != '' && _data.result == 'success'){
         alert("회원가입 완료! 환영합니다.");
         // 로그인 페이지로 이동
+        location.href = '/login';
     }
 
 }

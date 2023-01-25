@@ -11,7 +11,8 @@ sneat 테마(기본테마)의 default 레이아웃 구성
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <!-- 공통 헤더-->
-<th:block th:replace="theme/sneat/fragments/header :: fragment-sneat-header"></th:block>
+<th:block th:replace="theme/sneat/fragments/unAuthHeader :: fragment-sneat-unAuthHeader"></th:block>
+
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">

@@ -36,11 +36,11 @@ public class CommonUtils {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         // SALT 생성(무작위 랜덤 문자열)
-        String salt = new String(Base64.getEncoder().encode(bytes));
+        //String salt = new String(Base64.getEncoder().encode(bytes));
 
         // 문자+ salt 암호화
         MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(salt.getBytes());
+       // md.update(salt.getBytes());
         md.update(word.getBytes());
         String newWord = String.format("%064x", new BigInteger(1, md.digest()));
 
