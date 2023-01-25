@@ -38,6 +38,15 @@ public class JoinDTO extends BaseDTO {
         this.email = form.getEmail();
     }
 
+    public JoinDTO(String loginId, String password, String name, String phone, String email, String enterBy){
+        this.loginId = loginId;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.setEnterBy(enterBy);
+    }
+
     // DTO값을 entity 객체로 변환하여 반환한다.
     public JoinEntity toEntity(){
         return new JoinEntity(loginId, password, name, phone, email, getEnterBy());
