@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 /**
- * Horror Story 상세페이지
+ * Horror Story 상세페이지 Service
  */
 @Transactional
 @Service

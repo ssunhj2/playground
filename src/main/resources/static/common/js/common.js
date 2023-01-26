@@ -26,9 +26,19 @@ function goWelcome(){
     location.href='/';
 }
 
+// 로그인 페이지로 이동
+function goLogin(){
+    location.href='/login';
+}
+
 // playground 홈으로 이동
 function goPlaygroundHome(){
     location.href='/home';
+}
+
+// 회원정보 페이지로 이동
+function goAccount(){
+    location.href='/account';
 }
 
 // horror 홈으로 이동
@@ -41,7 +51,6 @@ function goHorrorHome(){
 function goHorrorStory(){
     location.href='/horror/story';
 }
-
 
 
 /*****************************************
@@ -62,6 +71,9 @@ function ajaxJson(_url, _param, _after)
         error: function(request, status, error){
             console.log('error!!!');
             console.log('Code:'+request.status+' / Message:'+request.responseText+' / Error: '+error);
+            if(typeof _after != undefined && "" != _after) {
+                return _after('fail');
+            }
         },
         success: function(data){
             console.log('success!!!');
@@ -74,7 +86,7 @@ function ajaxJson(_url, _param, _after)
 
 
 /*****************************************
- *************** ajax *******************
+ *************** 값 체크 *******************
  *****************************************/
 
 function chkEmptyText(_element, _msg){
@@ -86,4 +98,12 @@ function chkEmptyText(_element, _msg){
     }
 
     return true;
+}
+
+
+
+function isEmptyObject(_obj){
+    if(_obj.constructor === Object && Object.keys(_obj).length === 0) return true;
+
+    return false;
 }

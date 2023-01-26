@@ -1,4 +1,4 @@
-package com.xun.playground.join.entity;
+package com.xun.playground.member.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Table(name="MEMBER")
-public class JoinEntity {
+public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="MEMBER_NO")
@@ -35,6 +35,12 @@ public class JoinEntity {
     // 이메일
     @Column(name="EMAIL")
     private String email;
+    // 주소
+    @Column(name="ADDRESS")
+    private String address;
+    // 취미
+    @Column(name="HOBBY")
+    private String hobby;
 
     @Column(name="ENTER_BY")
     private String enterBy;
@@ -52,15 +58,27 @@ public class JoinEntity {
     @Column(name="UPDATE_DATE")
     private LocalDate updateDate;
 
-    public JoinEntity(){}
+    public MemberEntity(){}
 
     @Builder
-    public JoinEntity(String loginId, String password, String name, String phone, String email, String enterBy){
+    public MemberEntity(String loginId, String password, String name, String phone, String email, String address, String hobby, String enterBy){
         this.loginId = loginId;
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.address = address;
+        this.hobby = hobby;
         this.enterBy = enterBy;
+    }
+
+    // 수정
+    public void update(String name, String phone, String email, String address, String hobby, String updateBy){
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.hobby = hobby;
+        this.updateBy = updateBy;
     }
 }

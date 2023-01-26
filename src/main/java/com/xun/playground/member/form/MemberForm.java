@@ -1,4 +1,4 @@
-package com.xun.playground.join.form;
+package com.xun.playground.member.form;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class JoinForm {
+public class MemberForm {
     // 로그인 ID
     private String loginId;
     // 비밀번호
@@ -21,4 +21,8 @@ public class JoinForm {
     private String phone;
     // 이메일
     private String email;
+    // 주소
+    private String address;
+    // 취미
+    private String hobby;
 }

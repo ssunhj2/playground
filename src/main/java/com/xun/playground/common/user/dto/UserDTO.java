@@ -17,6 +17,8 @@ public class UserDTO {
     private String name;
     private String phone;
     private String email;
+    private String address;
+    private String hobby;
 
     // eneity값을 DTO에 set
     public UserDTO(UserEntity userEntity){
@@ -25,5 +27,8 @@ public class UserDTO {
         this.name = userEntity.getName();
         this.phone = userEntity.getPhone();
         this.email = userEntity.getEmail();
+        this.address = userEntity.getAddress();
+        this.hobby = userEntity.getHobby();
     }
+
 }

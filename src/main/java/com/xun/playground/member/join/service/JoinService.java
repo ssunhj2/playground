@@ -1,10 +1,9 @@
-package com.xun.playground.join.service;
+package com.xun.playground.member.join.service;
 
 import com.xun.playground.common.CommonUtils;
-import com.xun.playground.join.dto.JoinDTO;
-import com.xun.playground.join.entity.JoinEntity;
-import com.xun.playground.join.repository.JoinRepository;
-import org.apache.groovy.parser.antlr4.util.StringUtils;
+import com.xun.playground.member.dto.MemberDTO;
+import com.xun.playground.member.entity.MemberEntity;
+import com.xun.playground.member.join.repository.JoinRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Base64;
 
 /**
  * 회원가입 서비스
@@ -33,7 +30,7 @@ public class JoinService {
      * 회원정보 저장
      * @param joinDto
      */
-    public String saveMember(JoinDTO joinDto) {
+    public String saveMember(MemberDTO joinDto) {
         // 비밀번호 암호화
         String password = joinDto.getPassword();
         try{
@@ -42,7 +39,7 @@ public class JoinService {
             joinDto.setPassword(newPassword); // 암호화된 PW
             joinDto.setEnterBy(joinDto.getLoginId()); // enterBy
 
-            JoinEntity entity = joinDto.toEntity();
+            MemberEntity entity = joinDto.toEntity();
             // DB에 저장
             joinRepository.save(entity);
 
@@ -64,7 +61,7 @@ public class JoinService {
      * @return
      */
     public boolean chkDupId(String loginId){
-        JoinEntity joinEntity = joinRepository.findByLoginId(loginId);
+        MemberEntity joinEntity = joinRepository.findByLoginId(loginId);
         // 검색된 결과가 없는 경우
         if(joinEntity == null) return true;
 

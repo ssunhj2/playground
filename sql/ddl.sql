@@ -40,6 +40,8 @@ create table MEMBER
     NAME varchar(100),
     PHONE varchar(100),
     EMAIL varchar(100),
+    ADDRESS varchar(2000),
+    HOBBY varchar(2000),
     ENTER_BY varchar(40),
     ENTER_DATE datetime,
     UPDATE_BY varchar(40),

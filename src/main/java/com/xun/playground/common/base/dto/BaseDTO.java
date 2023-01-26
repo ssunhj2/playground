@@ -1,4 +1,4 @@
-package com.xun.playground.common.dto;
+package com.xun.playground.common.base.dto;
 
 import lombok.Getter;
 import lombok.Setter;

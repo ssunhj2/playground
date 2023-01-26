@@ -1,6 +1,6 @@
 package com.xun.playground.horr.story.dto;
 
-import com.xun.playground.common.dto.BaseDTO;
+import com.xun.playground.common.base.dto.BaseDTO;
 import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.form.HorrStForm;
 import lombok.Getter;

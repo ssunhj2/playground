@@ -29,4 +29,10 @@ public class UserEntity {
     // 이메일
     @Column(name="EMAIL")
     private String email;
+    // 주소
+    @Column(name="ADDRESS")
+    private String address;
+    // 취미
+    @Column(name="HOBBY")
+    private String hobby;
 }

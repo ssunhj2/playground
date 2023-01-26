@@ -79,7 +79,7 @@ main home 페이지
                     <h4 class="mb-2">Welcome to Playground! 👋</h4>
                     <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-                    <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                    <form id="LOGIN_FORM" class="mb-3" method="POST">
                         <div class="mb-3">
                             <label for="loginId" class="form-label">Login Id</label>
                             <input type="text"
@@ -87,6 +87,7 @@ main home 페이지
                                     id="loginId"
                                     name="loginId"
                                     placeholder="Enter your login Id"
+                                   value="guest1"
                                     autofocus
                             />
                         </div>
@@ -103,6 +104,7 @@ main home 페이지
                                         id="password"
                                         class="form-control"
                                         name="password"
+                                        value="kgb1234"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password"
                                 />
@@ -116,7 +118,7 @@ main home 페이지
                             </div>
                         </div>-->
                         <div class="mb-3">
-                            <button type="button" onclick="goLogin();" class="btn btn-primary d-grid w-100">Sign in</button>
+                            <button type="button" onclick="goSignIn();" class="btn btn-primary d-grid w-100">Sign in</button>
                             <button type="button" onclick="goWelcome();" class="btn btn-outline-secondary d-grid w-100 mt-2">Cancel</button>
                         </div>
                     </form>
@@ -135,28 +137,39 @@ main home 페이지
 </div>
 <script type="application/javascript">
 
+
 $(function() {
-    // 중복체크 이벤트
-    $('#account-content').click(function(e){
-        if(!$(e.target).hasClass('chk-id')){
-            chkDupId();
+    $('input[name="loginId"]').focus();
+
+    $('#LOGIN_FORM').keypress(function(e){
+        if(e.keyCode == 13){
+            goSignIn();
         }
     });
 
 });
 
-function goLogin(){
+
+// 로그인
+function goSignIn(){
+    let loginId = $('input[name="loginId"]');
+    let password = $('input[name="password"]');
+
+    // 필수입력 체크
+    if(!chkEmptyText(loginId, '로그인 아이디')) return;
+    if(!chkEmptyText(password, '비밀번호')) return;
+
     let url = '/login';
     const param = {
-        'loginId' : $('input[name="loginId"]').val(),
-        'password' : $('input[name="password"]').val()
+        'loginId' : loginId.val(),
+        'password' : password.val()
     };
 
-    ajaxJson(url, param, afterGoLogin);
+    ajaxJson(url, param, afterGoSignIn);
 }
 
-function afterGoLogin(_data){
-    if(typeof _data == undefined || _data == '') {
+function afterGoSignIn(_data){
+    if(typeof _data == undefined || _data == 'fail') {
         console.log('login error');
         return;
     }
@@ -168,7 +181,7 @@ function afterGoLogin(_data){
     }
 
     if(_data.result == 'success'){
-        location.href = '/home';
+        goPlaygroundHome();
         return;
     }
 }

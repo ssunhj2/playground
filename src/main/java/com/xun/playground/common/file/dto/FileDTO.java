@@ -1,11 +1,10 @@
 package com.xun.playground.common.file.dto;
 
-import com.xun.playground.common.dto.BaseDTO;
+import com.xun.playground.common.base.dto.BaseDTO;
 import com.xun.playground.common.file.domain.FileDomain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 /**

@@ -1,8 +1,8 @@
-package com.xun.playground.join.controller;
+package com.xun.playground.member.join.controller;
 
-import com.xun.playground.join.dto.JoinDTO;
-import com.xun.playground.join.form.JoinForm;
-import com.xun.playground.join.service.JoinService;
+import com.xun.playground.member.dto.MemberDTO;
+import com.xun.playground.member.form.MemberForm;
+import com.xun.playground.member.join.service.JoinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +32,10 @@ public class JoinController {
 
     @PostMapping("/join")
     @ResponseBody
-    public HashMap<String, String> saveMember(JoinForm form) throws NoSuchAlgorithmException {
+    public HashMap<String, String> saveMember(MemberForm form) throws NoSuchAlgorithmException {
         HashMap<String, String> resultMap = new HashMap<>();
 
-        JoinDTO joinDto = new JoinDTO(form);
+        MemberDTO joinDto = new MemberDTO(form);
         String result = joinService.saveMember(joinDto);
 
         resultMap.put("result", result);

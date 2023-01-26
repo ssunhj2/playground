@@ -10,8 +10,8 @@ sneat 테마(기본테마)의 default 레이아웃 구성
       data-template="vertical-menu-template-free"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-  <!-- 공통 헤더-->
-  <th:block th:replace="theme/sneat/fragments/header :: fragment-sneat-header"></th:block>
+<!-- 공통 헤더-->
+<th:block th:replace="theme/sneat/fragments/header :: fragment-sneat-header"></th:block>
   <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -39,6 +39,17 @@ sneat 테마(기본테마)의 default 레이아웃 구성
     </div>
     <!-- Layout END -->
     <!-- 공통 스크립트-->
-    <th:block th:replace="theme/sneat/fragments/script :: fragment-sneat-script"></th:block>
-  </body>
+<th:block th:replace="theme/sneat/fragments/script :: fragment-sneat-script"></th:block>
+<script type="application/javascript">
+<!-- dom 트리 준비이후 실행-->
+$(function() {
+    if(typeof(goSearch) == 'function'){
+        goSearch();
+    }
+
+});
+
+</script>
+
+</body>
 </html>

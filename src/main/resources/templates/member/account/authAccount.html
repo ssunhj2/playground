@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- =========================================================
+회원정보 수정 페이지
+========================================================= -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{theme/sneat/layout/default}">
+<th:block layout:fragment="content-sneat">
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account /</span> 회원정보</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
+                    </li>
+                </ul>
+                <div class="card mb-4">
+                    <h5 class="card-header">회원정보</h5>
+                    <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                            <img
+                                    src="static/theme/sneat/img/avatars/1.png"
+                                    alt="user-avatar"
+                                    class="d-block rounded"
+                                    height="100"
+                                    width="100"
+                                    id="uploadedAvatar"
+                            />
+                        </div>
+                    </div>
+                    <hr class="my-0" />
+                    <div class="card-body">
+                        <form id="formAccountSettings" method="POST" onsubmit="return false">
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="loginId" class="form-label">로그인 아이디</label>
+                                    <input class="form-control chk-id" type="text" name="loginId" id="loginId" readonly />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="name" class="form-label">이름</label>
+                                    <input class="form-control" type="text" name="name" id="name" maxlength="20" placeholder="이름" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="phone" class="form-label">핸드폰 번호</label>
+                                    <input class="form-control" type="text" name="phone" id="phone" maxlength="20" placeholder="010-1234-5678" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input class="form-control" type="text" name="email" id="email" maxlength="45" placeholder="hj.sun@example.com" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="address" class="form-label">주소</label>
+                                    <input type="text" class="form-control" id="address" name="address" maxlength="100" placeholder="Address" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="hobby" class="form-label">취미</label>
+                                    <input type="text" class="form-control" id="hobby" name="hobby" maxlength="100" placeholder="ex) 축구, 영화감상.." />
+                                </div>
+                                <!--<div class="mb-3 col-md-6">
+                                    <label for="password" class="form-label">비밀번호</label>
+                                    <input class="form-control" type="password" name="password" id="password" maxlength="20"
+                                           placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                    />
+                                </div>-->
+                            </div>
+                            <div class="mt-2">
+                                <button type="button" onclick="modifyAccount();" class="btn btn-primary me-2">Save changes</button>
+                                <button type="button" class="btn btn-outline-secondary">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /Account -->
+                </div>
+                <div class="card">
+                    <h5 class="card-header">회원탈퇴</h5>
+                    <div class="card-body">
+                        <div class="mb-3 col-12 mb-0">
+                            <div class="alert alert-warning">
+                                <h6 class="alert-heading fw-bold mb-1">탈퇴 하시겠습니까?</h6>
+                                <p class="mb-0">한번 계정을 삭제하시면 다시 되돌릴 수 없습니다.</p>
+                            </div>
+                        </div>
+                        <form id="formAccountDeactivation" onsubmit="return false">
+                            <div class="form-check mb-3">
+                                <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="accountActivation"
+                                        id="accountActivation"
+                                />
+                                <label class="form-check-label" for="accountActivation"
+                                >계정 삭제에 동의합니다.</label
+                                >
+                            </div>
+                            <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript">
+const oldName = '';
+const oldPhone = '';
+const oldEmail = '';
+const oldAddress = '';
+const oldHobby = '';
+
+// 회원정보 조회
+function goSearch(){
+    let url = '/account/authAccount';
+
+    ajaxJson(url, '', afterGoSearch);
+}
+function afterGoSearch(_data){
+    if(isEmptyObject(_data)){
+        console.log('데이터 조회된 값 없음');
+        return;
+    }
+
+    oldName = _data.member.name;
+    oldPhone = _data.member.phone;
+    oldEmail = _data.member.email;
+    oldAddress = _data.member.address;
+    oldHobby = _data.member.hobby;
+
+    // 조회한 값 설정
+    $('input[name="loginId"]').val(_data.member.loginId);
+    $('input[name="name"]').val(oldName);
+    $('input[name="phone"]').val(oldPhone);
+    $('input[name="email"]').val(oldEmail);
+    $('input[name="address"]').val(oldAddress);
+    $('input[name="hobby"]').val(oldHobby);
+
+}
+
+function modifyAccount(){
+    //if(!chkEmptyText(password, '비밀번호')) return;
+
+    // 수정된 내용이 있는지 확인
+    let name = $('input[name="name"]').val();
+    let phone = $('input[name="phone"]').val();
+    let email = $('input[name="email"]').val();
+    let address = $('input[name="address"]').val();
+    let hobby = $('input[name="hobby"]').val();
+
+    // 수정된 내용이 있는지 확인
+    if((name != '' && oldName == name) && (phone != '' && oldPhone == phone) && (email != '' && oldEmail == email)
+        && (address != '' && oldAddress == address) && (hobby != '' && oldHobby == hobby)){
+
+        alert('변경된 내용이 없습니다.');
+        return;
+    }
+
+    let url = '/account/modifyAccount';
+
+    const param = {
+        'loginId'  : $('input[name="loginId"]').val(),
+        'name'     : $('input[name="name"]').val(),
+        'phone'    : $('input[name="phone"]').val(),
+        'email'    : $('input[name="email"]').val(),
+        'address'  : $('input[name="address"]').val(),
+        'hobby'    : $('input[name="hobby"]').val()
+    };
+
+    ajaxJson(url, param, afterModifyAccount);
+}
+function afterModifyAccount(_data){
+    if(_data == 'fail'){
+        // 로그인 페이지로 이동
+        alert('값이 저장되지 않았습니다. 개발자에게 문의바랍니다.');
+        return;
+    }
+
+    alert('성공적으로 저장되었습니다.');
+
+}
+
+</script>
+
+</th:block>
+</html>
