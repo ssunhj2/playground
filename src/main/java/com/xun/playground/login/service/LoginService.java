@@ -45,6 +45,9 @@ public class LoginService {
             // 사용자가 존재하는 경우
             if(entity == null || StringUtils.isEmpty(entity.getMemberNo())) return null;
 
+            // 탈퇴한 사용자인 경우
+            if(!"Y".equals(entity.getIsLogin())) return null;
+
             // 비밀번호 확인
             if(chkPw != null && chkPw.equals(entity.getPassword())){
                 UserDTO user = new UserDTO(entity);

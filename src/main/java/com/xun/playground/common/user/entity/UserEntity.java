@@ -35,4 +35,7 @@ public class UserEntity {
     // 취미
     @Column(name="HOBBY")
     private String hobby;
+    // 로그인가능 여부
+    @Column(name="IS_LOGIN")
+    private String isLogin;
 }
