@@ -100,4 +100,21 @@ public class AccountService {
 
     }
 
+    /**
+     * 회원 탈퇴
+     * @param memberNo
+     * @return
+     */
+    public boolean leaveAccount(String memberNo){
+        boolean result = false;
+
+        if(StringUtils.isEmpty(memberNo)) return result;
+
+        int isUpdate = accountRepository.leaveAccount(memberNo);
+        // 업데이트 된 항목 존재하는 경우
+        if(isUpdate > 0) result = true;
+
+        return result;
+    }
+
 }

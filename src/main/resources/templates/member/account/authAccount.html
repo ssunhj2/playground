@@ -94,7 +94,7 @@
                                 >계정 삭제에 동의합니다.</label
                                 >
                             </div>
-                            <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+                            <button type="button" onclick="leaveAccount();" class="btn btn-danger deactivate-account">Deactivate Account</button>
                         </form>
                     </div>
                 </div>
@@ -104,15 +104,15 @@
 </div>
 
 <script type="application/javascript">
-const oldName = '';
-const oldPhone = '';
-const oldEmail = '';
-const oldAddress = '';
-const oldHobby = '';
+let oldName = '';
+let oldPhone = '';
+let oldEmail = '';
+let oldAddress = '';
+let oldHobby = '';
 
 // 회원정보 조회
 function goSearch(){
-    let url = '/account/authAccount';
+    const url = '/account/authAccount';
 
     ajaxJson(url, '', afterGoSearch);
 }
@@ -152,7 +152,7 @@ function modifyAccount(){
     if((name != '' && oldName == name) && (phone != '' && oldPhone == phone) && (email != '' && oldEmail == email)
         && (address != '' && oldAddress == address) && (hobby != '' && oldHobby == hobby)){
 
-        alert('변경된 내용이 없습니다.');
+        alert('수정된 내용이 없습니다.');
         return;
     }
 
@@ -176,8 +176,51 @@ function afterModifyAccount(_data){
         return;
     }
 
+    if(!_data.result){
+        console.log('데이터조회 실패');
+        return;
+    }
+
     alert('성공적으로 저장되었습니다.');
 
+    oldName = $('input[name="name"]').val();
+    oldPhone = $('input[name="phone"]').val();
+    oldEmail = $('input[name="email"]').val();
+    oldAddress = $('input[name="address"]').val();
+    oldHobby = $('input[name="hobby"]').val();
+}
+
+<!-- 회원탈퇴 -->
+function leaveAccount(){
+    // 계정삭제 동의여부 확인
+    if(!$('#accountActivation').is(':checked')){
+        alert('삭제 동의에 체크해주시기 바랍니다.')
+        return;
+    }
+
+    // 확인메시지 띄우기
+    if(!confirm('한번 탈퇴하시면 계정을 되돌릴 수 없습니다.\n정말 탈퇴하시겠습니까?')) return;
+
+    const url = '/account/leaveAccount';
+
+    ajaxJson(url, '', afterLeaveAccount)
+}
+
+function afterLeaveAccount(_data){
+    // welcome 페이지로 이동
+    if(_data == 'fail'){
+        // 로그인 페이지로 이동
+        alert('error. 개발자에게 문의바랍니다.');
+        return;
+    }
+
+    if(!_data.result){
+        console.log('탈퇴 실패');
+        return;
+    }
+
+    alert('탈퇴 완료되었습니다.');
+    goWelcome(); // welcome 페이지로 이동
 }
 
 </script>

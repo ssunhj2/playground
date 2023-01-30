@@ -27,7 +27,7 @@ public class JoinController {
 
     @GetMapping("/join")
     public String goJoin(){
-        return "join/join";
+        return "member/join/join";
     }
 
     @PostMapping("/join")

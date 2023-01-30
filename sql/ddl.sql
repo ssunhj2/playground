@@ -42,6 +42,7 @@ create table MEMBER
     EMAIL varchar(100),
     ADDRESS varchar(2000),
     HOBBY varchar(2000),
+    IS_LOGIN char(1) default 'Y',
     ENTER_BY varchar(40),
     ENTER_DATE datetime,
     UPDATE_BY varchar(40),

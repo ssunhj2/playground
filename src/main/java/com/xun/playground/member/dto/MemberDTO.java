@@ -28,7 +28,9 @@ public class MemberDTO extends BaseDTO {
     private String address;
     // 취미
     private String hobby;
-    
+    // 로그인 가능여부
+    private String isLogin;
+
     public MemberDTO(){}
     
     // form 값을 DTO에 set
@@ -51,6 +53,7 @@ public class MemberDTO extends BaseDTO {
         this.email = memberEntity.getEmail();
         this.address = memberEntity.getAddress();
         this.hobby = memberEntity.getHobby();
+        this.isLogin = memberEntity.getIsLogin();
     }
 
     public MemberDTO(String loginId, String password, String name, String phone, String email, String address, String hobby, String enterBy){
@@ -66,7 +69,7 @@ public class MemberDTO extends BaseDTO {
 
     // DTO값을 entity 객체로 변환하여 반환한다.
     public MemberEntity toEntity(){
-        return new MemberEntity(loginId, password, name, phone, email, address, hobby, getEnterBy());
+        return new MemberEntity(loginId, password, name, phone, email, address, hobby, isLogin, getEnterBy());
     }
 
 }

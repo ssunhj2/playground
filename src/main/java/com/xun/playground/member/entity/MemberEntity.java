@@ -41,6 +41,9 @@ public class MemberEntity {
     // 취미
     @Column(name="HOBBY")
     private String hobby;
+    //로그인 가능여부
+    @Column(name="IS_LOGIN")
+    private String isLogin;
 
     @Column(name="ENTER_BY")
     private String enterBy;
@@ -61,7 +64,7 @@ public class MemberEntity {
     public MemberEntity(){}
 
     @Builder
-    public MemberEntity(String loginId, String password, String name, String phone, String email, String address, String hobby, String enterBy){
+    public MemberEntity(String loginId, String password, String name, String phone, String email, String address, String hobby, String isLogin, String enterBy){
         this.loginId = loginId;
         this.password = password;
         this.name = name;
@@ -69,6 +72,7 @@ public class MemberEntity {
         this.email = email;
         this.address = address;
         this.hobby = hobby;
+        this.isLogin = isLogin;
         this.enterBy = enterBy;
     }
 

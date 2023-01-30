@@ -5,6 +5,8 @@ import com.xun.playground.common.session.SessionManager;
 import com.xun.playground.common.user.dto.UserDTO;
 import com.xun.playground.member.dto.MemberDTO;
 import com.xun.playground.member.form.MemberForm;
+import org.apache.groovy.parser.antlr4.util.StringUtils;
+import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +58,7 @@ public class AccountContoller {
 
     @GetMapping("/account")
     public String goAuthAccount() {
-        return "account/authAccount";
+        return "member/account/authAccount";
     }
 
 
@@ -88,6 +90,7 @@ public class AccountContoller {
 
         if(userDto == null) {
             resultMap.put("result", "fail"); // 유효하지 않은 사용자입니다.
+            return resultMap;
         }
 
         String memberNo = userDto.getMemberNo();
@@ -104,19 +107,23 @@ public class AccountContoller {
      * @param request
      * @return
      */
-    @PostMapping("/account/dropAccount")
+    @PostMapping("/account/leaveAccount")
     @ResponseBody
-    public HashMap<String, Object> dropAccount(HttpServletRequest request){
+    public HashMap<String, Object> leaveAccount(HttpServletRequest request){
         HashMap<String, Object> resultMap = new HashMap<>();
 
         UserDTO userDto = sessionManager.getSession(request);
 
-        if(userDto != null) {
-            String memberNo = userDto.getMemberNo();
-            MemberDTO member = accountService.findUser(memberNo);
-
-            resultMap.put("member", member);
+        if(userDto == null || StringUtils.isEmpty(userDto.getMemberNo())) {
+            resultMap.put("result", "fail"); // 유효하지 않은 사용자입니다.
+            return resultMap;
         }
+
+        boolean result = accountService.leaveAccount(userDto.getMemberNo());
+        resultMap.put("result", result);
+        
+        // 세션 삭제
+        sessionManager.expire(request);
 
         return resultMap;
     }

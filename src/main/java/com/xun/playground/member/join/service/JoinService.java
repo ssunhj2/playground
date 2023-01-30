@@ -38,6 +38,7 @@ public class JoinService {
 
             joinDto.setPassword(newPassword); // 암호화된 PW
             joinDto.setEnterBy(joinDto.getLoginId()); // enterBy
+            joinDto.setIsLogin("Y");
 
             MemberEntity entity = joinDto.toEntity();
             // DB에 저장
