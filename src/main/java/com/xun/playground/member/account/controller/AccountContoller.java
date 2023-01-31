@@ -32,16 +32,17 @@ public class AccountContoller {
 
     /*@GetMapping("/account")
     public String goUnAuthAccount() {
-        return "account/unAuthAccount";
+        return "member/account/unAuthAccount";
     }
 
 
     @PostMapping("/account")
-    public String checkAuthUser(HttpServletRequest request, @RequestParam("password") String password, RedirectAttributes re){
+    @ResponseBody
+    public String checkAuthUser(HttpServletRequest request, @RequestParam("password") String password){
         UserDTO userDto = sessionManager.getSession(request);
 
         if(userDto == null) {
-            re.addAttribute("msg", "500"); // 로그인이 필요합니다.
+
             return "redirect:/account/unAuthAccount";
         }
 
