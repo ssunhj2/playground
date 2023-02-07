@@ -1,4 +1,4 @@
-package com.xun.playground.common;
+package com.xun.playground.common.util;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

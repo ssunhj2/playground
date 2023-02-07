@@ -1,6 +1,6 @@
 package com.xun.playground.member.join.service;
 
-import com.xun.playground.common.CommonUtils;
+import com.xun.playground.common.util.CommonUtils;
 import com.xun.playground.member.dto.MemberDTO;
 import com.xun.playground.member.entity.MemberEntity;
 import com.xun.playground.member.join.repository.JoinRepository;

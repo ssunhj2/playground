@@ -1,7 +1,7 @@
 package com.xun.playground.login.service;
 
 
-import com.xun.playground.common.CommonUtils;
+import com.xun.playground.common.util.CommonUtils;
 import com.xun.playground.common.user.dto.UserDTO;
 import com.xun.playground.common.user.entity.UserEntity;
 import com.xun.playground.common.user.repository.UserRepository;

@@ -1,5 +1,6 @@
 package com.xun.playground.login.controller;
 
+import com.xun.playground.common.config.dto.ConfigDTO;
 import com.xun.playground.common.session.SessionManager;
 import com.xun.playground.common.user.dto.UserDTO;
 import com.xun.playground.login.dto.LoginDTO;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 /**
@@ -48,7 +50,7 @@ public class LoginController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public HashMap<String, String> login(LoginForm loginForm, HttpServletResponse response){
+    public HashMap<String, String> login(LoginForm loginForm, HttpServletRequest request, HttpServletResponse response){
         HashMap<String, String> resultMap = new HashMap<>();
 
         LoginDTO loginDTO = new LoginDTO(loginForm);
@@ -64,12 +66,22 @@ public class LoginController {
         // 세션관리자를 통해 세션을 생성한다.
         sessionManager.createSession(user, response);
         resultMap.put("result", "success");
+
+        // servlet을 통해 HttpSession 생성
+        HttpSession session = request.getSession();
+        session.setAttribute(ConfigDTO.SESSION_COOKIE_NAME, user);
+        
         return resultMap; // result 가 성공이면 home으로
     }
 
     @PostMapping("/logout")
     public String logout(HttpServletRequest request){
         sessionManager.expire(request);
+
+        HttpSession session = request.getSession();
+        if(session != null){
+            session.invalidate(); // 세션 무효화
+        }
 
         return "/";
     }

@@ -1,5 +1,6 @@
 package com.xun.playground.common.session;
 
+import com.xun.playground.common.config.dto.ConfigDTO;
 import com.xun.playground.common.user.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class SessionManager {
-    private static final String SESSION_COOKIE_NAME = "mySessionId";
+    private String SESSION_COOKIE_NAME = ConfigDTO.SESSION_COOKIE_NAME;
     // 동시요청에 안전한 ConcurrentHashMap 사용
     private Map<String, UserDTO> sessionTable = new ConcurrentHashMap<>();
 
@@ -29,7 +30,6 @@ public class SessionManager {
         // 세션 ID 생성
         String sessionId = UUID.randomUUID().toString();
         sessionTable.put(sessionId, user); // 값을 session에 저장
-
         // 쿠키생성
         Cookie sessionCookie = new Cookie(SESSION_COOKIE_NAME, sessionId);
         response.addCookie(sessionCookie);
@@ -68,6 +68,8 @@ public class SessionManager {
      * @return
      */
     private Cookie findCookie(HttpServletRequest request, String cookieName){
+        if(request.getCookies() == null) return null;
+
         return Arrays.stream(request.getCookies())
                 .filter(cookie -> cookie.getName().equals(cookieName))
                 .findAny()
