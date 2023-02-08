@@ -53,10 +53,11 @@ public class AuthInterceptor implements HandlerInterceptor {
             if(smUser == null) {
                 logger.info("====== UnAuthUSer: 인가되지 않은 사용자입니다. ==========");
 
-                response.sendRedirect("/login");
+                response.setCharacterEncoding("UTF-8");
+                response.setContentType("text/html; charset=UTF-8");
 
                 PrintWriter pw = response.getWriter();
-                pw.println("<script>로그인이 필요합니다.</script>");
+                pw.println("<script> alert('로그인이 필요합니다.'); location.href='/login'; </script>");
                 pw.flush();
                 pw.close();
 
@@ -67,14 +68,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         logger.info("====== [preHandel] AuthUser ==========");
         return true;
 
-
     }
 
-    /**
-     * 컨트롤러 실행 후, 뷰 실행전 실행
-     */
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
-    }
 }
