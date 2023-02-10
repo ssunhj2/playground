@@ -31,6 +31,11 @@ function goLogin(){
     location.href='/login';
 }
 
+// 로그아웃
+function goLogout(){
+    location.href='/logout';
+}
+
 // playground 홈으로 이동
 function goPlaygroundHome(){
     location.href='/home';

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 /**
@@ -74,8 +76,9 @@ public class LoginController {
         return resultMap; // result 가 성공이면 home으로
     }
 
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request){
+
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         sessionManager.expire(request);
 
         HttpSession session = request.getSession();
@@ -83,7 +86,14 @@ public class LoginController {
             session.invalidate(); // 세션 무효화
         }
 
-        return "/";
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
+        PrintWriter pw = response.getWriter();
+        pw.println("<script> alert('로그아웃 되었습니다.'); location.href='/'; </script>");
+        pw.flush();
+        pw.close();
+
     }
 
 }
