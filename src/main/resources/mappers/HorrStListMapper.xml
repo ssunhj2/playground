@@ -66,15 +66,17 @@
     <!-- 게시글 리스트 조회 -->
     <select id="findAll" parameterType="com.xun.playground.common.paging.FilterDTO" resultMap="HorrStResultMap">
         SELECT
-             HORR_ST_NO,
-             VIEW_COUNT,
-             TITLE,
+             s.HORR_ST_NO,
+             s.VIEW_COUNT,
+             s.TITLE,
              CONTENT,
-             ENTER_BY,
-             ENTER_DATE,
-             UPDATE_BY,
-             UPDATE_DATE
-        FROM HORROR_STORY
+            (SELECT m.NAME
+             FROM   MEMBER m
+             WHERE  m.MEMBER_NO = s.ENTER_BY) ENTER_BY,
+             s.ENTER_DATE,
+             s.UPDATE_BY,
+             s.UPDATE_DATE
+        FROM HORROR_STORY s
         <include refid="conditions" />
         ORDER BY ENTER_DATE DESC
         LIMIT #{pagination.limitStart}, #{pageCount}

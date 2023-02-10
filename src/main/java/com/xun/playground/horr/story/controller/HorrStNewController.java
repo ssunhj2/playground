@@ -2,6 +2,8 @@ package com.xun.playground.horr.story.controller;
 
 import com.xun.playground.common.file.dto.FileDTO;
 import com.xun.playground.common.file.service.FileLocalService;
+import com.xun.playground.common.user.dto.UserDTO;
+import com.xun.playground.common.util.CommonUtils;
 import com.xun.playground.horr.story.dto.HorrStDTO;
 import com.xun.playground.horr.story.form.HorrStForm;
 import com.xun.playground.horr.story.service.HorrStDetailService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -59,21 +62,24 @@ public class HorrStNewController {
      * @return
      */
     @PostMapping("/horror/story/new")
-    public String saveStory(HorrStForm form, @RequestParam(required = false, value = "file") List<MultipartFile> files){
-        // todo 로그인 사용자 ID 가져오기
-        String enterBy = "xunxou";
-        form.setEnterBy(enterBy);
-        // story 저장
-        HorrStDTO story = new HorrStDTO(form);
-        HorrStDTO result = horrorStoryWriteService.saveStory(story);
+    public String saveStory(HttpServletRequest request, HorrStForm form, @RequestParam(required = false, value = "file") List<MultipartFile> files){
+        UserDTO user = CommonUtils.getUser(request);
+        if(user != null){
+            String enterBy = user.getMemberNo();
 
-        // file저장
-        if(!CollectionUtils.isEmpty(files)){
-            FileDTO fileDto = new FileDTO();
-            fileDto.setAttachType("HORR_ST");
-            fileDto.setAttachNo(result.getHorrStNo());
-            fileDto.setEnterBy(enterBy);
-            fileService.upload(fileDto, files);
+            form.setEnterBy(enterBy);
+            // story 저장
+            HorrStDTO story = new HorrStDTO(form);
+            HorrStDTO result = horrorStoryWriteService.saveStory(story);
+
+            // file저장
+            if(!CollectionUtils.isEmpty(files)){
+                FileDTO fileDto = new FileDTO();
+                fileDto.setAttachType("HORR_ST");
+                fileDto.setAttachNo(result.getHorrStNo());
+                fileDto.setEnterBy(enterBy);
+                fileService.upload(fileDto, files);
+            }
         }
 
         return "horr/story/horrStList";

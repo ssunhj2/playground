@@ -1,5 +1,10 @@
 package com.xun.playground.common.util;
 
+import com.xun.playground.common.config.dto.ConfigDTO;
+import com.xun.playground.common.user.dto.UserDTO;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -8,6 +13,18 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class CommonUtils {
+
+    /**
+     * session을 통해 user 값을 조회한다.
+     * @param request
+     * @return
+     */
+    public static UserDTO getUser(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserDTO user = (UserDTO) session.getAttribute(ConfigDTO.SESSION_COOKIE_NAME);
+
+        return user;
+    }
 
     /**
      * 한국/서울의 localDateTime을 String 타입으로 반환한다.

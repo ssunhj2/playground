@@ -60,6 +60,7 @@ public class HorrStDetailController {
         horrorStoryDetailService.deleteStory(horrStNo);
     }
 
+    // 조회수 증가
     @PostMapping("/horrst/add-viewcount")
     @ResponseBody
     public HashMap<String, String> addViewCount(@RequestParam("horrStNo") String horrStNo){
