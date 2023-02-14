@@ -6,6 +6,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
+<div class="layout-wrapper">
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary p-4">
             <h6 class="text-body">무서운이야기</h6>
@@ -36,49 +37,50 @@
             </div>
         </div>
     </div>
-    <script type="application/javascript">
-        let horrStNo = '[[${story.horrStNo}]]';
+</div>
+<script type="application/javascript">
+    let horrStNo = '[[${story.horrStNo}]]';
 
-        function goSearch(){
-            addViewCount();
-        }
+    function goSearch(){
+        addViewCount();
+    }
 
-        <!-- 수정 -->
-        function goMmodify(horrStNo){
-            location.href='/horror/story/new?horrStNo=' + horrStNo;
-        }
+    <!-- 수정 -->
+    function goMmodify(horrStNo){
+        location.href='/horror/story/new?horrStNo=' + horrStNo;
+    }
 
-        <!-- 삭제 -->
-        function deleteStory(horrStNo){
-            if(!confirm('삭제하시겠습니까?')) return;
+    <!-- 삭제 -->
+    function deleteStory(horrStNo){
+        if(!confirm('삭제하시겠습니까?')) return;
 
-            var url = '/horror/story/delete';
-            var param = {'horrStNo':horrStNo};
-            var after = goHorrorStory();
+        var url = '/horror/story/delete';
+        var param = {'horrStNo':horrStNo};
+        var after = goHorrorStory();
 
-            ajaxJson(url, param, after);
-        }
+        ajaxJson(url, param, after);
+    }
 
-        <!-- 파일 다운로드-->
-        function download(fileNo){
-            console.log(fileNo)
+    <!-- 파일 다운로드-->
+    function download(fileNo){
+        console.log(fileNo)
 
-            location.href='/download?fileNo=' + fileNo;
-        }
+        location.href='/download?fileNo=' + fileNo;
+    }
 
-        function aa(){
-            alert('a');
-        }
+    function aa(){
+        alert('a');
+    }
 
-        <!-- 조회수를 업데이트 한다.-->
-        function addViewCount(){
-            var url = '/horrst/add-viewcount';
-            var param = {'horrStNo':horrStNo};
+    <!-- 조회수를 업데이트 한다.-->
+    function addViewCount(){
+        var url = '/horrst/add-viewcount';
+        var param = {'horrStNo':horrStNo};
 
-            ajaxJson(url, param);
-        }
+        ajaxJson(url, param);
+    }
 
-    </script>
+</script>
 
 </th:block>
 </html>

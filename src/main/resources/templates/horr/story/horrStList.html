@@ -7,6 +7,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
+<div class="layout-wrapper">
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary p-4">
             <h6 class="text-body">무서운이야기</h6>
@@ -45,116 +46,116 @@
         </div>
     </div>
     <!-- Horror List End -->
+</div>
+<script type="application/javascript">
+    function goSearch() {
+        findAll(1);
+        console.log("goSearch");
+    }
 
-    <script type="application/javascript">
-        function goSearch() {
-            findAll(1);
-            console.log("goSearch");
+    <!-- 조회 API 호출 -->
+    async function getJson(uri, params) {
+        if (params) {
+            uri = uri + '?' + new URLSearchParams(params).toString();
         }
 
-        <!-- 조회 API 호출 -->
-        async function getJson(uri, params) {
-            if (params) {
-                uri = uri + '?' + new URLSearchParams(params).toString();
-            }
+        const response = await fetch(uri);
 
-            const response = await fetch(uri);
-
-            if (!response.ok) {
-                await response.json().then(error => {
-                    throw error;
-                });
-            }
-
-            return await response.json();
-        }
-
-        <!-- 글 목록 조회 -->
-        function findAll(page){
-            const searchText = $("#SEARCH_FORM").find("#searchText").val();
-
-            const params = {
-                    page: page,
-                    pageCount: 5,
-                    pageSize: 5,
-                    searchText: searchText
-            }
-
-            getJson('/horror/story/list', params).then(response => {
-                if(!Object.keys(response).length){
-                    noData();
-                    drawPages();
-                    return false;
-                }
-
-                let html = '';
-                let num = response.pagingDTO.pagination.totalCnt - ((response.pagingDTO.page -1) * response.pagingDTO.pageCount);
-
-                response.list.forEach((obj, idx) => {
-                    html += `
-                        <tr>
-                            <td width="50%"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
-                            <td width="25%">${obj.enterBy}</td>
-                            <td width="15%">${obj.enterDate}</td>
-                            <td width="10%">${obj.viewCount}</td>
-                        </tr>
-                        `;
-
-                });
-               document.getElementById('list').innerHTML = html;
-               drawPages(response.pagingDTO);
-
+        if (!response.ok) {
+            await response.json().then(error => {
+                throw error;
             });
-
         }
 
-        <!-- 페이지 html 랜더링-->
-        function drawPages(params) {
-            if (!params) {
-                document.querySelector('.pagination').innerHTML = '';
+        return await response.json();
+    }
+
+    <!-- 글 목록 조회 -->
+    function findAll(page){
+        const searchText = $("#SEARCH_FORM").find("#searchText").val();
+
+        const params = {
+                page: page,
+                pageCount: 5,
+                pageSize: 5,
+                searchText: searchText
+        }
+
+        getJson('/horror/story/list', params).then(response => {
+            if(!Object.keys(response).length){
+                noData();
+                drawPages();
                 return false;
             }
 
-            let html = ``;
-            const pagination = params.pagination;
+            let html = '';
+            let num = response.pagingDTO.pagination.totalCnt - ((response.pagingDTO.page -1) * response.pagingDTO.pageCount);
 
-            // 첫 페이지, 이전 페이지
-            if (pagination.existPrevPage) {
+            response.list.forEach((obj, idx) => {
                 html += `
-                    <li class="page-item"><button type="button" onclick="findAll(1);" class="btn btn-secondary"><i class="fa fa-angles-left"></i></button> </li>
-                    <li class="page-item"><button type="button" onclick="findAll(${pagination.startPage - 1});" class="btn btn-secondary"><i class="fa fa-angle-left"></i></button> </li>
-               `;
-            }
+                    <tr>
+                        <td width="50%"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
+                        <td width="25%">${obj.enterBy}</td>
+                        <td width="15%">${obj.enterDate}</td>
+                        <td width="10%">${obj.viewCount}</td>
+                    </tr>
+                    `;
 
-            // 페이지 번호
-            for (let i = pagination.startPage; i <= pagination.endPage; i++) {
-                const active = (i === params.page) ? 'btn btn-primary' : 'btn btn-secondary';
-                html += `<li class="page-item"><button type="button" onclick="findAll(${i})" class="${active}">${i}</button><li>`
-            }
+            });
+           document.getElementById('list').innerHTML = html;
+           drawPages(response.pagingDTO);
 
-            // 다음 페이지, 마지막 페이지
-            if (pagination.existNextPage) {
-                html += `
-                    <li class="page-item"><button type="button" onclick="findAll(${pagination.endPage + 1});" class="btn btn-secondary"><i class="fa fa-angle-right"></i></button> </li>
-                    <li class="page-item"><button type="button" onclick="findAll(${pagination.totalPageCnt});" class="btn btn-secondary"><i class="fa fa-angles-right"></i></button> </li>
-                `;
-            }
+        });
 
-            document.querySelector('.pagination').innerHTML = html;
+    }
+
+    <!-- 페이지 html 랜더링-->
+    function drawPages(params) {
+        if (!params) {
+            document.querySelector('.pagination').innerHTML = '';
+            return false;
         }
 
+        let html = ``;
+        const pagination = params.pagination;
 
-        <!-- 상세페이지로 이동-->
-        function goStoryDetail(horrStNo){
-           location.href='/horror/story/detail?horrStNo=' + horrStNo;
+        // 첫 페이지, 이전 페이지
+        if (pagination.existPrevPage) {
+            html += `
+                <li class="page-item"><button type="button" onclick="findAll(1);" class="btn btn-secondary"><i class="fa fa-angles-left"></i></button> </li>
+                <li class="page-item"><button type="button" onclick="findAll(${pagination.startPage - 1});" class="btn btn-secondary"><i class="fa fa-angle-left"></i></button> </li>
+           `;
         }
 
-        <!-- 글쓰기 페이지로 이동-->
-        function goStoryNew(){
-           location.href='/horror/story/new';
+        // 페이지 번호
+        for (let i = pagination.startPage; i <= pagination.endPage; i++) {
+            const active = (i === params.page) ? 'btn btn-primary' : 'btn btn-secondary';
+            html += `<li class="page-item"><button type="button" onclick="findAll(${i})" class="${active}">${i}</button><li>`
         }
 
+        // 다음 페이지, 마지막 페이지
+        if (pagination.existNextPage) {
+            html += `
+                <li class="page-item"><button type="button" onclick="findAll(${pagination.endPage + 1});" class="btn btn-secondary"><i class="fa fa-angle-right"></i></button> </li>
+                <li class="page-item"><button type="button" onclick="findAll(${pagination.totalPageCnt});" class="btn btn-secondary"><i class="fa fa-angles-right"></i></button> </li>
+            `;
+        }
 
-    </script>
+        document.querySelector('.pagination').innerHTML = html;
+    }
+
+
+    <!-- 상세페이지로 이동-->
+    function goStoryDetail(horrStNo){
+       location.href='/horror/story/detail?horrStNo=' + horrStNo;
+    }
+
+    <!-- 글쓰기 페이지로 이동-->
+    function goStoryNew(){
+       location.href='/horror/story/new';
+    }
+
+
+</script>
 </th:block>
 </html>

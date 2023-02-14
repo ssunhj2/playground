@@ -7,38 +7,39 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
-<div class="container-fluid pt-4 px-4">
+<div class="layout-wrapper">
     <div class="container-fluid pt-4 px-4">
-        <div class="bg-secondary rounded-top p-4">
-            <h6 class="text-body mb-4">무서운이야기</h6>
-            <form action="/horror/story/new" id="STORY_FORM" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="horrStNo">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">제목</label>
-                    <div class="form-floating col-sm-10">
-                        <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요">
-                        <label for="title">title</label>
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-secondary rounded-top p-4">
+                <h6 class="text-body mb-4">무서운이야기</h6>
+                <form action="/horror/story/new" id="STORY_FORM" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="horrStNo">
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">제목</label>
+                        <div class="form-floating col-sm-10">
+                            <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요">
+                            <label for="title">title</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">내용</label>
-                    <div class="form-floating col-sm-10">
-                        <textarea class="form-control" id="content" name="content" placeholder="내용을 입력해주세요" style="height: 150px;"></textarea>
-                        <label for="content">content</label>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">내용</label>
+                        <div class="form-floating col-sm-10">
+                            <textarea class="form-control" id="content" name="content" placeholder="내용을 입력해주세요" style="height: 150px;"></textarea>
+                            <label for="content">content</label>
+                        </div>
                     </div>
-                </div>
-                <div class="mt-5 mb-5">
-                    <button type="button" onclick="addFile()" class="btn btn-outline-light m-2">파일추가</button>
-                    <div id="add-file" class="mb-3"></div>
-                </div>
-                <div class="mt-5 mb-5">
-                    <button type="button" onclick="saveStory()" class="btn btn-primary">저장</button>
-                </div>
-            </form>
+                    <div class="mt-5 mb-5">
+                        <button type="button" onclick="addFile()" class="btn btn-outline-light m-2">파일추가</button>
+                        <div id="add-file" class="mb-3"></div>
+                    </div>
+                    <div class="mt-5 mb-5">
+                        <button type="button" onclick="saveStory()" class="btn btn-primary">저장</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 <script type="application/javascript">
     let mode; // 입력모드/수정모드
     let fileNum = 0; // 첨부파일 번호
