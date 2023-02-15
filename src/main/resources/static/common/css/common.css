@@ -3,6 +3,11 @@
     height: 100%;
 }
 
+
+.full-height{
+    height: 100vh !important;
+}
+
 /* font color */
 .text-red {
     color: #EB1616 !important;

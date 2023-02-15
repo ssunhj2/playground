@@ -14,25 +14,16 @@ sneat 테마(기본테마)의 default 레이아웃 구성
 <th:block th:replace="theme/sneat/fragments/unAuthHeader :: fragment-sneat-unAuthHeader"></th:block>
 
 <body>
-<!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar">
-    <!-- Layout container -->
-    <div class="layout-container">
-        <div class="layout-page-no-menu">
-            <!-- Content wrapper -->
-            <div class="content-wrapper">
-                <!-- 본문-->
-                <th:block layout:fragment="content-sneat"></th:block>
-                <!-- 공통 하단-->
-                <th:block th:replace="theme/sneat/fragments/footer :: fragment-sneat-footer"></th:block>
-            </div>
-            <!-- Content wrapper END -->
-        </div>
-        <!-- Layout page END -->
+<!-- Content wrapper -->
+<div>
+    <div class="full-height">
+        <!-- 본문-->
+        <th:block layout:fragment="content-sneat"></th:block>
     </div>
-    <!-- Layout container END -->
+    <!-- 공통 하단-->
+    <th:block th:replace="theme/sneat/fragments/footer :: fragment-sneat-footer"></th:block>
 </div>
-<!-- Layout END -->
+
 <!-- 공통 스크립트-->
 <th:block th:replace="theme/sneat/fragments/script :: fragment-sneat-script"></th:block>
 </body>

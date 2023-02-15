@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 </head>
 <style>
 
 /** 이미지 css */
-.img-area {
+body {
     position: relative;
     height: 100vh;
     background-color: #778899;
@@ -29,14 +31,28 @@
      top:50%;
      left:50%;
      transform: translate(-50%, -50%);
-     font-size: 18px;
      z-index: 2;
      text-align: center;
-     color: white;
      background-color: rgba( 0, 0, 0, 0.5 );
      padding: 30px 0;
 }
 
+.txt-primary {
+    font-size: 18px;
+    color: white;
+}
+
+
+.txt-secondary {
+    font-size: 16px;
+    color: yellow;
+}
+
+
+.emp{
+    font-size: 18px !important;
+    font-weight: bold !important;
+}
 
 .img-bg {
     max-width: 100%;
@@ -105,8 +121,12 @@
 <div class="img-area">
     <div class="welcome-content">
         <div class="hello-box">
-            <p> 안녕하세요. 선혜정입니다.</p>
-            <p> 저의 plaground에 방문해주셔서 감사합니다.</p>
+            <p class="txt-primary"> 안녕하세요. 선혜정입니다.</p>
+            <p class="txt-primary"> 저의 plaground에 방문해주셔서 감사합니다.</p>
+            <p class="txt-secondary">
+                * 손님용 계정을 설정하였으니, <br />
+                바로 <span class="emp">로그인</span> 메뉴를 이용하시는 것이 가능합니다.
+            </p>
         </div>
         <div class="link">
             <button type="button" onclick="goPage('login')" class="btn rounded-pill btn-secondary">로그인</button>
@@ -148,7 +168,6 @@ function loadFadeImg(){
 
 function loadImage(){
     let bgImage = bgImages[Math.floor(Math.random() * bgImages.length)]; // 0 ~ length-1
-    console.log(bgImage);
 
     imgEle.attr('src', 'static/common/img/welcome/' +bgImage);
 }
