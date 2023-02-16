@@ -1,11 +1,6 @@
 /* sneat, darkpan 의 최상위 div에 height 지정 */
-.layout-wrapper {
-    height: 100%;
-}
-
-
 .full-height{
-    height: 100vh !important;
+    height: 75vh !important;
 }
 
 /* font color */
@@ -15,5 +10,9 @@
 
 .text-green {
     color: #198754 !important;
+}
+
+.text-gray-title {
+    color: #666 !important;
 }
 

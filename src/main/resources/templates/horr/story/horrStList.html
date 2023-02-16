@@ -15,7 +15,7 @@
     </div>
     <!-- Horror List Start -->
     <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
+        <div class="row g-4 full-height">
             <div class="col-12">
                 <div class="bg-secondary rounded h-100 p-4">
                     <th:block th:replace="theme/darkpan/fragments/searchFilter :: search-filter"></th:block>
@@ -94,8 +94,8 @@
             response.list.forEach((obj, idx) => {
                 html += `
                     <tr>
-                        <td width="50%"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
-                        <td width="25%">${obj.enterBy}</td>
+                        <td width="55%"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
+                        <td width="20%">${obj.enterBy}</td>
                         <td width="15%">${obj.enterDate}</td>
                         <td width="10%">${obj.viewCount}</td>
                     </tr>

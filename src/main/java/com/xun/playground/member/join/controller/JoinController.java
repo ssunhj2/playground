@@ -1,5 +1,7 @@
 package com.xun.playground.member.join.controller;
 
+import com.xun.playground.common.config.dto.ConfigDTO;
+import com.xun.playground.common.user.dto.UserDTO;
 import com.xun.playground.member.dto.MemberDTO;
 import com.xun.playground.member.form.MemberForm;
 import com.xun.playground.member.join.service.JoinService;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
@@ -26,8 +30,13 @@ public class JoinController {
     }
 
     @GetMapping("/join")
-    public String goJoin(){
-        return "member/join/join";
+    public String goJoin(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserDTO user = (UserDTO) session.getAttribute(ConfigDTO.SESSION_COOKIE_NAME);
+
+        if(user == null) return "member/join/join";
+
+        return "/home";
     }
 
     @PostMapping("/join")

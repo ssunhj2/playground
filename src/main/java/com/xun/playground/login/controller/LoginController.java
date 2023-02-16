@@ -39,8 +39,13 @@ public class LoginController {
      * @return
      */
     @GetMapping("/login")
-    public String goLogin(){
-        return "login/login";
+    public String goLogin(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserDTO user = (UserDTO) session.getAttribute(ConfigDTO.SESSION_COOKIE_NAME);
+
+        if(user == null) return "login/login";
+
+        return "/home";
     }
 
 
