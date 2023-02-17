@@ -122,8 +122,8 @@
         // 첫 페이지, 이전 페이지
         if (pagination.existPrevPage) {
             html += `
-                <li class="page-item"><button type="button" onclick="findAll(1);" class="btn btn-secondary"><i class="fa fa-angles-left"></i></button> </li>
-                <li class="page-item"><button type="button" onclick="findAll(${pagination.startPage - 1});" class="btn btn-secondary"><i class="fa fa-angle-left"></i></button> </li>
+                <li class="page-item"><button type="button" onclick="findAll(1);" class="btn btn-secondary">&lt;&lt;</button> </li>
+                <li class="page-item"><button type="button" onclick="findAll(${pagination.startPage - 1});" class="btn btn-secondary">&lt;</button> </li>
            `;
         }
 
@@ -136,8 +136,8 @@
         // 다음 페이지, 마지막 페이지
         if (pagination.existNextPage) {
             html += `
-                <li class="page-item"><button type="button" onclick="findAll(${pagination.endPage + 1});" class="btn btn-secondary"><i class="fa fa-angle-right"></i></button> </li>
-                <li class="page-item"><button type="button" onclick="findAll(${pagination.totalPageCnt});" class="btn btn-secondary"><i class="fa fa-angles-right"></i></button> </li>
+                <li class="page-item"><button type="button" onclick="findAll(${pagination.endPage + 1});" class="btn btn-secondary">&gt;</button> </li>
+                <li class="page-item"><button type="button" onclick="findAll(${pagination.totalPageCnt});" class="btn btn-secondary">&gt;&gt;</button> </li>
             `;
         }
 

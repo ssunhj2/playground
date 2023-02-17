@@ -69,4 +69,10 @@ public class HorrStListService {
 
         return result;
     }
+
+    public List<HorrStDTO> findTopList(){
+        List<HorrStDTO> list = horrStListMapper.findViewTopList();
+
+        return list;
+    }
 }

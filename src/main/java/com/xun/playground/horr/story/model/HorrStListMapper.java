@@ -17,4 +17,7 @@ public interface HorrStListMapper {
     // 글 전체조회
     List<HorrStDTO> findAll(final FilterDTO pagingDTO);
 
+    // 조회수 상위글 조회
+    List<HorrStDTO> findViewTopList();
+
 }

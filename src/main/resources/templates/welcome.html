@@ -116,11 +116,18 @@ body {
     left: 25%;
 }
 
+/** 기타 css */
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+
 </style>
 <body>
 <div class="img-area">
     <div class="welcome-content">
         <div class="hello-box">
+            <p class="txt-primary mb-2"><strong>[안내]</strong></p>
             <p class="txt-primary"> 안녕하세요. 선혜정입니다.</p>
             <p class="txt-primary"> 저의 plaground에 방문해주셔서 감사합니다.</p>
             <p class="txt-secondary">
@@ -154,7 +161,7 @@ window.onload = () =>{
     // 시간마다 변경되도록 하기
     const timer = setInterval(()=> {
         loadFadeImg();
-    }, 2000);
+    }, 1500);
 
 }
 
