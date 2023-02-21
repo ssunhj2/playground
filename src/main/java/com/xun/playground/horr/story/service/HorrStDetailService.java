@@ -2,6 +2,7 @@ package com.xun.playground.horr.story.service;
 
 import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.dto.HorrStDTO;
+import com.xun.playground.horr.story.model.HorrStDetailMapper;
 import com.xun.playground.horr.story.repository.HorrStDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,12 @@ import java.util.Optional;
 public class HorrStDetailService {
     private final HorrStDetailRepository horrStDetailRepository;
 
+    private final HorrStDetailMapper horrStDetailMapper;
+
     @Autowired
-    public HorrStDetailService(HorrStDetailRepository horrStDetailRepository){
+    public HorrStDetailService(HorrStDetailRepository horrStDetailRepository, HorrStDetailMapper horrStDetailMapper){
         this.horrStDetailRepository = horrStDetailRepository;
+        this.horrStDetailMapper = horrStDetailMapper;
     }
 
     /**
@@ -28,17 +32,12 @@ public class HorrStDetailService {
      * @return
      */
     public HorrStDTO findDetail(String horrStNo){
-        Optional<HorrStEntity> story = horrStDetailRepository.findById(horrStNo);
-        HorrStDTO storyDto;
+        //Optional<HorrStEntity> story = horrStDetailRepository.findById(horrStNo);
+        HorrStDTO story = horrStDetailMapper.findDetail(horrStNo);
 
-        if(story != null){
-            // return 값을 HorrStDTO 로 변경
-            storyDto = new HorrStDTO(story.get());
-        }else{
-            storyDto = new HorrStDTO();
-        }
+        if(story == null) story = new HorrStDTO();
 
-        return storyDto;
+        return story;
     }
 
     /**
