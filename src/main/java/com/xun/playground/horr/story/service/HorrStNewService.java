@@ -3,6 +3,7 @@ package com.xun.playground.horr.story.service;
 
 import com.xun.playground.horr.story.entity.HorrStEntity;
 import com.xun.playground.horr.story.dto.HorrStDTO;
+import com.xun.playground.horr.story.model.HorrStDetailMapper;
 import com.xun.playground.horr.story.repository.HorrStNewRepository;
 import org.apache.groovy.parser.antlr4.util.StringUtils;
 import org.slf4j.Logger;
@@ -22,10 +23,12 @@ import java.util.Optional;
 public class HorrStNewService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final HorrStNewRepository horrStNewRepository;
+    private final HorrStDetailMapper horrStDetailMapper;
 
     @Autowired
-    public HorrStNewService(HorrStNewRepository horrStNewRepository){
+    public HorrStNewService(HorrStNewRepository horrStNewRepository, HorrStDetailMapper horrStDetailMapper){
         this.horrStNewRepository = horrStNewRepository;
+        this.horrStDetailMapper = horrStDetailMapper;
     }
 
     /**

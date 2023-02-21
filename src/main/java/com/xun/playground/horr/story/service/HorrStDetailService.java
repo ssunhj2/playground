@@ -32,11 +32,11 @@ public class HorrStDetailService {
      * @return
      */
     public HorrStDTO findDetail(String horrStNo){
+        addViewCount(horrStNo); // 조회수를 증가시킨다.
         //Optional<HorrStEntity> story = horrStDetailRepository.findById(horrStNo);
         HorrStDTO story = horrStDetailMapper.findDetail(horrStNo);
 
         if(story == null) story = new HorrStDTO();
-
         return story;
     }
 
@@ -44,8 +44,8 @@ public class HorrStDetailService {
      * story를 삭제한다.(삭제 flag update)
      * @param horrStNo
      */
-   public void deleteStory(String horrStNo){
-       horrStDetailRepository.deleteStory(horrStNo);
+   public void deleteStory(String horrStNo, String memberNo){
+       horrStDetailRepository.deleteStory(horrStNo, memberNo);
    }
 
     /**

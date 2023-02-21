@@ -50,21 +50,22 @@
     <!-- dom 트리 준비이후 실행-->
     function goSearch(){
         mode = checkMode(); // 입력모드/수정모드 check
+
+        if(mode == 'MODIFY'){
+            // 수정인 경우 값 설정
+            $('input[name="horrStNo"]').val('[[${story.horrStNo}]]');
+            $('input[name="title"]').val('[[${story.title}]]');
+            $('textarea[name="content"]').val('[[${story.content}]]');
+        }
         console.log('mode: ' + mode);
     };
 
     <!-- 글쓰기인지 수정인지 검사. 직관적으로 알기쉽게 true/false 보다 MODIFY/NEW로 반환값을 정했음.-->
     function checkMode(){
         const story = '[[${story}]]';
-        console.log(story);
-        if(typeof story != 'undefined' && story != ''){
-            // 수정인 경우 값 설정
-            $('input[name="horrStNo"]').val(story.horrStNo);
-            $('input[name="title"]').val(story.title);
-            $('textarea[name="content"]').val(story.content);
-            return 'MODIFY';
+        // 수정인 경우
+        if(typeof story != 'undefined' && story != '') return 'MODIFY';
 
-        }
         return 'NEW';
 
     }

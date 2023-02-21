@@ -4,20 +4,22 @@
 <mapper namespace="com.xun.playground.horr.story.model.HorrStDetailMapper">
     <!-- SELECT 결과 -->
     <resultMap id="HorrStDto" type="com.xun.playground.horr.story.dto.HorrStDTO">
-        <id column="horrStNo"        property="HORR_ST_NO" />
+        <result property="horrStNo"  column="HORR_ST_NO" />
         <result property="viewCount" column="VIEW_COUNT" />
         <result property="title"     column="TITLE" />
         <result property="content"   column="CONTENT" />
-        <result property="enterBy"   column="ENTER_BY" />
+        <result property="enterBy"   column="ENTER_BY" /> <!-- 화면표기방식 -->
         <result property="enterDate" column="ENTER_DATE" />
     </resultMap>
 
     <!-- 상세페이지 조회 -->
     <select id="findDetail" parameterType="string" resultMap="HorrStDto">
         SELECT
+               s.HORR_ST_NO,
                s.VIEW_COUNT,
                s.TITLE,
                s.CONTENT,
+               s.ENTER_BY as memberNo,
                (SELECT m.name
                 FROM   MEMBER m
                 WHERE  m.MEMBER_NO = s.ENTER_BY) ENTER_BY,
@@ -25,4 +27,5 @@
         FROM   HORROR_STORY s
         WHERE  s.HORR_ST_NO = #{horrStNo}
     </select>
+
 </mapper>

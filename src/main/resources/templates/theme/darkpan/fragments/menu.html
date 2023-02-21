@@ -20,7 +20,6 @@
 <!-- 메뉴 active 설정 -->
 function setMenu(){
     let pageId = $('#PAGE_ID').text();
-    console.log(pageId);
 
     $('.sidebar .navbar-nav a.active').removeClass('active');
     $('.sidebar .navbar-nav a#'+ pageId).addClass('active');

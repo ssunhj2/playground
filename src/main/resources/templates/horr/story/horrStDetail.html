@@ -29,7 +29,7 @@
             </div>
             <div class="d-flex align-items-center justify-content-between mt-4">
                 <a href="javascript:goHorrorStory();"><i class="fa fa-list me-2"></i></a>
-                <div>
+                <div th:if="${isWriter} == 'true'">
                     <button type="button" th:onclick="goMmodify([[${story.horrStNo}]])" class="btn btn-outline-warning m-2">수정</button>
                     <button type="button" th:onclick="deleteStory([[${story.horrStNo}]])" class="btn btn-outline-light m-2">삭제</button>
                 </div>
@@ -47,10 +47,6 @@
 </div>
 <script type="application/javascript">
     let horrStNo = '[[${story.horrStNo}]]';
-
-    function goSearch(){
-        addViewCount();
-    }
 
     <!-- 수정 -->
     function goMmodify(horrStNo){
@@ -73,15 +69,6 @@
         console.log(fileNo)
 
         location.href='/download?fileNo=' + fileNo;
-    }
-
-
-    <!-- 조회수를 업데이트 한다.-->
-    function addViewCount(){
-        var url = '/horrst/add-viewcount';
-        var param = {'horrStNo':horrStNo};
-
-        ajaxJson(url, param);
     }
 
 </script>

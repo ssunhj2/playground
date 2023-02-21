@@ -12,9 +12,12 @@ import org.springframework.data.repository.query.Param;
  */
 public interface HorrStDetailRepository extends JpaRepository<HorrStEntity, String> {
 
+    /* 삭제 수행
+     * 조건에 enterBy 조건 추가하여 작성자만 삭제 가능하도록 처리
+     * */
     @Modifying
-    @Query("UPDATE HorrStEntity s SET s.isDelete = 'Y' WHERE s.horrStNo = :horrStNo")
-    int deleteStory(@Param("horrStNo") String horrStNo);
+    @Query("UPDATE HorrStEntity s SET s.isDelete = 'Y' WHERE s.horrStNo = :horrStNo AND s.enterBy = :enterBy")
+    int deleteStory(@Param("horrStNo") String horrStNo, @Param("enterBy") String enterBy);
 
     @Modifying
     @Query("UPDATE HorrStEntity s SET s.viewCount = s.viewCount+1 WHERE s.horrStNo = :horrStNo")

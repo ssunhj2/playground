@@ -3,6 +3,7 @@ package com.xun.playground.login.controller;
 import com.xun.playground.common.config.dto.ConfigDTO;
 import com.xun.playground.common.session.SessionManager;
 import com.xun.playground.common.user.dto.UserDTO;
+import com.xun.playground.common.util.CommonUtils;
 import com.xun.playground.login.dto.LoginDTO;
 import com.xun.playground.login.form.LoginForm;
 import com.xun.playground.login.service.LoginService;
@@ -40,8 +41,7 @@ public class LoginController {
      */
     @GetMapping("/login")
     public String goLogin(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        UserDTO user = (UserDTO) session.getAttribute(ConfigDTO.SESSION_COOKIE_NAME);
+        UserDTO user = CommonUtils.getUser(request);
 
         if(user == null) return "login/login";
 

@@ -2,6 +2,7 @@ package com.xun.playground.member.join.controller;
 
 import com.xun.playground.common.config.dto.ConfigDTO;
 import com.xun.playground.common.user.dto.UserDTO;
+import com.xun.playground.common.util.CommonUtils;
 import com.xun.playground.member.dto.MemberDTO;
 import com.xun.playground.member.form.MemberForm;
 import com.xun.playground.member.join.service.JoinService;
@@ -31,8 +32,7 @@ public class JoinController {
 
     @GetMapping("/join")
     public String goJoin(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        UserDTO user = (UserDTO) session.getAttribute(ConfigDTO.SESSION_COOKIE_NAME);
+        UserDTO user = CommonUtils.getUser(request);
 
         if(user == null) return "member/join/join";
 

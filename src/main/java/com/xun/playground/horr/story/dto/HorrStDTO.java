@@ -26,6 +26,8 @@ public class HorrStDTO extends BaseDTO {
     private String content;
     // 삭제여부
     private String isDelete;
+    // writer memberNo (writer 비교시에만 사용)
+    private String memberNo;
 
 
     public HorrStDTO(String viewCount, String title, String content, String enterBy){

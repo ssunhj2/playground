@@ -2,6 +2,7 @@ package com.xun.playground.home.controller;
 
 import com.xun.playground.common.config.dto.ConfigDTO;
 import com.xun.playground.common.user.dto.UserDTO;
+import com.xun.playground.common.util.CommonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,7 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
     @GetMapping("/home")
     public String welcome(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        UserDTO user = (UserDTO) session.getAttribute(ConfigDTO.SESSION_COOKIE_NAME);
+        UserDTO user = CommonUtils.getUser(request);
 
         if(user == null) return "/login";
 
