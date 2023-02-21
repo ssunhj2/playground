@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <!-- darkpan 왼쪽메뉴 -->
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-    <th:block th:fragment="fragment-darkpan-menu">
-        <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-secondary navbar-dark">
-                <a href="javascript:goHorrorHome();" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-ghost me-2"></i>Playground</h3>
-                </a>
-                <div class="navbar-nav w-100">
-                    <a href="javascript:goHorrorHome();" class="nav-item nav-link active"><i class="fa fa-home me-2"></i>Horror Home</a>
-                    <a href="javascript:goHorrorStory();" class="nav-item nav-link"><i class="fa fa-quote-left me-2"></i>무서운이야기</a>
-                    <a href="javascript:goPlaygroundHome();" class="nav-item nav-link"><i class="fa fa-reply me-2"></i>Playground 홈</a>
-                </div>
-            </nav>
-        </div>
-        <!-- Sidebar End -->
-    </th:block>
+<th:block th:fragment="fragment-darkpan-menu">
+    <!-- Sidebar Start -->
+    <div class="sidebar pe-4 pb-3">
+        <nav class="navbar bg-secondary navbar-dark">
+            <a href="javascript:goHorrorHome();" class="navbar-brand mx-4 mb-3">
+                <h3 class="text-primary"><i class="fa fa-ghost me-2"></i>Playground</h3>
+            </a>
+            <div class="navbar-nav w-100">
+                <a href="javascript:goHorrorHome();" id="HORR_HOME" class="nav-item nav-link active"><i class="fa fa-home me-2"></i>Horror Home</a>
+                <a href="javascript:goHorrorStory();" id="HORR_ST" class="nav-item nav-link"><i class="fa fa-quote-left me-2"></i>무서운이야기</a>
+                <a href="javascript:goPlaygroundHome();" class="nav-item nav-link"><i class="fa fa-reply me-2"></i>Playground 홈</a>
+            </div>
+        </nav>
+    </div>
+    <!-- Sidebar End -->
+<script type="application/javascript">
+<!-- 메뉴 active 설정 -->
+function setMenu(){
+    let pageId = $('#PAGE_ID').text();
+    console.log(pageId);
+
+    $('.sidebar .navbar-nav a.active').removeClass('active');
+    $('.sidebar .navbar-nav a#'+ pageId).addClass('active');
+}
+
+
+</script>
+</th:block>
 </html>

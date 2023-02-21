@@ -7,6 +7,7 @@
       layout:decorate="~{theme/darkpan/layout/default}">
 <th:block layout:fragment="content-darkpan">
 <div>
+    <div id="PAGE_ID" class="hide">HORR_ST</div>
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary p-4">
             <h6 class="text-body">무서운이야기</h6>
@@ -74,9 +75,6 @@
         location.href='/download?fileNo=' + fileNo;
     }
 
-    function aa(){
-        alert('a');
-    }
 
     <!-- 조회수를 업데이트 한다.-->
     function addViewCount(){

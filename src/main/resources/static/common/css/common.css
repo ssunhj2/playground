@@ -3,6 +3,10 @@
     height: 75vh !important;
 }
 
+.hide {
+    display: none;
+}
+
 /* font color */
 .text-red {
     color: #EB1616 !important;

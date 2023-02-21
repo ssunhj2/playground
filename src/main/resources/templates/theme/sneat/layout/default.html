@@ -43,10 +43,15 @@ sneat 테마(기본테마)의 default 레이아웃 구성
 <script type="application/javascript">
 <!-- dom 트리 준비이후 실행-->
 $(function() {
+    <!-- 검색 -->
     if(typeof(goSearch) == 'function'){
         goSearch();
     }
 
+    <!-- 메뉴 active 설정  -->
+    if(typeof(setMenu) == 'function'){
+        setMenu();
+    }
 });
 
 </script>

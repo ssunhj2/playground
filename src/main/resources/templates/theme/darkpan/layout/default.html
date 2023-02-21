@@ -32,8 +32,6 @@ darkpan 테마(기본테마)의 default 레이아웃 구성
             <th:block th:replace="theme/darkpan/fragments/footer :: fragment-darkpan-footer"></th:block>
         </div>
         <!-- Content END -->
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
     <!-- container-fluid END -->
 
@@ -43,8 +41,14 @@ darkpan 테마(기본테마)의 default 레이아웃 구성
 <script type="application/javascript">
 <!-- dom 트리 준비이후 실행-->
 $(function() {
+    <!-- 검색 -->
     if(typeof(goSearch) == 'function'){
         goSearch();
+    }
+
+    <!-- 왼쪽메뉴 설정 -->
+    if(typeof(setMenu) == 'function'){
+        setMenu();
     }
 
 });
