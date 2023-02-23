@@ -73,9 +73,9 @@
             (SELECT m.NAME
              FROM   MEMBER m
              WHERE  m.MEMBER_NO = s.ENTER_BY) ENTER_BY,
-             s.ENTER_DATE,
+             DATE_FORMAT(s.ENTER_DATE, '%Y-%m-%d') ENTER_DATE,
              s.UPDATE_BY,
-             s.UPDATE_DATE
+             DATE_FORMAT(s.UPDATE_DATE, '%Y-%m-%d') UPDATE_DATE
         FROM HORROR_STORY s
         <include refid="conditions" />
         ORDER BY ENTER_DATE DESC
@@ -92,9 +92,9 @@
         (SELECT m.NAME
         FROM   MEMBER m
         WHERE  m.MEMBER_NO = s.ENTER_BY) ENTER_BY,
-        s.ENTER_DATE,
+        DATE_FORMAT(s.ENTER_DATE, '%Y-%m-%d') ENTER_DATE,
         s.UPDATE_BY,
-        s.UPDATE_DATE
+        DATE_FORMAT(s.UPDATE_DATE, '%Y-%m-%d') UPDATE_DATE
         FROM HORROR_STORY s
         ORDER BY s.VIEW_COUNT DESC
         LIMIT 10

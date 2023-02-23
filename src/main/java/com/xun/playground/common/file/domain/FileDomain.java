@@ -6,7 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 파일첨부 Entity
@@ -36,7 +36,7 @@ public class FileDomain {
     @CreationTimestamp
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
     @Column(name="ENTER_DATE")
-    private LocalDate enterDate;
+    private LocalDateTime enterDate;
     // 수정자 id
     @Column(name="UPDATE_BY")
     private String updateBy;
@@ -44,7 +44,7 @@ public class FileDomain {
     @UpdateTimestamp
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
     @Column(name="UPDATE_DATE")
-    private LocalDate updateDate;
+    private LocalDateTime updateDate;
 
     public FileDomain(){}
 

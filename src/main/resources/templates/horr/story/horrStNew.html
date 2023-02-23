@@ -17,7 +17,7 @@
     <div class="container-fluid pt-4 px-4">
             <div class="bg-secondary rounded-top p-5 full-height">
                 <form action="/horror/story/new" id="STORY_FORM" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="horrStNo">
+                    <input type="hidden" name="horrStNo" th:value="${horrStNo}">
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">제목</label>
                         <div class="form-floating col-sm-10">
@@ -44,55 +44,63 @@
     </div>
 </div>
 <script type="application/javascript">
-    let mode; // 입력모드/수정모드
-    let fileNum = 0; // 첨부파일 번호
+let fileNum = 0; // 첨부파일 번호
 
-    <!-- dom 트리 준비이후 실행-->
-    function goSearch(){
-        mode = checkMode(); // 입력모드/수정모드 check
+<!-- dom 트리 준비이후 실행-->
+function goSearch(){
+    findStory();
+};
 
-        if(mode == 'MODIFY'){
-            // 수정인 경우 값 설정
-            $('input[name="horrStNo"]').val('[[${story.horrStNo}]]');
-            $('input[name="title"]').val('[[${story.title}]]');
-            $('textarea[name="content"]').val('[[${story.content}]]');
-        }
-        console.log('mode: ' + mode);
-    };
+function findStory(){
+    let horrStNo = $('input[name="horrStNo"]').val();
+    console.log('horrStNo: ' + horrStNo);
 
-    <!-- 글쓰기인지 수정인지 검사. 직관적으로 알기쉽게 true/false 보다 MODIFY/NEW로 반환값을 정했음.-->
-    function checkMode(){
-        const story = '[[${story}]]';
-        // 수정인 경우
-        if(typeof story != 'undefined' && story != '') return 'MODIFY';
+     if(horrStNo == "") return;
 
-        return 'NEW';
-
+    let url = '/horror/story/story';
+    let param = {
+        'horrStNo' : horrStNo
     }
 
-    <!-- 값을 체크하고 저장한다. -->
-    function saveStory(){
-        if($('input[name="title"]').val() == ""){
-            alert('제목을 입력해주세요');
-            return;
-        }
-        if($('textarea[name="content"]').val() == ""){
-            alert('내용을 입력해주세요');
-            return;
-        }
+    ajaxJson(url, param, afterFindStory);
 
-        $('#STORY_FORM').submit();
+}
+function afterFindStory(_data){
+    if(typeof _data == 'undefined' || _data == 'fail') return;
+    if(typeof _data.result == 'undefined' || _data.result == '') return;
+
+    // 수정인 경우 값 설정
+    $('input[name="horrStNo"]').val(_data.result.horrStNo);
+    $('input[name="title"]').val(_data.result.title);
+    $('textarea[name="content"]').val(_data.result.content);
+}
+
+
+
+
+<!-- 값을 체크하고 저장한다. -->
+function saveStory(){
+    if($('input[name="title"]').val() == ""){
+        alert('제목을 입력해주세요');
+        return;
+    }
+    if($('textarea[name="content"]').val() == ""){
+        alert('내용을 입력해주세요');
+        return;
     }
 
-    // 필수입력을 체크한다.
-    function checkEmpty(_objname, _msg){
+    $('#STORY_FORM').submit();
+}
 
-    }
+// 필수입력을 체크한다.
+function checkEmpty(_objname, _msg){
 
-    <!-- 첨부를 추가합니다. -->
-    function addFile(){
-        $('#add-file').append('<input name="file" type="file" class="mt-1 form-control form-control-sm bg-dark">');
-    }
+}
+
+<!-- 첨부를 추가합니다. -->
+function addFile(){
+    $('#add-file').append('<input name="file" type="file" class="mt-1 form-control form-control-sm bg-dark">');
+}
 
 
 </script>

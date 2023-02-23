@@ -23,7 +23,7 @@
                (SELECT m.name
                 FROM   MEMBER m
                 WHERE  m.MEMBER_NO = s.ENTER_BY) ENTER_BY,
-               s.ENTER_DATE
+               DATE_FORMAT(s.ENTER_DATE, '%Y-%m-%d') ENTER_DATE
         FROM   HORROR_STORY s
         WHERE  s.HORR_ST_NO = #{horrStNo}
     </select>

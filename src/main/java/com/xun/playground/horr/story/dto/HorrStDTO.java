@@ -53,9 +53,9 @@ public class HorrStDTO extends BaseDTO {
         this.content = entity.getContent();
         this.isDelete = entity.getIsDelete();
         this.setEnterBy(entity.getEnterBy());
-        this.setEnterDate(entity.getEnterDate());
+        this.setEnterDate(entity.getEnterDate().toString());
         this.setUpdateBy(entity.getUpdateBy());
-        this.setUpdateDate(entity.getUpdateDate());
+        this.setUpdateDate(entity.getUpdateDate().toString());
     }
 
     // HorrStDTO 객체를 entity 객체로 변환하여 반환한다.

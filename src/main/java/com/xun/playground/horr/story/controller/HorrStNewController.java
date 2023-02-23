@@ -15,9 +15,11 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -47,13 +49,24 @@ public class HorrStNewController {
      */
     @GetMapping("/horror/story/new")
     public String goHorrorStory(Model model, @RequestParam(required = false, value = "horrStNo") String horrStNo){
+
+        model.addAttribute("horrStNo", horrStNo);
+
+        return "horr/story/horrStNew";
+    }
+
+    @PostMapping("/horror/story/story")
+    @ResponseBody
+    public HashMap<String, Object> findStory(@RequestParam(required = false, value = "horrStNo") String horrStNo){
+        HashMap<String, Object> resultMap = new HashMap<>();
+
         // 수정인 경우, 값 조회
         if(!StringUtils.isEmpty(horrStNo)){
             HorrStDTO story = horrorStoryDetailService.findDetail(horrStNo);
-            model.addAttribute("story", story);
+            resultMap.put("result", story);
         }
 
-        return "horr/story/horrStNew";
+        return resultMap;
     }
 
     /**

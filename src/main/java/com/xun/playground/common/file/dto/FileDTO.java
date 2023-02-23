@@ -5,7 +5,7 @@ import com.xun.playground.common.file.domain.FileDomain;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 데이터 전송을 위한 FILE DTO
@@ -29,7 +29,7 @@ public class FileDTO extends BaseDTO {
     public FileDTO(){}
 
     public FileDTO(String fileNo, String fileName, String filePath, String attachType, String attachNo,
-                   String contentType, String enterBy, LocalDate enterDate){
+                   String contentType, String enterBy, LocalDateTime enterDate){
         this.fileNo = fileNo;
         this.fileName = fileName;
         this.filePath = filePath;
@@ -37,7 +37,7 @@ public class FileDTO extends BaseDTO {
         this.attachNo = attachNo;
         this.contentType = contentType;
         this.setEnterBy(enterBy);
-        this.setEnterDate(enterDate);
+        this.setEnterDate(enterDate.toString());
     }
 
     public FileDTO fromEntity(FileDomain entity){
