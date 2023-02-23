@@ -18,23 +18,26 @@
             <div class="bg-secondary rounded-top p-5 full-height">
                 <form action="/horror/story/new" id="STORY_FORM" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="horrStNo" th:value="${horrStNo}">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">제목</label>
-                        <div class="form-floating col-sm-10">
-                            <input type="text" id="title" name="title" class="form-control">
-                            <label for="title">title</label>
+                    <h5>자신만의 재미있는 이야기를 남겨주세요.</h5>
+                    <div class="mt-5 pt-3" style="min-height:600px;">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">제목</label>
+                            <div class="form-floating col-sm-10">
+                                <input type="text" id="title" name="title" class="form-control">
+                                <label for="title">title</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">내용</label>
-                        <div class="form-floating col-sm-10">
-                            <textarea class="form-control" id="content" name="content" style="min-height: 300px;"></textarea>
-                            <label for="content">content</label>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">내용</label>
+                            <div class="form-floating col-sm-10">
+                                <textarea class="form-control" id="content" name="content" style="min-height: 300px;"></textarea>
+                                <label for="content">content</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mt-5 mb-5">
-                        <button type="button" onclick="addFile()" class="btn btn-outline-light m-2">파일추가</button>
-                        <div id="add-file" class="mb-3"></div>
+                        <div class="mt-5 mb-5">
+                            <button type="button" onclick="addFile()" class="btn btn-outline-light m-2">파일추가</button>
+                            <div id="add-file" class="mb-3"></div>
+                        </div>
                     </div>
                     <div class="mt-5 mb-5 pb-4 pt-4" style="border-top:1px solid #333;">
                         <button type="button" onclick="saveStory()" class="btn btn-primary">저장</button>

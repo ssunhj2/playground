@@ -67,16 +67,22 @@
 
   <!-- Horror List Start -->
   <div class="container-fluid pt-4 px-4">
-    <div class="bg-secondary rounded p-4">
-      <div class="d-flex align-items-center justify-content-between mb-4">
+    <div class="bg-secondary rounded p-4 full-height">
+      <div class="d-flex align-items-center justify-content-between mb-4 mt-4">
         <h5 class="mb-0">무서운이야기</h5>
         <a href="javascript:goHorrorStory()">Show All</a>
       </div>
       <div class="mt-4 mb-5">
         <p class="text-light-gray">※ 인기 상위10개 게시글입니다</p>
       </div>
-      <div class="table-responsive mb-4">
-        <table class="table">
+      <div class="table-responsive mb-4 pt-2">
+        <table class="table table-layout-fixed">
+          <colgroup>
+            <col width="10%" />
+            <col width="55%" />
+            <col width="20%" />
+            <col width="15%" />
+          </colgroup>
           <thead>
           <tr>
             <th scope="col">조회수</th>
@@ -88,8 +94,8 @@
           <tbody>
           <tr th:each="story : ${storyList}">
             <td th:text="${story.viewCount}"></td>
-            <td th:text="${story.title}"></td>
-            <td th:text="${story.enterBy}"></td>
+            <td th:text="${story.title}" class="text-ellipsis"></td>
+            <td th:text="${story.enterBy}" class="text-ellipsis"></td>
             <td th:text="${story.enterDate}"></td>
           </tr>
           </tbody>

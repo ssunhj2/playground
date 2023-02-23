@@ -20,8 +20,14 @@
             <div class="col-12">
                 <div class="bg-secondary rounded h-100 p-4">
                     <th:block th:replace="theme/darkpan/fragments/searchFilter :: search-filter"></th:block>
-                    <div class="table-responsive">
-                        <table class="table" id="HORR_ST">
+                    <div class="table-responsive pt-5">
+                        <table class="table table-layout-fixed" id="HORR_ST">
+                            <colgroup>
+                                <col width="55%" />
+                                <col width="20%" />
+                                <col width="15%" />
+                                <col width="10%" />
+                            </colgroup>
                             <thead>
                             <tr>
                                 <th scope="col">제목</th>
@@ -33,7 +39,7 @@
                             <tbody id="list"></tbody>
                         </table>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="d-flex align-items-center justify-content-between mt-5 mb-5">
                         <i class="fa fa-list me-2"></i>
                         <a href="javascript:goStoryNew();">
                             <button class="btn btn-outline-primary m-2" type="button">글쓰기</button>
@@ -95,10 +101,10 @@
             response.list.forEach((obj, idx) => {
                 html += `
                     <tr>
-                        <td width="55%"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
-                        <td width="20%">${obj.enterBy}</td>
-                        <td width="15%">${obj.enterDate}</td>
-                        <td width="10%">${obj.viewCount}</td>
+                        <td class="text-ellipsis"><a href="#" onclick="goStoryDetail(${obj.horrStNo})">${obj.title}</a></td>
+                        <td class="text-ellipsis">${obj.enterBy}</td>
+                        <td>${obj.enterDate}</td>
+                        <td>${obj.viewCount}</td>
                     </tr>
                     `;
 

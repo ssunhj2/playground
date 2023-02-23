@@ -78,7 +78,7 @@
              DATE_FORMAT(s.UPDATE_DATE, '%Y-%m-%d') UPDATE_DATE
         FROM HORROR_STORY s
         <include refid="conditions" />
-        ORDER BY ENTER_DATE DESC
+        ORDER BY s.ENTER_DATE DESC
         LIMIT #{pagination.limitStart}, #{pageCount}
     </select>
 

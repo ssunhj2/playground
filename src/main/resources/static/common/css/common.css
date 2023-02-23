@@ -1,11 +1,27 @@
 /* sneat, darkpan 의 최상위 div에 height 지정 */
 .full-height{
-    height: 75vh !important;
+    min-height: 900px !important;
 }
 
 .hide {
     display: none;
 }
+
+.table-layout-fixed{
+    table-layout: fixed
+}
+
+.text-ellipsis{
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+}
+
+.line-break{
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
 
 /* font color */
 .text-red {
