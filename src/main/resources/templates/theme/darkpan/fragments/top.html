@@ -1,28 +1,62 @@
 <!DOCTYPE html>
 <!-- darkpan. 상단의 고정된 top -->
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-    <th:block th:fragment="fragment-darkpan-top">
-        <!-- Navbar Start -->
-        <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-            <a href="javascript:goHorrorHome();" class="navbar-brand d-flex d-lg-none me-4">
-                <h2 class="text-primary mb-0"><i class="fa fa-ghost"></i></h2>
+<th:block th:fragment="fragment-darkpan-top">
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+    <a href="javascript:goHorrorHome();" class="navbar-brand d-flex d-lg-none me-4">
+        <h2 class="text-primary mb-0"><i class="fa fa-ghost"></i></h2>
+    </a>
+    <a href="#" class="sidebar-toggler flex-shrink-0">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="navbar-nav align-items-center ms-auto">
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <img class="rounded-circle me-lg-2" src="/static/theme/darkpan/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <span id="user-name-info" class="d-none d-lg-inline-flex">Kim gana</span>
             </a>
-            <a href="#" class="sidebar-toggler flex-shrink-0">
-                <i class="fa fa-bars"></i>
-            </a>
-            <div class="navbar-nav align-items-center ms-auto">
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <img class="rounded-circle me-lg-2" src="/static/theme/darkpan/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <span class="d-none d-lg-inline-flex">John Doe</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                        <a href="javascript:goAccount();" class="dropdown-item">My Profile</a>
-                        <a href="javascript:goLogout();" class="dropdown-item">Log Out</a>
-                    </div>
-                </div>
+            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                <a href="javascript:goAccount();" class="dropdown-item">My Profile</a>
+                <a href="javascript:goLogout();" class="dropdown-item">Log Out</a>
             </div>
-        </nav>
-        <!-- Navbar End -->
-    </th:block>
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+<script type="application/javascript">
+const brsSessionKey = 'BROWSER_SESSION_INFO';
+
+$(function(){
+    // 브라우저 세션에 정보 가져오기
+    var userName = window.sessionStorage.getItem(brsSessionKey);
+
+    if(userName == null){
+        setUserInfo();
+    }else{
+        $('#user-name-info').text(userName);
+    }
+});
+
+
+// 사용자 정보 표시
+function setUserInfo(){
+    var url = '/top/name';
+
+    ajaxJson(url, '', afterSetUserInfo);
+}
+function afterSetUserInfo(_data){
+    if(typeof _data == 'undefined' || _data == 'fail') return;
+
+    let userName = _data.userName;
+
+    // 브라우저 세션에 정보 저장
+    window.sessionStorage.clear();
+    window.sessionStorage.setItem(brsSessionKey, userName);
+
+    $('#user-name-info').text(userName);
+}
+
+</script>
+</th:block>
 </html>
