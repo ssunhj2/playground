@@ -28,7 +28,9 @@
                 <p th:text="${story.content}">내용</p>
             </div>
             <div class="d-flex align-items-center justify-content-between mt-4">
-                <a href="javascript:goHorrorStory();"><i class="fa fa-list me-2"></i></a>
+                <a href="javascript:goHorrorStory();">
+                    <i class="fa fa-list me-2"></i>목록으로
+                </a>
                 <div th:if="${isWriter} == 'true'">
                     <button type="button" th:onclick="goMmodify([[${story.horrStNo}]])" class="btn btn-outline-warning m-2">수정</button>
                     <button type="button" th:onclick="deleteStory([[${story.horrStNo}]])" class="btn btn-outline-light m-2">삭제</button>
@@ -62,13 +64,6 @@
         var after = goHorrorStory();
 
         ajaxJson(url, param, after);
-    }
-
-    <!-- 파일 다운로드-->
-    function download(fileNo){
-        console.log(fileNo)
-
-        location.href='/download?fileNo=' + fileNo;
     }
 
 </script>

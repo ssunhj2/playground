@@ -126,7 +126,31 @@ public class FileLocalService implements FileService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
+    }
 
+
+    // 메뉴얼 다운로드
+    public ResponseEntity<Resource> manualDownload(String uploadFileName){
+
+        try{
+            String filePath = "manual\\" + uploadFileName;
+
+            UrlResource resource = new UrlResource("file:" +localPath + "\\" + filePath);
+
+            // 인코딩
+            String encodedFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
+            String contentDisposition = "attachment; filename=\"" + encodedFileName + "\"";
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+                    .header(HttpHeaders.CONTENT_LENGTH, String.valueOf(resource.getFile().length()))
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM.toString())
+                    .body(resource);
+
+        } catch(IOException e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 

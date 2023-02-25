@@ -57,6 +57,13 @@ function goHorrorStory(){
     location.href='/horror/story';
 }
 
+// 파일 다운로드
+function download(fileNo){
+    console.log(fileNo)
+
+    location.href='/download?fileNo=' + fileNo;
+}
+
 
 /*****************************************
  *************** ajax *******************

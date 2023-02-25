@@ -28,4 +28,10 @@ public class FileController {
     public ResponseEntity<Resource> download(@RequestParam("fileNo") String fileNo) throws MalformedURLException {
         return fileService.download(fileNo);
     }
+
+    @GetMapping("/manualDownload")
+    public ResponseEntity<Resource> manualDownload(@RequestParam("fileName") String fileName) throws MalformedURLException {
+        return fileService.manualDownload(fileName);
+    }
+
 }

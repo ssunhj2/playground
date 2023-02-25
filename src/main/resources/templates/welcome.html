@@ -48,6 +48,9 @@ body {
     color: yellow;
 }
 
+.txt-red {
+    color:#EB1616 !important;
+}
 
 .emp{
     font-size: 18px !important;
@@ -68,7 +71,7 @@ body {
 
 .hello-box {
     padding: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
 }
 
 
@@ -117,8 +120,8 @@ body {
 }
 
 /** 기타 css */
-.mb-2 {
-    margin-bottom: 2rem;
+.mt-2 {
+    margin-top: 3rem;
 }
 
 
@@ -127,13 +130,21 @@ body {
 <div class="img-area">
     <div class="welcome-content">
         <div class="hello-box">
-            <p class="txt-primary mb-2"><strong>[안내]</strong></p>
             <p class="txt-primary"> 안녕하세요. 선혜정입니다.</p>
             <p class="txt-primary"> 저의 plaground에 방문해주셔서 감사합니다.</p>
-            <p class="txt-secondary">
-                * 손님용 계정을 설정하였으니, <br />
-                바로 <span class="emp">로그인</span> 메뉴를 이용하시는 것이 가능합니다.
-            </p>
+            <p class="txt-primary mt-2"><strong>[안내]</strong></p>
+            <div style="text-align:left;">
+                <p class="txt-secondary">
+                    1) 손님용 계정을 설정하였으니, <br />
+                    바로 <span class="emp">로그인</span> 메뉴를 이용하시는 것이 가능합니다.
+                </p>
+                <p style="color:#B2B8D9;">
+                    2) Playground WBS는 <br />
+                    아래 링크에서 다운받으실 수 있습니다.<br />
+                    <i class="fa fa-paperclip txt-red"></i>
+                    <a href="javascript:manualDownload()" class="txt-red"><strong>Playground WBS</strong></a>
+                </p>
+            </div>
         </div>
         <div class="link">
             <button type="button" onclick="goPage('login')" class="btn rounded-pill btn-secondary">로그인</button>
@@ -153,7 +164,8 @@ var bgImages = ["welcome-1.jpg", "welcome-2.jpg", "welcome-3.jpg",
                 "welcome-4.jpg", "welcome-5.jpg", "welcome-6.jpg",
                 "welcome-7.jpg", "welcome-8.jpg", "welcome-9.jpg",
                 "welcome-10.jpg", "welcome-11.jpg", "welcome-12.jpg",
-                "welcome-13.jpg", "welcome-14.jpg", "welcome-15.jpg"
+                "welcome-13.jpg", "welcome-14.jpg", "welcome-15.jpg",
+                "welcome-16.jpg", "welcome-17.jpg", "welcome-18.jpg"
                ];
 
 window.onload = () =>{
@@ -182,6 +194,12 @@ function loadImage(){
 // 호출한 페이지로 이동한다.
 function goPage(_actionName){
     location.href = '/' + _actionName;
+}
+
+
+// 파일 다운로드
+function manualDownload(){
+    location.href='/manualDownload?fileName=playground_wbs.xlsx';
 }
 
 </script>
