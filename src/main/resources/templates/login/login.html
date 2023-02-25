@@ -181,6 +181,7 @@ function afterGoSignIn(_data){
     }
 
     if(_data.result == 'success'){
+        window.sessionStorage.clear(); // 브라우저 세션 초기화
         goPlaygroundHome();
         return;
     }
