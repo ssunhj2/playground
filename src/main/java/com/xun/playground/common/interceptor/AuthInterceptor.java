@@ -25,7 +25,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     // public List authPattrn = Arrays.asList("/**");
     public List authPattrn = Arrays.asList("/home/**", "/horror/**", "/account/**");
-    public List unAuthPattrn = Arrays.asList("/", "/join", "/login", "/logout", "/css/**", "/.ico", "/error");
+    public List unAuthPattrn = Arrays.asList("/", "/join", "/login", "/logout", "/psych/**", "/css/**", "/.ico", "/error");
 
     public AuthInterceptor(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
