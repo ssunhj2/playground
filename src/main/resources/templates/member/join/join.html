@@ -8,10 +8,9 @@ main home 페이지
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{theme/sneat/layout/unAuthDefault}">
 <th:block layout:fragment="content-sneat">
-<div class="content-wrapper">
-    <div class="container-xxl flex-grow-1 container-p-y">
+<div class="content-wrapper" style="min-height:100vh;">
+    <div class="container-xxl flex-grow-1">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account /</span> 회원가입</h4>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card mb-4" id="account-content">
@@ -160,6 +159,9 @@ function saveMember(){
         return;
     }
 
+    // ID 중복체크
+    chkDupId();
+
     // 전송
     let url = '/join';
 
@@ -184,13 +186,20 @@ function saveMember(){
 }
 // 회원가입 후 수행
 function afterSaveMember(_data){
-    if(_data != '' && _data.result == 'success'){
+    if(_data != '' && _data.result == 'SUCCESS'){
         alert("회원가입 완료! 환영합니다.");
         // 로그인 페이지로 이동
         location.href = '/login';
+        return;
+    }
+
+    if(_data.result == 'DUP_ID'){
+        alert("ID가 중복되었습니다.");
+        return;
     }
 
 }
+
 
 </script>
 </th:block>

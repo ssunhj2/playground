@@ -31,6 +31,10 @@ public class JoinService {
      * @param joinDto
      */
     public String saveMember(MemberDTO joinDto) {
+        // 아이디 중복체크
+        String loginId = joinDto.getLoginId();
+        if(!chkDupId(loginId)) return "DUP_ID";
+
         // 비밀번호 암호화
         String password = joinDto.getPassword();
         try{
@@ -44,14 +48,14 @@ public class JoinService {
             // DB에 저장
             joinRepository.save(entity);
 
-            return "success";
+            return "SUCCESS";
 
         } catch(NoSuchAlgorithmException e){
             logger.error(e.getMessage());
-            return "fail";
+            return "FAIL";
         } catch(Exception e){
             logger.error(e.getMessage());
-            return "fail";
+            return "FAIL";
         }
 
     }
