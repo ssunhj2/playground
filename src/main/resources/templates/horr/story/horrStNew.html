@@ -30,8 +30,8 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label">내용</label>
                             <div class="form-floating col-sm-10">
-                                <textarea class="form-control" id="content" name="content" style="min-height: 300px;"></textarea>
-                                <label for="content">content</label>
+                                <textarea class="form-control" id="content1" name="content1" style="min-height: 300px;"></textarea>
+                                <label for="content1">content</label>
                             </div>
                         </div>
                         <div class="mt-5 mb-5">
@@ -48,6 +48,7 @@
 </div>
 <script type="application/javascript">
 let fileNum = 0; // 첨부파일 번호
+var saveFlag = false;
 
 <!-- dom 트리 준비이후 실행-->
 function goSearch(){
@@ -75,32 +76,42 @@ function afterFindStory(_data){
     // 수정인 경우 값 설정
     $('input[name="horrStNo"]').val(_data.result.horrStNo);
     $('input[name="title"]').val(_data.result.title);
-    $('textarea[name="content"]').val(_data.result.content);
+    $('textarea[name="content1"]').val(_data.result.content1.replaceAll('<br>', '\r\n'));
 }
 
 
 
 
-<!-- 값을 체크하고 저장한다. -->
+// 값을 체크하고 저장한다.
 function saveStory(){
+    // 중복저장 방지
+    if(saveFlag){
+        alert('저장중입니다.');
+        return;
+    }
     if($('input[name="title"]').val() == ""){
         alert('제목을 입력해주세요');
         return;
     }
-    if($('textarea[name="content"]').val() == ""){
+    if($('textarea[name="content1"]').val() == ""){
         alert('내용을 입력해주세요');
         return;
     }
 
+    saveFlag = true;
+
+    // 줄바꿈 기호 변경
+    var content = $('textarea[name="content1"]').val();
+    content = content.replace(/\n/g, '<br>');
+    // 줄바꿈 반영한 textarea 추가
+    $('#STORY_FORM').append($('<textarea />', {style:'display:none;', name:'content'}));
+    $('#STORY_FORM').find('textarea[name="content"]').val(content);
+
     $('#STORY_FORM').submit();
 }
 
-// 필수입력을 체크한다.
-function checkEmpty(_objname, _msg){
 
-}
-
-<!-- 첨부를 추가합니다. -->
+// 첨부를 추가합니다.
 function addFile(){
     $('#add-file').append('<input name="file" type="file" class="mt-1 form-control form-control-sm bg-dark">');
 }
