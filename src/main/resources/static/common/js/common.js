@@ -26,6 +26,16 @@ function goWelcome(){
     location.href='/';
 }
 
+// playground 홈으로 이동
+function goPlaygroundHome(){
+    location.href='/home';
+}
+
+// horror 홈으로 이동
+function goHorrorHome(){
+    location.href='/horror';
+}
+
 // 로그인 페이지로 이동
 function goLogin(){
     location.href='/login';
@@ -36,25 +46,19 @@ function goLogout(){
     location.href='/logout';
 }
 
-// playground 홈으로 이동
-function goPlaygroundHome(){
-    location.href='/home';
-}
-
 // 회원정보 페이지로 이동
 function goAccount(){
     location.href='/account';
 }
 
-// horror 홈으로 이동
-function goHorrorHome(){
-    location.href='/horror';
-}
-
-
 // 무서운이야기 게시판으로 이동
 function goHorrorStory(){
     location.href='/horror/story';
+}
+
+// 무서운이야기 상세페이지로 이동
+function goStoryDetail(horrStNo){
+   location.href='/horror/story/detail?horrStNo=' + horrStNo;
 }
 
 // 파일 다운로드

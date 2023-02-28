@@ -94,7 +94,9 @@
           <tbody>
           <tr th:each="story : ${storyList}">
             <td th:text="${story.viewCount}"></td>
-            <td th:text="${story.title}" class="text-ellipsis"></td>
+            <td class="text-ellipsis">
+              <a th:href="|javascript:goStoryDetail(${story.horrStNo})|" th:text="${story.title}"></a>
+            </td>
             <td th:text="${story.enterBy}" class="text-ellipsis"></td>
             <td th:text="${story.enterDate}"></td>
           </tr>
