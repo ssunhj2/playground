@@ -89,13 +89,16 @@
         }
 
         getJson('/horror/story/list', params).then(response => {
+            let html = '';
             if(!Object.keys(response).length){
-                noData();
+                html += `<tr>
+                            <td class="text-center" colSpan="4">NO_DATA</td>
+                        </tr>`;
+                document.getElementById('list').innerHTML = html;
                 drawPages();
                 return false;
             }
 
-            let html = '';
             let num = response.pagingDTO.pagination.totalCnt - ((response.pagingDTO.page -1) * response.pagingDTO.pageCount);
 
             response.list.forEach((obj, idx) => {
@@ -107,7 +110,6 @@
                         <td>${obj.viewCount}</td>
                     </tr>
                     `;
-
             });
            document.getElementById('list').innerHTML = html;
            drawPages(response.pagingDTO);

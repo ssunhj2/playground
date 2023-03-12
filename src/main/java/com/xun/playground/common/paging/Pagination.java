@@ -51,7 +51,7 @@ public class Pagination {
         }
         
         // limit 시작 위치 계산
-        limitStart = (pagingDTO.getPage() - 1) * pagingDTO.getPageCount();
+        limitStart = (pagingDTO.getPage() - 1) * pagingDTO.getPageCount(); // limit은 0부터 시작
         // 이전 페이지 존재여부
         existPrevPage = (startPage != 1);
         // 다음 페이지 존재여부

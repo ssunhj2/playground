@@ -1,5 +1,8 @@
-package com.xun.playground.horr.story.repository;
+package com.xun.playground.horr.story;
 
+import com.xun.playground.horr.story.repository.HorrStDetailRepository;
+import com.xun.playground.horr.story.repository.HorrStListRepository;
+import com.xun.playground.horr.story.repository.HorrStNewRepository;
 import com.xun.playground.horr.story.service.HorrStDetailService;
 import com.xun.playground.horr.story.service.HorrStListService;
 import com.xun.playground.horr.story.service.HorrStNewService;
