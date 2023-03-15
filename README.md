@@ -9,9 +9,8 @@
 
 ## Tech Stacks
 - IDE: IntelliJ
-- OS: Windows
 - Spring Boot(2.7.7)
-- JAVA(17)
+- JAVA(11)
 - Thymeleaf
 - MYSQL
 - MyBatis
